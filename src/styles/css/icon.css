@@ -1,0 +1,1356 @@
+[class*=icon-chain-] {
+  display: block;
+  background-image: url(https://img.hash.best/sprites/chain.png);
+  background-repeat: no-repeat
+}
+
+[class*="webp icon-chain-"] {
+  background-image: url(https://img.hash.best/sprites/chain.webp)
+}
+
+.icon-chain-mini {
+  width: .48rem;
+  height: .48rem;
+  background-size: 11.14839rem auto
+}
+
+.icon-chain-mini-arbitrum {
+  background-position: -.06968rem -.06968rem
+}
+
+.icon-chain-mini-avalanche {
+  background-position: -.68903rem -.06968rem
+}
+
+.icon-chain-mini-bitcoin {
+  background-position: -1.30839rem -.06968rem
+}
+
+.icon-chain-mini-bsc {
+  background-position: -1.92774rem -.06968rem
+}
+
+.icon-chain-mini-cardano {
+  background-position: -2.5471rem -.06968rem
+}
+
+.icon-chain-mini-cosmos {
+  background-position: -3.16645rem -.06968rem
+}
+
+.icon-chain-mini-cronos {
+  background-position: -3.78581rem -.06968rem
+}
+
+.icon-chain-mini-doge {
+  background-position: -4.40516rem -.06968rem
+}
+
+.icon-chain-mini-ethereum {
+  background-position: -5.02452rem -.06968rem
+}
+
+.icon-chain-mini-fantom {
+  background-position: -5.64387rem -.06968rem
+}
+
+.icon-chain-mini-near {
+  background-position: -6.26323rem -.06968rem
+}
+
+.icon-chain-mini-optimism {
+  background-position: -6.88258rem -.06968rem
+}
+
+.icon-chain-mini-polkadot {
+  background-position: -7.50194rem -.06968rem
+}
+
+.icon-chain-mini-polygon {
+  background-position: -8.12129rem -.06968rem
+}
+
+.icon-chain-mini-ripple {
+  background-position: -8.74065rem -.06968rem
+}
+
+.icon-chain-mini-solana {
+  background-position: -9.36rem -.06968rem
+}
+
+.icon-chain-mini-thorchain {
+  background-position: -9.97935rem -.06968rem
+}
+
+.icon-chain-mini-tron {
+  background-position: -10.59871rem -.06968rem
+}
+
+.icon-chain-small {
+  width: .64rem;
+  height: .64rem;
+  background-size: 14.86452rem auto
+}
+
+.icon-chain-small-arbitrum {
+  background-position: -.0929rem -.0929rem
+}
+
+.icon-chain-small-avalanche {
+  background-position: -.91871rem -.0929rem
+}
+
+.icon-chain-small-bitcoin {
+  background-position: -1.74452rem -.0929rem
+}
+
+.icon-chain-small-bsc {
+  background-position: -2.57032rem -.0929rem
+}
+
+.icon-chain-small-cardano {
+  background-position: -3.39613rem -.0929rem
+}
+
+.icon-chain-small-cosmos {
+  background-position: -4.22194rem -.0929rem
+}
+
+.icon-chain-small-cronos {
+  background-position: -5.04774rem -.0929rem
+}
+
+.icon-chain-small-doge {
+  background-position: -5.87355rem -.0929rem
+}
+
+.icon-chain-small-ethereum {
+  background-position: -6.69935rem -.0929rem
+}
+
+.icon-chain-small-fantom {
+  background-position: -7.52516rem -.0929rem
+}
+
+.icon-chain-small-near {
+  background-position: -8.35097rem -.0929rem
+}
+
+.icon-chain-small-optimism {
+  background-position: -9.17677rem -.0929rem
+}
+
+.icon-chain-small-polkadot {
+  background-position: -10.00258rem -.0929rem
+}
+
+.icon-chain-small-polygon {
+  background-position: -10.82839rem -.0929rem
+}
+
+.icon-chain-small-ripple {
+  background-position: -11.65419rem -.0929rem
+}
+
+.icon-chain-small-solana {
+  background-position: -12.48rem -.0929rem
+}
+
+.icon-chain-small-thorchain {
+  background-position: -13.30581rem -.0929rem
+}
+
+.icon-chain-small-tron {
+  background-position: -14.13161rem -.0929rem
+}
+
+.icon-chain-normal {
+  width: .8rem;
+  height: .8rem;
+  background-size: 18.58065rem auto
+}
+
+.icon-chain-normal-arbitrum {
+  background-position: -.11613rem -.11613rem
+}
+
+.icon-chain-normal-avalanche {
+  background-position: -1.14839rem -.11613rem
+}
+
+.icon-chain-normal-bitcoin {
+  background-position: -2.18065rem -.11613rem
+}
+
+.icon-chain-normal-bsc {
+  background-position: -3.2129rem -.11613rem
+}
+
+.icon-chain-normal-cardano {
+  background-position: -4.24516rem -.11613rem
+}
+
+.icon-chain-normal-cosmos {
+  background-position: -5.27742rem -.11613rem
+}
+
+.icon-chain-normal-cronos {
+  background-position: -6.30968rem -.11613rem
+}
+
+.icon-chain-normal-doge {
+  background-position: -7.34194rem -.11613rem
+}
+
+.icon-chain-normal-ethereum {
+  background-position: -8.37419rem -.11613rem
+}
+
+.icon-chain-normal-fantom {
+  background-position: -9.40645rem -.11613rem
+}
+
+.icon-chain-normal-near {
+  background-position: -10.43871rem -.11613rem
+}
+
+.icon-chain-normal-optimism {
+  background-position: -11.47097rem -.11613rem
+}
+
+.icon-chain-normal-polkadot {
+  background-position: -12.50323rem -.11613rem
+}
+
+.icon-chain-normal-polygon {
+  background-position: -13.53548rem -.11613rem
+}
+
+.icon-chain-normal-ripple {
+  background-position: -14.56774rem -.11613rem
+}
+
+.icon-chain-normal-solana {
+  background-position: -15.6rem -.11613rem
+}
+
+.icon-chain-normal-thorchain {
+  background-position: -16.63226rem -.11613rem
+}
+
+.icon-chain-normal-tron {
+  background-position: -17.66452rem -.11613rem
+}
+
+.icon-chain-large {
+  width: 1.12rem;
+  height: 1.12rem;
+  background-size: 26.0129rem auto
+}
+
+.icon-chain-large-arbitrum {
+  background-position: -.16258rem -.16258rem
+}
+
+.icon-chain-large-avalanche {
+  background-position: -1.60774rem -.16258rem
+}
+
+.icon-chain-large-bitcoin {
+  background-position: -3.0529rem -.16258rem
+}
+
+.icon-chain-large-bsc {
+  background-position: -4.49806rem -.16258rem
+}
+
+.icon-chain-large-cardano {
+  background-position: -5.94323rem -.16258rem
+}
+
+.icon-chain-large-cosmos {
+  background-position: -7.38839rem -.16258rem
+}
+
+.icon-chain-large-cronos {
+  background-position: -8.83355rem -.16258rem
+}
+
+.icon-chain-large-doge {
+  background-position: -10.27871rem -.16258rem
+}
+
+.icon-chain-large-ethereum {
+  background-position: -11.72387rem -.16258rem
+}
+
+.icon-chain-large-fantom {
+  background-position: -13.16903rem -.16258rem
+}
+
+.icon-chain-large-near {
+  background-position: -14.61419rem -.16258rem
+}
+
+.icon-chain-large-optimism {
+  background-position: -16.05935rem -.16258rem
+}
+
+.icon-chain-large-polkadot {
+  background-position: -17.50452rem -.16258rem
+}
+
+.icon-chain-large-polygon {
+  background-position: -18.94968rem -.16258rem
+}
+
+.icon-chain-large-ripple {
+  background-position: -20.39484rem -.16258rem
+}
+
+.icon-chain-large-solana {
+  background-position: -21.84rem -.16258rem
+}
+
+.icon-chain-large-thorchain {
+  background-position: -23.28516rem -.16258rem
+}
+
+.icon-chain-large-tron {
+  background-position: -24.73032rem -.16258rem
+}
+
+[class*=icon-coin-] {
+  display: block;
+  background-image: url(https://img.hash.best/sprites/coin.png);
+  background-repeat: no-repeat
+}
+
+[class*="webp icon-coin-"] {
+  background-image: url(https://img.hash.best/sprites/coin.webp)
+}
+
+.icon-coin-mini {
+  width: .48rem;
+  height: .48rem;
+  background-size: 22.29677rem auto
+}
+
+.icon-coin-mini-ada {
+  background-position: -.06968rem -.06968rem
+}
+
+.icon-coin-mini-atom {
+  background-position: -.68903rem -.06968rem
+}
+
+.icon-coin-mini-avax {
+  background-position: -1.30839rem -.06968rem
+}
+
+.icon-coin-mini-bch {
+  background-position: -1.92774rem -.06968rem
+}
+
+.icon-coin-mini-bnb {
+  background-position: -2.5471rem -.06968rem
+}
+
+.icon-coin-mini-btc {
+  background-position: -3.16645rem -.06968rem
+}
+
+.icon-coin-mini-busd {
+  background-position: -3.78581rem -.06968rem
+}
+
+.icon-coin-mini-cro {
+  background-position: -4.40516rem -.06968rem
+}
+
+.icon-coin-mini-dai {
+  background-position: -5.02452rem -.06968rem
+}
+
+.icon-coin-mini-doge {
+  background-position: -5.64387rem -.06968rem
+}
+
+.icon-coin-mini-dot {
+  background-position: -6.26323rem -.06968rem
+}
+
+.icon-coin-mini-etc {
+  background-position: -6.88258rem -.06968rem
+}
+
+.icon-coin-mini-eth {
+  background-position: -7.50194rem -.06968rem
+}
+
+.icon-coin-mini-ftm {
+  background-position: -8.12129rem -.06968rem
+}
+
+.icon-coin-mini-hbar {
+  background-position: -8.74065rem -.06968rem
+}
+
+.icon-coin-mini-icp {
+  background-position: -9.36rem -.06968rem
+}
+
+.icon-coin-mini-leo {
+  background-position: -9.97935rem -.06968rem
+}
+
+.icon-coin-mini-link {
+  background-position: -10.59871rem -.06968rem
+}
+
+.icon-coin-mini-ltc {
+  background-position: -11.21806rem -.06968rem
+}
+
+.icon-coin-mini-matic {
+  background-position: -11.83742rem -.06968rem
+}
+
+.icon-coin-mini-near {
+  background-position: -12.45677rem -.06968rem
+}
+
+.icon-coin-mini-okb {
+  background-position: -13.07613rem -.06968rem
+}
+
+.icon-coin-mini-op {
+  background-position: -13.69548rem -.06968rem
+}
+
+.icon-coin-mini-rune {
+  background-position: -14.31484rem -.06968rem
+}
+
+.icon-coin-mini-shib {
+  background-position: -14.93419rem -.06968rem
+}
+
+.icon-coin-mini-sol {
+  background-position: -15.55355rem -.06968rem
+}
+
+.icon-coin-mini-ton {
+  background-position: -16.1729rem -.06968rem
+}
+
+.icon-coin-mini-trx {
+  background-position: -16.79226rem -.06968rem
+}
+
+.icon-coin-mini-tusd {
+  background-position: -17.41161rem -.06968rem
+}
+
+.icon-coin-mini-uni {
+  background-position: -18.03097rem -.06968rem
+}
+
+.icon-coin-mini-usdc {
+  background-position: -18.65032rem -.06968rem
+}
+
+.icon-coin-mini-usdt {
+  background-position: -19.26968rem -.06968rem
+}
+
+.icon-coin-mini-wbtc {
+  background-position: -19.88903rem -.06968rem
+}
+
+.icon-coin-mini-xlm {
+  background-position: -20.50839rem -.06968rem
+}
+
+.icon-coin-mini-xmr {
+  background-position: -21.12774rem -.06968rem
+}
+
+.icon-coin-mini-xrp {
+  background-position: -21.7471rem -.06968rem
+}
+
+.icon-coin-small {
+  width: .64rem;
+  height: .64rem;
+  background-size: 29.72903rem auto
+}
+
+.icon-coin-small-ada {
+  background-position: -.0929rem -.0929rem
+}
+
+.icon-coin-small-atom {
+  background-position: -.91871rem -.0929rem
+}
+
+.icon-coin-small-avax {
+  background-position: -1.74452rem -.0929rem
+}
+
+.icon-coin-small-bch {
+  background-position: -2.57032rem -.0929rem
+}
+
+.icon-coin-small-bnb {
+  background-position: -3.39613rem -.0929rem
+}
+
+.icon-coin-small-btc {
+  background-position: -4.22194rem -.0929rem
+}
+
+.icon-coin-small-busd {
+  background-position: -5.04774rem -.0929rem
+}
+
+.icon-coin-small-cro {
+  background-position: -5.87355rem -.0929rem
+}
+
+.icon-coin-small-dai {
+  background-position: -6.69935rem -.0929rem
+}
+
+.icon-coin-small-doge {
+  background-position: -7.52516rem -.0929rem
+}
+
+.icon-coin-small-dot {
+  background-position: -8.35097rem -.0929rem
+}
+
+.icon-coin-small-etc {
+  background-position: -9.17677rem -.0929rem
+}
+
+.icon-coin-small-eth {
+  background-position: -10.00258rem -.0929rem
+}
+
+.icon-coin-small-ftm {
+  background-position: -10.82839rem -.0929rem
+}
+
+.icon-coin-small-hbar {
+  background-position: -11.65419rem -.0929rem
+}
+
+.icon-coin-small-icp {
+  background-position: -12.48rem -.0929rem
+}
+
+.icon-coin-small-leo {
+  background-position: -13.30581rem -.0929rem
+}
+
+.icon-coin-small-link {
+  background-position: -14.13161rem -.0929rem
+}
+
+.icon-coin-small-ltc {
+  background-position: -14.95742rem -.0929rem
+}
+
+.icon-coin-small-matic {
+  background-position: -15.78323rem -.0929rem
+}
+
+.icon-coin-small-near {
+  background-position: -16.60903rem -.0929rem
+}
+
+.icon-coin-small-okb {
+  background-position: -17.43484rem -.0929rem
+}
+
+.icon-coin-small-op {
+  background-position: -18.26065rem -.0929rem
+}
+
+.icon-coin-small-rune {
+  background-position: -19.08645rem -.0929rem
+}
+
+.icon-coin-small-shib {
+  background-position: -19.91226rem -.0929rem
+}
+
+.icon-coin-small-sol {
+  background-position: -20.73806rem -.0929rem
+}
+
+.icon-coin-small-ton {
+  background-position: -21.56387rem -.0929rem
+}
+
+.icon-coin-small-trx {
+  background-position: -22.38968rem -.0929rem
+}
+
+.icon-coin-small-tusd {
+  background-position: -23.21548rem -.0929rem
+}
+
+.icon-coin-small-uni {
+  background-position: -24.04129rem -.0929rem
+}
+
+.icon-coin-small-usdc {
+  background-position: -24.8671rem -.0929rem
+}
+
+.icon-coin-small-usdt {
+  background-position: -25.6929rem -.0929rem
+}
+
+.icon-coin-small-wbtc {
+  background-position: -26.51871rem -.0929rem
+}
+
+.icon-coin-small-xlm {
+  background-position: -27.34452rem -.0929rem
+}
+
+.icon-coin-small-xmr {
+  background-position: -28.17032rem -.0929rem
+}
+
+.icon-coin-small-xrp {
+  background-position: -28.99613rem -.0929rem
+}
+
+.icon-coin-normal {
+  width: .8rem;
+  height: .8rem;
+  background-size: 37.16129rem auto
+}
+
+.icon-coin-normal-ada {
+  background-position: -.11613rem -.11613rem
+}
+
+.icon-coin-normal-atom {
+  background-position: -1.14839rem -.11613rem
+}
+
+.icon-coin-normal-avax {
+  background-position: -2.18065rem -.11613rem
+}
+
+.icon-coin-normal-bch {
+  background-position: -3.2129rem -.11613rem
+}
+
+.icon-coin-normal-bnb {
+  background-position: -4.24516rem -.11613rem
+}
+
+.icon-coin-normal-btc {
+  background-position: -5.27742rem -.11613rem
+}
+
+.icon-coin-normal-busd {
+  background-position: -6.30968rem -.11613rem
+}
+
+.icon-coin-normal-cro {
+  background-position: -7.34194rem -.11613rem
+}
+
+.icon-coin-normal-dai {
+  background-position: -8.37419rem -.11613rem
+}
+
+.icon-coin-normal-doge {
+  background-position: -9.40645rem -.11613rem
+}
+
+.icon-coin-normal-dot {
+  background-position: -10.43871rem -.11613rem
+}
+
+.icon-coin-normal-etc {
+  background-position: -11.47097rem -.11613rem
+}
+
+.icon-coin-normal-eth {
+  background-position: -12.50323rem -.11613rem
+}
+
+.icon-coin-normal-ftm {
+  background-position: -13.53548rem -.11613rem
+}
+
+.icon-coin-normal-hbar {
+  background-position: -14.56774rem -.11613rem
+}
+
+.icon-coin-normal-icp {
+  background-position: -15.6rem -.11613rem
+}
+
+.icon-coin-normal-leo {
+  background-position: -16.63226rem -.11613rem
+}
+
+.icon-coin-normal-link {
+  background-position: -17.66452rem -.11613rem
+}
+
+.icon-coin-normal-ltc {
+  background-position: -18.69677rem -.11613rem
+}
+
+.icon-coin-normal-matic {
+  background-position: -19.72903rem -.11613rem
+}
+
+.icon-coin-normal-near {
+  background-position: -20.76129rem -.11613rem
+}
+
+.icon-coin-normal-okb {
+  background-position: -21.79355rem -.11613rem
+}
+
+.icon-coin-normal-op {
+  background-position: -22.82581rem -.11613rem
+}
+
+.icon-coin-normal-rune {
+  background-position: -23.85806rem -.11613rem
+}
+
+.icon-coin-normal-shib {
+  background-position: -24.89032rem -.11613rem
+}
+
+.icon-coin-normal-sol {
+  background-position: -25.92258rem -.11613rem
+}
+
+.icon-coin-normal-ton {
+  background-position: -26.95484rem -.11613rem
+}
+
+.icon-coin-normal-trx {
+  background-position: -27.9871rem -.11613rem
+}
+
+.icon-coin-normal-tusd {
+  background-position: -29.01935rem -.11613rem
+}
+
+.icon-coin-normal-uni {
+  background-position: -30.05161rem -.11613rem
+}
+
+.icon-coin-normal-usdc {
+  background-position: -31.08387rem -.11613rem
+}
+
+.icon-coin-normal-usdt {
+  background-position: -32.11613rem -.11613rem
+}
+
+.icon-coin-normal-wbtc {
+  background-position: -33.14839rem -.11613rem
+}
+
+.icon-coin-normal-xlm {
+  background-position: -34.18065rem -.11613rem
+}
+
+.icon-coin-normal-xmr {
+  background-position: -35.2129rem -.11613rem
+}
+
+.icon-coin-normal-xrp {
+  background-position: -36.24516rem -.11613rem
+}
+
+.icon-coin-large {
+  width: 1.12rem;
+  height: 1.12rem;
+  background-size: 52.02581rem auto
+}
+
+.icon-coin-large-ada {
+  background-position: -.16258rem -.16258rem
+}
+
+.icon-coin-large-atom {
+  background-position: -1.60774rem -.16258rem
+}
+
+.icon-coin-large-avax {
+  background-position: -3.0529rem -.16258rem
+}
+
+.icon-coin-large-bch {
+  background-position: -4.49806rem -.16258rem
+}
+
+.icon-coin-large-bnb {
+  background-position: -5.94323rem -.16258rem
+}
+
+.icon-coin-large-btc {
+  background-position: -7.38839rem -.16258rem
+}
+
+.icon-coin-large-busd {
+  background-position: -8.83355rem -.16258rem
+}
+
+.icon-coin-large-cro {
+  background-position: -10.27871rem -.16258rem
+}
+
+.icon-coin-large-dai {
+  background-position: -11.72387rem -.16258rem
+}
+
+.icon-coin-large-doge {
+  background-position: -13.16903rem -.16258rem
+}
+
+.icon-coin-large-dot {
+  background-position: -14.61419rem -.16258rem
+}
+
+.icon-coin-large-etc {
+  background-position: -16.05935rem -.16258rem
+}
+
+.icon-coin-large-eth {
+  background-position: -17.50452rem -.16258rem
+}
+
+.icon-coin-large-ftm {
+  background-position: -18.94968rem -.16258rem
+}
+
+.icon-coin-large-hbar {
+  background-position: -20.39484rem -.16258rem
+}
+
+.icon-coin-large-icp {
+  background-position: -21.84rem -.16258rem
+}
+
+.icon-coin-large-leo {
+  background-position: -23.28516rem -.16258rem
+}
+
+.icon-coin-large-link {
+  background-position: -24.73032rem -.16258rem
+}
+
+.icon-coin-large-ltc {
+  background-position: -26.17548rem -.16258rem
+}
+
+.icon-coin-large-matic {
+  background-position: -27.62065rem -.16258rem
+}
+
+.icon-coin-large-near {
+  background-position: -29.06581rem -.16258rem
+}
+
+.icon-coin-large-okb {
+  background-position: -30.51097rem -.16258rem
+}
+
+.icon-coin-large-op {
+  background-position: -31.95613rem -.16258rem
+}
+
+.icon-coin-large-rune {
+  background-position: -33.40129rem -.16258rem
+}
+
+.icon-coin-large-shib {
+  background-position: -34.84645rem -.16258rem
+}
+
+.icon-coin-large-sol {
+  background-position: -36.29161rem -.16258rem
+}
+
+.icon-coin-large-ton {
+  background-position: -37.73677rem -.16258rem
+}
+
+.icon-coin-large-trx {
+  background-position: -39.18194rem -.16258rem
+}
+
+.icon-coin-large-tusd {
+  background-position: -40.6271rem -.16258rem
+}
+
+.icon-coin-large-uni {
+  background-position: -42.07226rem -.16258rem
+}
+
+.icon-coin-large-usdc {
+  background-position: -43.51742rem -.16258rem
+}
+
+.icon-coin-large-usdt {
+  background-position: -44.96258rem -.16258rem
+}
+
+.icon-coin-large-wbtc {
+  background-position: -46.40774rem -.16258rem
+}
+
+.icon-coin-large-xlm {
+  background-position: -47.8529rem -.16258rem
+}
+
+.icon-coin-large-xmr {
+  background-position: -49.29806rem -.16258rem
+}
+
+.icon-coin-large-xrp {
+  background-position: -50.74323rem -.16258rem
+}
+
+[class*=icon-socialize-] {
+  display: block;
+  background-image: url(https://img.hash.best/sprites/socialize.png);
+  background-repeat: no-repeat
+}
+
+[class*="webp icon-socialize-"] {
+  background-image: url(https://img.hash.best/sprites/socialize.webp)
+}
+
+.icon-socialize-normal {
+  width: .8rem;
+  height: .8rem;
+  background-size: 10.32258rem auto
+}
+
+.icon-socialize-normal-discord {
+  background-position: -.11613rem -.11613rem
+}
+
+.icon-socialize-normal-facebook {
+  background-position: -1.14839rem -.11613rem
+}
+
+.icon-socialize-normal-instagram {
+  background-position: -2.18065rem -.11613rem
+}
+
+.icon-socialize-normal-line {
+  background-position: -3.2129rem -.11613rem
+}
+
+.icon-socialize-normal-telegram {
+  background-position: -4.24516rem -.11613rem
+}
+
+.icon-socialize-normal-tiktok {
+  background-position: -5.27742rem -.11613rem
+}
+
+.icon-socialize-normal-twitter {
+  background-position: -6.30968rem -.11613rem
+}
+
+.icon-socialize-normal-whatsapp {
+  background-position: -7.34194rem -.11613rem
+}
+
+.icon-socialize-normal-x {
+  background-position: -8.37419rem -.11613rem
+}
+
+.icon-socialize-normal-youtube {
+  background-position: -9.40645rem -.11613rem
+}
+
+.icon-socialize-large {
+  width: 1.12rem;
+  height: 1.12rem;
+  background-size: 14.45161rem auto
+}
+
+.icon-socialize-large-discord {
+  background-position: -.16258rem -.16258rem
+}
+
+.icon-socialize-large-facebook {
+  background-position: -1.60774rem -.16258rem
+}
+
+.icon-socialize-large-instagram {
+  background-position: -3.0529rem -.16258rem
+}
+
+.icon-socialize-large-line {
+  background-position: -4.49806rem -.16258rem
+}
+
+.icon-socialize-large-telegram {
+  background-position: -5.94323rem -.16258rem
+}
+
+.icon-socialize-large-tiktok {
+  background-position: -7.38839rem -.16258rem
+}
+
+.icon-socialize-large-twitter {
+  background-position: -8.83355rem -.16258rem
+}
+
+.icon-socialize-large-whatsapp {
+  background-position: -10.27871rem -.16258rem
+}
+
+.icon-socialize-large-x {
+  background-position: -11.72387rem -.16258rem
+}
+
+.icon-socialize-large-youtube {
+  background-position: -13.16903rem -.16258rem
+}
+
+[class*=icon-query-] {
+  display: block;
+  background-image: url(https://img.hash.best/sprites/query.png);
+  background-repeat: no-repeat
+}
+
+[class*="webp icon-query-"] {
+  background-image: url(https://img.hash.best/sprites/query.webp)
+}
+
+.icon-query-normal {
+  width: .8rem;
+  height: .8rem;
+  background-size: 5.64706rem auto
+}
+
+.icon-query-normal-arbiscan {
+  background-position: -.07059rem -.07059rem
+}
+
+.icon-query-normal-bscscan {
+  background-position: -1.01176rem -.07059rem
+}
+
+.icon-query-normal-oklink {
+  background-position: -1.95294rem -.07059rem
+}
+
+.icon-query-normal-querylink {
+  background-position: -2.89412rem -.07059rem
+}
+
+.icon-query-normal-tokenview {
+  background-position: -3.83529rem -.07059rem
+}
+
+.icon-query-normal-tronscan {
+  background-position: -4.77647rem -.07059rem
+}
+
+.icon-query-large {
+  width: 1.12rem;
+  height: 1.12rem;
+  background-size: 7.90588rem auto
+}
+
+.icon-query-large-arbiscan {
+  background-position: -.09882rem -.09882rem
+}
+
+.icon-query-large-bscscan {
+  background-position: -1.41647rem -.09882rem
+}
+
+.icon-query-large-oklink {
+  background-position: -2.73412rem -.09882rem
+}
+
+.icon-query-large-querylink {
+  background-position: -4.05176rem -.09882rem
+}
+
+.icon-query-large-tokenview {
+  background-position: -5.36941rem -.09882rem
+}
+
+.icon-query-large-tronscan {
+  background-position: -6.68706rem -.09882rem
+}
+
+[class*=icon-get-] {
+  display: block;
+  background-image: url(https://img.hash.best/sprites/get.png);
+  background-repeat: no-repeat
+}
+
+[class*="webp icon-get-"] {
+  background-image: url(https://img.hash.best/sprites/get.webp)
+}
+
+.icon-get-normal {
+  width: .8rem;
+  height: .8rem;
+  background-size: 3.90244rem auto
+}
+
+.icon-get-normal-android {
+  background-position: -.0878rem -.0878rem
+}
+
+.icon-get-normal-chome {
+  background-position: -1.06341rem -.0878rem
+}
+
+.icon-get-normal-ios {
+  background-position: -2.03902rem -.0878rem
+}
+
+.icon-get-normal-website {
+  background-position: -3.01463rem -.0878rem
+}
+
+
+@font-face {
+  font-family: my-icon;
+  src: url('@/assets/iconfont.woff2') format("woff2")
+}
+
+.my-icon {
+  font-family: my-icon !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.my-icon-jinrong:before {
+  content: ""
+}
+
+.my-icon-my:before {
+  content: ""
+}
+
+.my-icon-jiaohuan:before {
+  content: ""
+}
+
+.my-icon-game:before {
+  content: ""
+}
+
+.my-icon-home:before {
+  content: ""
+}
+
+.my-icon-fanhui:before {
+  content: ""
+}
+
+.my-icon-earth1:before {
+  content: ""
+}
+
+.my-icon-lang:before {
+  content: ""
+}
+
+.my-icon-moon1:before {
+  content: ""
+}
+
+.my-icon-sun1:before {
+  content: ""
+}
+
+.my-icon-best:before {
+  content: ""
+}
+
+.my-icon-dot3:before {
+  content: ""
+}
+
+.my-icon-paixu:before {
+  content: ""
+}
+
+.my-icon-dot:before {
+  content: ""
+}
+
+.my-icon-right:before {
+  content: ""
+}
+
+.my-icon-data:before {
+  content: ""
+}
+
+.my-icon-zhexiantu:before {
+  content: ""
+}
+
+.my-icon-shuju:before {
+  content: ""
+}
+
+.my-icon-shujuku:before {
+  content: ""
+}
+
+.my-icon-earth:before {
+  content: ""
+}
+
+.my-icon-del:before {
+  content: ""
+}
+
+.my-icon-close:before {
+  content: ""
+}
+
+.my-icon-add:before {
+  content: ""
+}
+
+.my-icon-ok:before {
+  content: ""
+}
+
+.my-icon-moon:before {
+  content: ""
+}
+
+.my-icon-sun:before {
+  content: ""
+}
+
+.my-icon-error:before {
+  content: ""
+}
+
+.my-icon-search:before {
+  content: ""
+}
+
+.my-icon-tip:before {
+  content: ""
+}
+
+.my-icon-true:before {
+  content: ""
+}
+
+.my-icon-copy:before {
+  content: ""
+}
+
+@font-face {
+  font-family: iconfont;
+  src: url(data:font/woff2;base64,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) format("woff2"), url(data:font/woff;base64,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) format("woff"), url(/static/ttf/iconfont-ee5d633d.ttf?t=1714902768909) format("truetype")
+}
+
+.iconfont {
+  /* font-size: .42667rem; */
+  font-family: iconfont !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.icon-yinle:before {
+  content: ""
+}
+
+.icon-yinle1:before {
+  content: ""
+}
+
+.icon-shezhi:before {
+  content: ""
+}
+
+.icon-yinxiao:before {
+  content: ""
+}
+
+.icon-setting:before {
+  content: ""
+}
+
+.icon-shezhi1:before {
+  content: ""
+}
+
+.icon-yinxiao1:before {
+  content: ""
+}
+
+.icon-yinxiao2:before {
+  content: ""
+}
+
+.icon-refresh {
+  animation: rotate 1s infinite linear
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+.icon_10 {
+  width: calc(var(--base) * 10);
+  height: calc(var(--base) * 10);
+}
+
+.icon_12 {
+  width: calc(var(--base) * 12);
+  height: calc(var(--base) * 12);
+}
+
+.icon_14 {
+  width: calc(var(--base) * 14);
+  height: calc(var(--base) * 14);
+}
+
+.icon_16 {
+  width: calc(var(--base) * 16);
+  height: calc(var(--base) * 16);
+}
+
+.icon_18 {
+  width: calc(var(--base) * 18);
+  height: calc(var(--base) * 18);
+}

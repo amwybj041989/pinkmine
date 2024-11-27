@@ -4627,11 +4627,6 @@ is-typed-array@^1.1.13:
   dependencies:
     which-typed-array "^1.1.14"
 
-is-unicode-supported@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.npmmirror.com/is-unicode-supported/-/is-unicode-supported-1.3.0.tgz#d824984b616c292a2e198207d4a609983842f714"
-  integrity sha512-43r2mRvz+8JRIKnWJ+3j8JtjRKZ6GmjzfaE/qiBJnikNnYv/6bagRJ1kUhNk8R5EX/GkobD+r+sfxCPJsiKBLQ==
-
 is-weakmap@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/is-weakmap/-/is-weakmap-2.0.2.tgz#bf72615d649dfe5f699079c54b83e47d1ae19cfd"
@@ -4690,6 +4685,7 @@ jake@^10.8.5:
     minimatch "^3.1.2"
 
 "jiti-v1@npm:jiti@^1.21.6", jiti@^1.21.6:
+  name jiti-v1
   version "1.21.6"
   resolved "https://registry.npmmirror.com/jiti/-/jiti-1.21.6.tgz#6c7f7398dd4b3142767f9a168af2f317a428d268"
   integrity sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==
@@ -7320,6 +7316,11 @@ vue-tsc@^2.1.10:
     "@volar/typescript" "~2.4.8"
     "@vue/language-core" "2.1.10"
     semver "^7.5.4"
+
+vue3-marquee@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.npmmirror.com/vue3-marquee/-/vue3-marquee-4.2.2.tgz#e5316591e5412931856d5a7e5aa2b34be4388673"
+  integrity sha512-FeFvGUVInKfFilXFcnl8sDRBJBZCZSNLlQDquJErB9db6W2xICRVqbRV/jtdzsEP0rftarLQhx9MeEAU0+TPuQ==
 
 vue@^3.4, vue@^3.5.12:
   version "3.5.13"

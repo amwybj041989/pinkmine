@@ -1,0 +1,11 @@
+.text-color {
+  color: var(--text-color);
+}
+
+.title-color {
+  color: var(--title-color);
+}
+
+.bg_input {
+  background-color: var(--bg-input);
+}

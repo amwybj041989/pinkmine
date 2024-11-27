@@ -1,5 +1,13 @@
-@import url('./layout.css');
+@import url('./css/root.css');
 @import url('./common.css');
+@import url('./css/layout.css');
+@import url('./css/padding.css');
+@import url('./css/margin.css');
+@import url('./css/font.css');
+@import url('css/icon.css');
+@import url('./css/vant.less');
+@import url('css/color.css');
+@import url('./css/border.css');
 *,
 *::before,
 *::after {
@@ -16,11 +24,56 @@ html.dark {
   background: #222;
   color-scheme: dark;
 }
+body[data-theme='light'] {
+  --title-color: #333;
+  --sub-title-color: #454545;
+  --text-color: #666;
+  --sub-text-color: #777;
+  --tips-color: #999;
+  --bg-color: #f5f5f5;
+  --bg-nav: rgba(245, 245, 245, 0.9);
+  --bg-input: #e8e8e8;
+  --bg-dropdown: #ccc;
+  background-color: var(--bg-color);
+}
+body[data-theme=light] .gradient-gold {
+    background-image: linear-gradient(119deg,#f7990a 0%,#e4c041 100%)
+}
 
+body[data-theme='dark'] {
+  background-color: var(--bg-color);
+}
+
+body[data-theme='dark'] .app-wrap {
+  background: url(https://img.hash.best/background/bg_earth.png) 0 0 / 100% auto repeat-y;
+}
+
+body[data-theme='dark'] .app-wrap:before {
+  background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
+}
+
+body[data-theme='dark'] .app-wrap.webp {
+  background-image: url(https://img.hash.best/background/bg_earth.webp);
+}
+
+body[data-theme='dark'] .app-wrap.webp:before {
+  background-image: url(https://img.hash.best/background/bg_meteor.webp);
+}
+
+body[data-theme='light'] .app-wrap:before {
+  background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
+}
+
+body[data-theme='light'] .app-wrap.webp:before {
+  background-image: url(https://img.hash.best/background/city.webp);
+}
 #app {
-  height: 100%;
-  position: relative;
-  overflow-x: hidden;
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  margin: auto;
+  overflow: hidden;
+  color: var(--title-color);
+  font-size: 0.32rem;
 }
 
 ::-webkit-scrollbar {

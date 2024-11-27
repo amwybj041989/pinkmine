@@ -1,0 +1,3 @@
+.br_10 {
+  border-radius: calc(var(--base) * 10);
+}

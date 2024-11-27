@@ -29,9 +29,16 @@ const { initializeThemeSwitcher } = useAutoThemeSwitcher(appStore);
 const keepAliveRouteNames = computed(() => {
   return useRouteCache().routeCaches as string[];
 });
+function setRem() {
+  var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+  var rootFontSize = viewportWidth / 10;
+  document.documentElement.style.fontSize = rootFontSize + 'px';
+}
 
 onMounted(() => {
+  setRem();
   initializeThemeSwitcher();
+  window.addEventListener('resize', setRem);
 });
 </script>
 
@@ -51,8 +58,11 @@ onMounted(() => {
 
 <style scoped>
 .app-wrapper {
-  width: 100%;
   position: relative;
-  padding: 16px;
+  box-sizing: border-box;
+  min-height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  padding-bottom: 15vh;
+  overflow-y: scroll;
 }
 </style>
