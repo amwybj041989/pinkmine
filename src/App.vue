@@ -43,17 +43,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <VanConfigProvider :theme="mode">
-    <!-- <NavBar /> -->
-    <router-view v-slot="{ Component, route }">
-      <section class="app-wrapper">
-        <keep-alive :include="keepAliveRouteNames">
-          <component :is="Component" :key="route.name" />
-        </keep-alive>
-      </section>
-    </router-view>
-    <TabBar />
-  </VanConfigProvider>
+  <!-- <Suspense> -->
+    <VanConfigProvider :theme="mode">
+      <!-- <NavBar /> -->
+      <router-view v-slot="{ Component, route }">
+        <section class="app-wrapper title-color">
+          <keep-alive :include="keepAliveRouteNames">
+            <component :is="Component" :key="route.name" />
+          </keep-alive>
+        </section>
+      </router-view>
+      <TabBar />
+    </VanConfigProvider>
+  <!-- </Suspense> -->
 </template>
 
 <style scoped>
@@ -64,5 +66,6 @@ onMounted(() => {
   width: 100%;
   padding-bottom: 15vh;
   overflow-y: scroll;
+  color: var(--title-color);
 }
 </style>

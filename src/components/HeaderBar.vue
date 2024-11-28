@@ -1,5 +1,8 @@
 <template>
   <div class="">
+    <div class="header_padding">
+
+    </div>
     <div class="heaerbar_wrap">
       <div class="gbg pad_12">
         <Vue3Marquee>
@@ -11,7 +14,7 @@
         <div class="logo_title fontSize_20 gcolor light" data-text="HashGameFi">HashGameFi</div>
         <div class="flex flex flex_center">
           <div class="walletConnect gborder">
-            <div class="flex flex_center pad_2_4 gborder_container">
+            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick">
               <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
               <div class="color_fff ml_6">0x3E***Fc2A</div>
             </div>
@@ -60,15 +63,18 @@
     <van-popup v-model:show="showLanguagePicker" position="bottom">
       <van-picker v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm" @cancel="showLanguagePicker = false" />
     </van-popup>
-    -->
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" async>
 import { Vue3Marquee } from 'vue3-marquee';
 import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import useAppStore from '@/stores/modules/app';
+import { modal } from '@/utils/connect';
+function modalClick() {
+  modal.open();
+}
 const appStore = useAppStore();
 const showSetting = ref(false);
 const checked = ref<boolean>(isDark.value);
@@ -99,6 +105,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.heaerbar_wrap {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.header_padding{
+  width: 100vw;
+  height: calc(var(--base) * 85);
+}
 .heaerbar_action {
   background-color: var(--bg-color);
 }

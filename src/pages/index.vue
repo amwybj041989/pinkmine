@@ -2,7 +2,7 @@
   <HeaderBar></HeaderBar>
   <div class="vuemarquee_padding"></div>
   <div class="pad_12">
-    <div class="gradient-text fontSize_30 bold_700 text_center">Web 3.0 Block Hash Ecosystem</div>
+    <div class="gtext fontSize_30 bold_700 text_center">Web 3.0 Block Hash Ecosystem</div>
     <div class="">
       Web3.0 Blockchain (Block Hash) Games, Investments, Swap, Task, Open, Transparent, Anonymous, Trustworthy and Innovative. Create an integrated decentralized ecological environment Ecosystem. Everyone can gain wealth on this Ecosystem! Invite
       your friends to join and get generous Bonus!
