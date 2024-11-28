@@ -1,13 +1,12 @@
 .gtext {
-  padding-right: .05333rem;
   color: var(--gradient-color1);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent
+  -webkit-text-fill-color: transparent;
+
 }
 
 .gcolor {
-  padding-right: .05333rem;
   color: var(--gradient-color1);
   -webkit-background-clip: text;
   background-clip: text;
@@ -27,18 +26,16 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-color: var(--gradient-color1);
-  background-image: linear-gradient(180deg, #fbe07f 0%, #f3c785 100%)
+  background-image: linear-gradient(119deg, #f7b149 0%, #fbedb9 100%);
 }
 
 
 ::-moz-placeholder {
-  padding-right: .05333rem;
   color: var(--tips-color);
   font-size: .32rem
 }
 
 ::placeholder {
-  padding-right: .05333rem;
   color: var(--tips-color);
   font-size: .32rem
 }
@@ -137,9 +134,11 @@
   appearance: none;
   padding: 2px;
 }
-.gborder_container{
+
+.gborder_container {
   border-radius: 50%;
 }
+
 .border_line {
   --rotate: var(--5eaeaae9);
   --m-i: linear-gradient(#000, #000);

@@ -47,7 +47,7 @@ onMounted(() => {
     <VanConfigProvider :theme="mode">
       <!-- <NavBar /> -->
       <router-view v-slot="{ Component, route }">
-        <section class="app-wrapper title-color">
+        <section class="app-wrap title-color webp">
           <keep-alive :include="keepAliveRouteNames">
             <component :is="Component" :key="route.name" />
           </keep-alive>
@@ -59,11 +59,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.app-wrapper {
+.app-wrap {
   position: relative;
   box-sizing: border-box;
   min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
+  font-size: calc(var(--base) * 12);
   padding-bottom: 15vh;
   overflow-y: scroll;
   color: var(--title-color);

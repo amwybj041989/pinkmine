@@ -2,23 +2,14 @@
   <HeaderBar></HeaderBar>
   <div class="vuemarquee_padding"></div>
   <div class="pad_12">
-    <div class="gtext fontSize_30 bold_700 text_center">Web 3.0 Block Hash Ecosystem</div>
-    <div class="">
+    <div class="gtext fontSize_30 bold_700 text_center gcolor mb_15">Web 3.0 Block Hash Ecosystem</div>
+    <div class="sub-text-color line_15 text_center mb_20">
       Web3.0 Blockchain (Block Hash) Games, Investments, Swap, Task, Open, Transparent, Anonymous, Trustworthy and Innovative. Create an integrated decentralized ecological environment Ecosystem. Everyone can gain wealth on this Ecosystem! Invite
       your friends to join and get generous Bonus!
     </div>
+    <indexTabs></indexTabs>
   </div>
-  <!-- <div class="gradient-text">Web 3.0 Block Hash Ecosystem</div>
-  <VanCellGroup :title="t('menus.basicSettings')" :border="false" :inset="true">
-    <VanCell center :title="t('menus.darkMode')">
-      <template #right-icon>
-        <VanSwitch v-model="checked" size="20px" aria-label="on/off Dark Mode" @click="toggle()" />
-      </template>
-    </VanCell>
-
-    <VanCell is-link :title="t('menus.language')" :value="language" @click="showLanguagePicker = true" />
-  </VanCellGroup>
-
+  <!--
   <VanCellGroup :title="t('menus.exampleComponents')" :border="false" :inset="true">
     <template v-for="item in menuItems" :key="item.route">
       <VanCell :title="item.title" :to="item.route" is-link />
@@ -31,45 +22,18 @@
 </template>
 
 <script setup lang="ts">
-import type { PickerColumn } from 'vant';
+const { t } = useI18n();
+import indexTabs from '@/components/Index/indexTabs.vue';
 import useAppStore from '@/stores/modules/app';
 import { languageColumns, locale } from '@/utils/i18n';
 const appStore = useAppStore();
 const checked = ref<boolean>(false);
 
-watch(
-  () => isDark.value,
-  (newMode) => {
-    checked.value = newMode;
-  },
-  { immediate: true }
-);
-
-function toggle() {
-  toggleDark();
-  appStore.switchMode(isDark.value ? 'dark' : 'light');
-}
-
-const { t } = useI18n();
-
-const showLanguagePicker = ref(false);
-const languageValues = ref<Array<string>>([locale.value]);
-const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
-
-function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
-  locale.value = event.selectedOptions[0].value as string;
-  showLanguagePicker.value = false;
-}
-
-const menuItems = computed(() => [
-  { title: t('menus.mockGuide'), route: 'mock' },
-  { title: t('menus.echartsDemo'), route: 'charts' },
-  { title: t('menus.unocssExample'), route: 'unocss' },
-  { title: t('menus.persistPiniaState'), route: 'counter' },
-  { title: t('menus.keepAlive'), route: 'keepalive' },
-  { title: t('menus.404Demo'), route: 'unknown' },
-]);
+onMounted(() => {});
 </script>
 
 <style scoped>
+.color {
+  background-color: transparent;
+}
 </style>

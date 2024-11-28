@@ -16,6 +16,7 @@
 }
 
 html {
+  -webkit-tap-highlight-color: transparent;
   background: var(--van-gray-1);
   font-size: var(--van-font-size-lg);
   color-scheme: light;
@@ -61,6 +62,25 @@ body[data-theme='dark'] .app-wrap.webp:before {
   background-image: url(https://img.hash.best/background/bg_meteor.webp);
 }
 
+body[data-theme='light'] .app-wrap {
+  background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
+}
+
+body[data-theme='light'] .app-wrap.webp:before {
+  background-image: url(https://img.hash.best/background/city.webp);
+}
+body[data-theme='dark'] .app-wrap:before {
+  background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
+}
+
+body[data-theme='dark'] .app-wrap.webp {
+  background-image: url(https://img.hash.best/background/bg_earth.webp);
+}
+
+body[data-theme='dark'] .app-wrap.webp:before {
+  background-image: url(https://img.hash.best/background/bg_meteor.webp);
+}
+
 body[data-theme='light'] .app-wrap:before {
   background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
 }
@@ -68,13 +88,22 @@ body[data-theme='light'] .app-wrap:before {
 body[data-theme='light'] .app-wrap.webp:before {
   background-image: url(https://img.hash.best/background/city.webp);
 }
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
 #app {
   min-width: var(--min-width);
   max-width: var(--max-width);
   margin: auto;
   overflow: hidden;
   color: var(--title-color);
-  font-size: 0.32rem;
+  font-size: calc(var(--base) * 12);
 }
 
 ::-webkit-scrollbar {

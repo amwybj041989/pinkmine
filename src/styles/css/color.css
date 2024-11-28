@@ -9,3 +9,23 @@
 .bg_input {
   background-color: var(--bg-input);
 }
+
+.sub-text-color {
+  color: var(--sub-text-color);
+
+}
+
+.green {
+  color: var(--green);
+
+}
+
+.red {
+  color: var(--red);
+
+}
+
+.yellow {
+  color: var(--yellow);
+
+}

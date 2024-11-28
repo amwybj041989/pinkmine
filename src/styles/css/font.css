@@ -103,54 +103,86 @@ span {
   font-weight: 900;
 }
 
+.fontSize_10 {
+  font-size: calc(var(--base) * 10);
+}
+
+.fontSize_11 {
+  font-size: calc(var(--base) * 11);
+}
+
 .fontSize_12 {
-  font-size: .32rem
+  font-size: calc(var(--base) * 12);
 }
 
 .fontSize_13 {
-  font-size: .34667rem
+  font-size: calc(var(--base) * 13);
 }
 
 .fontSize_14 {
-  font-size: .37333rem
+  font-size: calc(var(--base) * 14);
 }
 
 .fontSize_15 {
-  font-size: .4rem
+  font-size: calc(var(--base) * 15);
 }
 
 .fontSize_16 {
-  font-size: .42667rem
+  font-size: calc(var(--base) * 16);
 }
 
 .fontSize_18 {
-  font-size: .48rem
+  font-size: calc(var(--base) * 18);
 }
 
 .fontSize_20 {
-  font-size: .53333rem
+  font-size: calc(var(--base) * 20);
 }
 
 .fontSize_22 {
-  font-size: .58667rem
+  font-size: calc(var(--base) * 22);
 }
 
 .fontSize_24 {
-  font-size: .64rem
+  font-size: calc(var(--base) * 24);
 }
 
 .fontSize_26 {
-  font-size: .69333rem
+  font-size: calc(var(--base) * 26);
 }
 
 .fontSize_28 {
-  font-size: .74667rem
+  font-size: calc(var(--base) * 28);
+}
+
+.fontSize_30 {
+  font-size: calc(var(--base) * 30);
 }
 
 .fontSize_32 {
-  font-size: .85333rem
+  font-size: calc(var(--base) * 32);
+}
+
+.fontSize_34 {
+  font-size: calc(var(--base) * 34);
 }
 
 .fontSize_36 {
-  font-size: .96rem
+  font-size: calc(var(--base) * 36);
+}
+
+.fontSize_30 {
+  font-size: calc(var(--base) * 30);
+}
+
+.fontSize_42 {
+  font-size: calc(var(--base) * 42);
+}
+
+.fontSize_58 {
+  font-size: calc(var(--base) * 58);
+}
+
+.fontSize_76 {
+  font-size: calc(var(--base) * 76);
 }

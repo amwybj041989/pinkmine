@@ -1,8 +1,6 @@
 <template>
   <div class="">
-    <div class="header_padding">
-
-    </div>
+    <div class="header_padding"></div>
     <div class="heaerbar_wrap">
       <div class="gbg pad_12">
         <Vue3Marquee>
@@ -96,6 +94,7 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
   showLanguagePicker.value = false;
 }
 function toggle() {
+  document.body.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
   toggleDark();
   appStore.switchMode(isDark.value ? 'dark' : 'light');
 }
@@ -111,7 +110,7 @@ onMounted(() => {
   top: 0;
   left: 0;
 }
-.header_padding{
+.header_padding {
   width: 100vw;
   height: calc(var(--base) * 85);
 }
