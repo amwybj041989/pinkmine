@@ -140,7 +140,7 @@ export default {
     el.innerHTML = str;
   },
   hash: (el, binding) => {
-    let value = el.innerHTML;
+    let value = binding.value;
     if (!value) {
       el.innerHTML = '---';
       return

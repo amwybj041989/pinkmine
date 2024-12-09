@@ -3,9 +3,10 @@ import { storeToRefs } from 'pinia';
 import useAppStore from '@/stores/modules/app';
 import useRouteCache from '@/stores/modules/routeCache';
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
-import {generateRandomGradient} from'@/utils'
+import { generateRandomGradient } from '@/utils';
+import { appName, appDescription } from '@/constants';
 useHead({
-  title: 'hash Finace',
+  title: appName,
   meta: [
     {
       name: 'theme-color',
@@ -32,13 +33,17 @@ const keepAliveRouteNames = computed(() => {
 function setRem() {
   var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
   var rootFontSize = viewportWidth / 10;
+  if (rootFontSize >= 43) {
+    rootFontSize = 41.4;
+  }
   document.documentElement.style.fontSize = rootFontSize + 'px';
 }
 
 onMounted(() => {
+  setRem();
   initializeThemeSwitcher();
-  generateRandomGradient()
-  // window.addEventListener('resize', setRem);
+  generateRandomGradient();
+  window.addEventListener('resize', setRem);
 });
 </script>
 

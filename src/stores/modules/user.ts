@@ -9,6 +9,14 @@ export const useUserStore = defineStore(
   'user',
   () => {
     const address = ref<String>('');
+    if (localStorage.address) {
+      address.value = localStorage.address;
+    }
+
+    const chainId = ref<Number>(0);
+    if (localStorage.chainId) {
+      chainId.value = localStorage.chainId * 1;
+    }
     const loginStatus = ref<Boolean>(false);
     const getLoginStatus = () => {
       if (localStorage.getItem('token') && address.value) {
@@ -22,16 +30,24 @@ export const useUserStore = defineStore(
     const setAddress = (value) => {
       address.value = value;
     };
-
+    const setChainId = (value) => {
+      chainId.value = value;
+    };
     const login = async (loginForm: LoginData) => {
       try {
         const { data } = await Login(loginForm);
         localStorage.setItem('token', data.accessToken);
       } catch (error) {
-        localStorage.clear();
+        localStorage.removeItem('token');
         throw error;
       }
     };
+    if (localStorage.chainId && localStorage.address) {
+      login({
+        chain: localStorage.chainId * 1,
+        address: localStorage.address,
+      });
+    }
 
     // const info = async () => {
     //   try {
@@ -77,7 +93,9 @@ export const useUserStore = defineStore(
       login,
       getLoginStatus,
       setAddress,
-      address
+      address,
+      chainId,
+      setChainId,
     };
   },
   {

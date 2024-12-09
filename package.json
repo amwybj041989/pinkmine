@@ -17,15 +17,15 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@reown/appkit": "^1.5.3",
+    "@reown/appkit-adapter-ethers5": "^1.5.3",
     "@unhead/vue": "^1.11.11",
     "@vant/touch-emulator": "^1.4.0",
     "@vant/use": "^1.6.0",
     "@vueuse/core": "^11.2.0",
-    "@web3modal/ethers": "4.1.0",
-    "@web3modal/ethers5": "3.5.4",
     "axios": "^1.7.7",
     "echarts": "^5.5.1",
-    "ethers": "6.9.2",
+    "ethers": "^5.7.2",
     "lodash-es": "^4.17.21",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.6",

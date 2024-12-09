@@ -14,9 +14,9 @@
           <div class="walletConnect gborder">
             <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!userStore.address">
               <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
-              <div class="color_fff ml_6">{{t('event.connectWallet')}}</div>
+              <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
-            <div class="flex flex_center pad_2_4 gborder_container"  v-else>
+            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
               <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
               <div class="color_fff ml_6" v-hash="userStore.address">---</div>
             </div>
@@ -73,15 +73,38 @@ import { Vue3Marquee } from 'vue3-marquee';
 import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import useAppStore from '@/stores/modules/app';
-import { modal } from '@/utils/connect';
+// import { modal,modalAccount } from '@/utils/connect';
+import { appKit } from '@/utils/modal';
 import { useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '@/stores';
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
+function getModalAccount() {
+  if (!appKit.getAddress() && !appKit.getChainId()) {
+    setTimeout(() => {
+      console.log(2222);
+      getModalAccount();
+    }, 500);
+  } else {
+    let address = appKit.getAddress();
+    let chainId = appKit.getChainId();
+    if (address && chainId) {
+      localStorage.address = address;
+      localStorage.chainId = chainId;
+      userStore.setAddress(address);
+      userStore.setChainId(chainId);
+    }
+  }
+}
+function gotAccount() {
+  router.push('/account');
+}
 function modalClick() {
+  appKit.open();
+  getModalAccount();
   // router.push('/account');
-  modal.open();
+  // modal.open();
 }
 const appStore = useAppStore();
 const showSetting = ref(false);
@@ -109,7 +132,7 @@ function toggle() {
   document.body.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
 }
 onMounted(() => {
-  console.log(isDark.value);
+  // getAppKitInfo();
 });
 </script>
 
