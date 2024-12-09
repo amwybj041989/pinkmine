@@ -12,9 +12,13 @@
         <div class="logo_title fontSize_20 gcolor light" data-text="HashGameFi">HashGameFi</div>
         <div class="flex flex flex_center">
           <div class="walletConnect gborder">
-            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick">
+            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!userStore.address">
               <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
-              <div class="color_fff ml_6">0x3E***Fc2A</div>
+              <div class="color_fff ml_6">{{t('event.connectWallet')}}</div>
+            </div>
+            <div class="flex flex_center pad_2_4 gborder_container"  v-else>
+              <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
+              <div class="color_fff ml_6" v-hash="userStore.address">---</div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
           </div>
@@ -70,7 +74,13 @@ import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import useAppStore from '@/stores/modules/app';
 import { modal } from '@/utils/connect';
+import { useRouter, useRoute } from 'vue-router';
+import { useUserStore } from '@/stores';
+const userStore = useUserStore();
+const route = useRoute();
+const router = useRouter();
 function modalClick() {
+  // router.push('/account');
   modal.open();
 }
 const appStore = useAppStore();
@@ -94,9 +104,9 @@ function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
   showLanguagePicker.value = false;
 }
 function toggle() {
-  document.body.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
   toggleDark();
   appStore.switchMode(isDark.value ? 'dark' : 'light');
+  document.body.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
 }
 onMounted(() => {
   console.log(isDark.value);
@@ -109,6 +119,7 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 199;
 }
 .header_padding {
   width: 100vw;

@@ -20,6 +20,12 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '404': RouteRecordInfo<'404', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
+    '/account/': RouteRecordInfo<'/account/', '/account', Record<never, never>, Record<never, never>>,
+    '/account/components/charge': RouteRecordInfo<'/account/components/charge', '/account/components/charge', Record<never, never>, Record<never, never>>,
+    '/account/components/indexTabs': RouteRecordInfo<'/account/components/indexTabs', '/account/components/indexTabs', Record<never, never>, Record<never, never>>,
+    '/account/components/myAccount': RouteRecordInfo<'/account/components/myAccount', '/account/components/myAccount', Record<never, never>, Record<never, never>>,
+    '/account/components/withdraw': RouteRecordInfo<'/account/components/withdraw', '/account/components/withdraw', Record<never, never>, Record<never, never>>,
+    '/account/new_file': RouteRecordInfo<'/account/new_file', '/account/new_file', Record<never, never>, Record<never, never>>,
     'charts': RouteRecordInfo<'charts', '/charts', Record<never, never>, Record<never, never>>,
     'counter': RouteRecordInfo<'counter', '/counter', Record<never, never>, Record<never, never>>,
     'forgot-password': RouteRecordInfo<'forgot-password', '/forgot-password', Record<never, never>, Record<never, never>>,

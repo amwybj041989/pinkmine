@@ -11,7 +11,9 @@
 .pad_4 {
   padding: calc(var(--base) * 4);
 }
-
+.pad_0_8 {
+  padding:0 calc(var(--base) * 8);
+}
 .pad_8 {
   padding: calc(var(--base) * 8);
 }

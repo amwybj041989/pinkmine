@@ -9,8 +9,6 @@ import '@/styles/var.less';
 
 import { i18n } from '@/utils/i18n';
 
-
-
 // Vant 桌面端适配
 import '@vant/touch-emulator';
 
@@ -27,7 +25,13 @@ import 'vant/es/image-preview/style';
 
 const app = createApp(App);
 const head = createHead();
-
+import filter from '@/utils/filter.js';
+for (let key in filter) {
+  let item: any = filter[key];
+  app.directive(key, (el: any, binding: any) => {
+    item(el, binding);
+  });
+}
 app.use(head);
 app.use(router);
 app.use(pinia);

@@ -22,6 +22,28 @@ let USDTAbi = [
 	'event Transfer(address indexed from, address indexed to, uint amount)'
 ];
 let projectId = 'b5b9bf25c2eb3ffdf92152e71cfa4627';
+    // 56: {
+    //     chainId: "0x38",
+    //     chainName: "Binance Smart Chain",
+    //     nativeCurrency: {
+    //         name: "BNB",
+    //         symbol: "BNB",
+    //         decimals: 18
+    //     },
+    //     rpcUrls: ["https://bsc-dataseed.binance.org/"],
+    //     blockExplorerUrls: ["https://bscscan.com/"]
+    // },
+    // 97: {
+    //     chainId: "0x61",
+    //     chainName: "Binance Smart Chain - TestNet",
+    //     nativeCurrency: {
+    //         name: "BNB",
+    //         symbol: "BNB",
+    //         decimals: 18
+    //     },
+    //     rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+    //     blockExplorerUrls: ["https://testnet.bscscan.com/"]
+    // },
 // let mainnet = {
 // 	chainId: 1,
 // 	name: 'Ethereum',
@@ -61,23 +83,24 @@ export let sign = (message) => {
 	let signer = provider.getSigner();
 	return signer.signMessage(message);
 }
-export let checkoutConnect = () => {
+export let modalAccount = () => {
 	let {
 		address,
 		chainId,
 		isConnected
 	} = useWeb3ModalAccount()
-	// console.log(address);
+	console.log(address);
+	console.log(chainId);
 	return new Promise((res, rej) => {
 
-		if (isConnected._value) {
-			store.commit('setAccount', address._value)
-			sessionStorage.address = address._value
-			return res(address._value)
-		} else {
-			store.commit('setAccount', '')
-			return rej('')
-		}
+		// if (isConnected._value) {
+		// 	store.commit('setAccount', address._value)
+		// 	sessionStorage.address = address._value
+		// 	return res(address._value)
+		// } else {
+		// 	store.commit('setAccount', '')
+		// 	return rej('')
+		// }
 	})
 }
 export let connectStatus = () => {

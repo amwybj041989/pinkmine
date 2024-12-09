@@ -3,7 +3,7 @@ import { storeToRefs } from 'pinia';
 import useAppStore from '@/stores/modules/app';
 import useRouteCache from '@/stores/modules/routeCache';
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
-
+import {generateRandomGradient} from'@/utils'
 useHead({
   title: 'hash Finace',
   meta: [
@@ -36,26 +36,23 @@ function setRem() {
 }
 
 onMounted(() => {
-  setRem();
   initializeThemeSwitcher();
-  window.addEventListener('resize', setRem);
+  generateRandomGradient()
+  // window.addEventListener('resize', setRem);
 });
 </script>
 
 <template>
-  <!-- <Suspense> -->
-    <VanConfigProvider :theme="mode">
-      <!-- <NavBar /> -->
-      <router-view v-slot="{ Component, route }">
-        <section class="app-wrap title-color webp">
-          <keep-alive :include="keepAliveRouteNames">
-            <component :is="Component" :key="route.name" />
-          </keep-alive>
-        </section>
-      </router-view>
-      <TabBar />
-    </VanConfigProvider>
-  <!-- </Suspense> -->
+  <VanConfigProvider :theme="mode">
+    <router-view v-slot="{ Component, route }">
+      <section class="app-wrap title-color webp capitalize">
+        <keep-alive :include="keepAliveRouteNames">
+          <component :is="Component" :key="route.name" />
+        </keep-alive>
+      </section>
+    </router-view>
+    <TabBar />
+  </VanConfigProvider>
 </template>
 
 <style scoped>
@@ -66,7 +63,7 @@ onMounted(() => {
   width: 100%;
   font-size: calc(var(--base) * 12);
   padding-bottom: 15vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   color: var(--title-color);
 }
 </style>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { routeWhiteList } from '@/config/routes'
+import { routeWhiteList } from '@/config/routes';
 
-const { t } = useI18n()
-const active = ref(0)
-const route = useRoute()
+const { t } = useI18n();
+const active = ref(0);
+const route = useRoute();
 
-const show = computed(() => route.name && routeWhiteList.includes(route.name))
+const show = computed(() => route.name && routeWhiteList.includes(route.name));
 </script>
 
 <template>
@@ -14,12 +14,6 @@ const show = computed(() => route.name && routeWhiteList.includes(route.name))
       {{ t('layouts.home') }}
       <template #icon>
         <div class="i-carbon:home" />
-      </template>
-    </van-tabbar-item>
-    <van-tabbar-item replace to="/">
-      {{ t('layouts.home') }}
-      <template #icon>
-        <div class="i-carbon:border-full" />
       </template>
     </van-tabbar-item>
     <van-tabbar-item replace to="/profile">

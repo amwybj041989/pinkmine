@@ -2,38 +2,55 @@
   <HeaderBar></HeaderBar>
   <div class="vuemarquee_padding"></div>
   <div class="pad_12">
-    <div class="gtext fontSize_30 bold_700 text_center gcolor mb_15">Web 3.0 Block Hash Ecosystem</div>
-    <div class="sub-text-color line_15 text_center mb_20">
-      Web3.0 Blockchain (Block Hash) Games, Investments, Swap, Task, Open, Transparent, Anonymous, Trustworthy and Innovative. Create an integrated decentralized ecological environment Ecosystem. Everyone can gain wealth on this Ecosystem! Invite
-      your friends to join and get generous Bonus!
+    <div class="mb_15">
+      <minintForm></minintForm>
     </div>
-    <indexTabs></indexTabs>
-  </div>
-  <!--
-  <VanCellGroup :title="t('menus.exampleComponents')" :border="false" :inset="true">
-    <template v-for="item in menuItems" :key="item.route">
-      <VanCell :title="item.title" :to="item.route" is-link />
-    </template>
-  </VanCellGroup>
+    <div class="mb_15">
+      <indexTabs></indexTabs>
+    </div>
 
-  <van-popup v-model:show="showLanguagePicker" position="bottom">
-    <van-picker v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm" @cancel="showLanguagePicker = false" />
-  </van-popup> -->
+    <div class="mb_15">
+      <mining></mining>
+    </div>
+    <div class="mb_15">
+      <Qa></Qa>
+    </div>
+    <div class="mb_15">
+      <helpCenter></helpCenter>
+    </div>
+    <div class="mb_15">
+      <auditReport></auditReport>
+    </div>
+    <div class="">
+      <partner></partner>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n();
 import indexTabs from '@/components/Index/indexTabs.vue';
+import mining from '@/components/Index/mining.vue';
+import minintForm from '@/components/Index/minintForm.vue';
+import helpCenter from '@/components/Index/helpCenter.vue';
+import Qa from '@/components/Index/Qa.vue';
+import auditReport from '@/components/Index/auditReport.vue';
+import partner from '@/components/Index/partner.vue';
 import useAppStore from '@/stores/modules/app';
 import { languageColumns, locale } from '@/utils/i18n';
+import {Auth} from "@/utils/api/index"
 const appStore = useAppStore();
 const checked = ref<boolean>(false);
-
-onMounted(() => {});
+function fetchAuth(){
+  Auth().then(res=>{
+    console.log(res);
+  })
+}
+onMounted(() => {
+  // fetchAuth()
+});
 </script>
 
 <style scoped>
-.color {
-  background-color: transparent;
-}
+
 </style>

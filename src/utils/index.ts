@@ -47,3 +47,57 @@ export function observeVisibility(targetElement, callback, options = {}) {
   // 返回观察器实例，以便可以在需要时停止观察
   return observer;
 }
+
+export function generateRandomEthAddress() {
+  // 以太坊地址是20字节的值，因此我们需要40个十六进制数字
+  const addressLength = 40;
+  let randomAddress = '0x';
+
+  // 生成40个随机十六进制数字
+  for (let i = 0; i < addressLength; i++) {
+    // 生成一个0-15之间的随机数，然后转换为相应的十六进制数字
+    const randomByte = Math.floor(Math.random() * 16);
+    randomAddress += randomByte.toString(16);
+  }
+
+  return randomAddress;
+}
+export function generateRandomDecimalInRange(min, max, decimalPlaces = 8) {
+  // 生成一个介于0和1之间的随机数
+  const randomNumber = Math.random();
+
+  // 将随机数映射到指定的范围
+  const scaledNumber = min + randomNumber * (max - min);
+
+  // 使用toFixed()确保结果有指定的小数位数
+  const fixedNumber = scaledNumber.toFixed(decimalPlaces);
+
+  // 转换回浮点数
+  return parseFloat(fixedNumber);
+}
+
+// console.log(generateRandomDecimalInRange(0.07, 0.08, 8));
+
+export function generateRandomGradient() {
+  // 生成随机颜色的函数，排除黑色系和灰色系
+  function getRandomColor() {
+    let color;
+    let isBlackOrGray
+    do {
+      color = '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
+      // 将颜色转换为RGB值
+      const r = parseInt(color.substr(1, 2), 16);
+      const g = parseInt(color.substr(3, 2), 16);
+      const b = parseInt(color.substr(5, 2), 16);
+      // 检查颜色是否接近黑色或灰色
+       isBlackOrGray = r < 64 && g < 64 && b < 64 || Math.abs(r - g) < 32 && Math.abs(r - b) < 32 && Math.abs(g - b) < 32;
+    } while (isBlackOrGray); // 如果是黑色或灰色，重新生成
+    return color;
+  }
+
+  // 更新CSS变量的值
+  document.documentElement.style.setProperty('--gradient-color1', getRandomColor());
+  document.documentElement.style.setProperty('--gradient-color2', getRandomColor());
+  document.documentElement.style.setProperty('--gradient-color3', getRandomColor());
+}
+

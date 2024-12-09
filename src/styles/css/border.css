@@ -1,3 +1,7 @@
 .br_10 {
   border-radius: calc(var(--base) * 10);
 }
+
+.br_50 {
+  border-radius: 50%;
+}

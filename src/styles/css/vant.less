@@ -23,11 +23,45 @@ html body {
     height: 0.10667rem;
     background: linear-gradient(145deg, var(--gradient-color1), var(--gradient-color2), var(--gradient-color3));
   }
+
+  .van-cell.input {
+    height: 1.38667rem;
+    line-height: 0.85333rem;
+    background: var(--bg-input);
+    border-radius: var(--border-radius);
+  }
+
+  .van-cell.input .van-field__control {
+    font-weight: 600;
+    font-size: 0.48rem;
+    font-style: italic;
+  }
+
+  .van-cell.input.green .van-field__control {
+    color: var(--green);
+  }
+
+  .van-cell.input.title-color .van-field__control {
+    color: var(--title-color);
+  }
+
+  .van-cell.input:after {
+    display: none;
+  }
+
+  .input-btn {
+    right: 0;
+    bottom: 0;
+    height: 0.69333rem;
+    line-height: 0.69333rem;
+    border-top-left-radius: var(--border-radius-s);
+    border-bottom-right-radius: var(--border-radius-s);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+  }
 }
-html body[data-theme='light']{
-
-
+html body[data-theme='light'] {
 }
-html body[data-theme='dark']{
-
+html body[data-theme='dark'] {
 }
