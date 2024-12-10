@@ -50,8 +50,8 @@ function errorHandler(error: RequestError): Promise<any> {
 // 请求拦截器
 function requestHandler(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig | Promise<InternalAxiosRequestConfig> {
   const savedToken = localStorage.getItem('token');
+  config.headers['Content-Type'] = 'application/json;charset=UTF-8';
   if (savedToken) config.headers['Authorization'] = `Bearer ${savedToken}`;
-
   return config;
 }
 

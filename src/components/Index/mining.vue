@@ -1,12 +1,12 @@
 <template>
   <div class="">
-    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">Mining</div>
+    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">{{ t('text.mining') }}</div>
     <div class="gborder br_10">
       <div class="pad_12">
-        <div class="capitalize title-color fontSize_16 mb_15 bold_700">User output</div>
+        <div class="capitalize title-color fontSize_16 mb_15 bold_700">{{ t('text.userOutput') }}</div>
         <div class="flex flex_center justify_sb fontSize_14 sub-title-color mb_15">
-          <div class="">Address</div>
-          <div class="">Quantity</div>
+          <div class="">{{ t('text.address') }}</div>
+          <div class="">{{ t('text.quantity') }}</div>
         </div>
 
         <Vue3Marquee :vertical="true" style="height: 300px; width: 100%" :duration="50">
@@ -27,12 +27,13 @@
 import { Vue3Marquee } from 'vue3-marquee';
 import { onMounted } from 'vue';
 import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
+const { t } = useI18n();
 const list = ref([]);
 function initList() {
   for (let i = 0; i < 100; i++) {
     let obj = {
       address: generateRandomEthAddress(),
-      quantity: generateRandomDecimalInRange(0.07, 0.18, 8),
+      quantity: generateRandomDecimalInRange(0.007, 0.018, 8),
     };
     list.value.push(obj);
   }

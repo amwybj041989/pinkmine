@@ -6,9 +6,10 @@ import pinia from '@/stores';
 import 'virtual:uno.css';
 import '@/styles/app.less';
 import '@/styles/var.less';
-
 import { i18n } from '@/utils/i18n';
 
+// import { createPinia } from 'pinia'
+// const pinia = createPinia()
 // Vant 桌面端适配
 import '@vant/touch-emulator';
 
@@ -32,9 +33,8 @@ for (let key in filter) {
     item(el, binding);
   });
 }
+app.use(pinia);
 app.use(head);
 app.use(router);
-app.use(pinia);
 app.use(i18n);
-
 app.mount('#app');

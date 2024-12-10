@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import useAppStore from '@/stores/modules/app';
+import { useAppStore } from '@/stores/modules';
 import useRouteCache from '@/stores/modules/routeCache';
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
 import { generateRandomGradient } from '@/utils';
 import { appName, appDescription } from '@/constants';
+import { appKit } from '@/utils/modal';
+import { useUserStore } from '@/stores/modules';
+const userStore = useUserStore();
 useHead({
   title: appName,
   meta: [
@@ -38,12 +41,24 @@ function setRem() {
   }
   document.documentElement.style.fontSize = rootFontSize + 'px';
 }
-
+function getConnectSataus() {
+  let isConnected = appKit.getIsConnectedState();
+  if (!isConnected) {
+    userStore.setAddress('');
+    userStore.setChainId(0);
+    localStorage.removeItem('address');
+    localStorage.removeItem('chainId');
+  }
+  setTimeout(() => {
+    getConnectSataus();
+  }, 1000);
+}
 onMounted(() => {
   setRem();
   initializeThemeSwitcher();
   generateRandomGradient();
   window.addEventListener('resize', setRem);
+  getConnectSataus();
 });
 </script>
 

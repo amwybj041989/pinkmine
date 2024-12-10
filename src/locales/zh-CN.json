@@ -2,6 +2,23 @@
 
   "event":{
     "connectWallet":"连接钱包"
-  }
+  },
+  "text":{
+    "poolData":"资金池",
+    "trendChart":"走势图",
+    "refreshTime":"剩余刷新时间",
 
+    "userRevenue":"用户收益",
+    "participant":"参与人数",
+    "validNode":"有效节点",
+    "totalOutput":"总产量",
+    "mining":"挖矿",
+    "userOutput":"用户产量",
+    "address":"用户地址",
+    "quantity":"产出数量",
+    "qa":"问答",//Question & Answer
+    "userRevenue":"用户收益"
+
+
+  }
 }

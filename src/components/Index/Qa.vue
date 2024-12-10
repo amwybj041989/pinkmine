@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="fontSize_32 gcolor text_center mb_15 bold_700 mt_15">Question & Answer</div>
+    <div class="fontSize_32 gcolor text_center mb_15 bold_700 mt_15">{{t('text.qa')}}</div>
     <!-- <div class="gborder br_10"> -->
     <div class="pad_4">
       <van-collapse v-model="activeNames" accordion>
@@ -29,6 +29,7 @@
 
 <script setup lang="ts">
 import { Faq } from '@/api/api';
+const { t } = useI18n();
 const activeNames = ref(1);
 let list = ref([]);
 function fetchList() {

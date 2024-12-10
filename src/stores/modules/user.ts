@@ -1,7 +1,7 @@
+import pinia from '@/stores';
 import { defineStore } from 'pinia';
 import type { LoginData, UserState } from '@/api/api';
-
-import { Login } from '@/api/api';
+import { Login, Auth } from '@/api/api';
 const expiresIn = 0;
 // const loginStatus = false;
 
@@ -9,6 +9,7 @@ export const useUserStore = defineStore(
   'user',
   () => {
     const address = ref<String>('');
+    const hasAuth = ref<String>(1);
     if (localStorage.address) {
       address.value = localStorage.address;
     }
@@ -26,8 +27,8 @@ export const useUserStore = defineStore(
       }
       return loginStatus;
     };
-    // Set user's information
     const setAddress = (value) => {
+      console.log('setAddress', value);
       address.value = value;
     };
     const setChainId = (value) => {
@@ -37,9 +38,13 @@ export const useUserStore = defineStore(
       try {
         const { data } = await Login(loginForm);
         localStorage.setItem('token', data.accessToken);
+        Auth().then(res=>{
+          hasAuth.value=res.status
+        })
+        console.log(data);
       } catch (error) {
         localStorage.removeItem('token');
-        throw error;
+        console.log(error);
       }
     };
     if (localStorage.chainId && localStorage.address) {
@@ -96,6 +101,7 @@ export const useUserStore = defineStore(
       address,
       chainId,
       setChainId,
+      hasAuth,
     };
   },
   {

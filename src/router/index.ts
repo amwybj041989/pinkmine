@@ -6,7 +6,7 @@ import 'nprogress/nprogress.css'
 
 import type { EnhancedRouteLocation } from './types'
 import useRouteCacheStore from '@/stores/modules/routeCache'
-import { useUserStore } from '@/stores'
+import { useUserStore } from '@/stores/modules'
 
 import { isLogin } from '@/utils/auth'
 import setPageTitle from '@/utils/set-page-title'

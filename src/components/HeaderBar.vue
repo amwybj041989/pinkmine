@@ -9,7 +9,7 @@
         </Vue3Marquee>
       </div>
       <div class="heaerbar_action pad_8 flex flex_center justify_sb">
-        <div class="logo_title fontSize_20 gcolor light" data-text="HashGameFi">HashGameFi</div>
+        <div class="logo_title fontSize_20 gcolor light" :data-text="appName">{{ appName }}</div>
         <div class="flex flex flex_center">
           <div class="walletConnect gborder">
             <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!userStore.address">
@@ -69,42 +69,29 @@
 </template>
 
 <script setup lang="ts" async>
+import { getCurrentInstance } from 'vue';
+const {
+  proxy: { $forceUpdate },
+}: any = getCurrentInstance();
 import { Vue3Marquee } from 'vue3-marquee';
+import { appName, appDescription } from '@/constants';
 import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
-import useAppStore from '@/stores/modules/app';
-// import { modal,modalAccount } from '@/utils/connect';
-import { appKit } from '@/utils/modal';
+import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
-import { useUserStore } from '@/stores';
+import { modalOopen } from '@/utils/modal';
+import { useUserStore } from '@/stores/modules';
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
-function getModalAccount() {
-  if (!appKit.getAddress() && !appKit.getChainId()) {
-    setTimeout(() => {
-      console.log(2222);
-      getModalAccount();
-    }, 500);
-  } else {
-    let address = appKit.getAddress();
-    let chainId = appKit.getChainId();
-    if (address && chainId) {
-      localStorage.address = address;
-      localStorage.chainId = chainId;
-      userStore.setAddress(address);
-      userStore.setChainId(chainId);
-    }
-  }
-}
+const address = ref(userStore.address);
 function gotAccount() {
+  // appKit.open();
+
   router.push('/account');
 }
 function modalClick() {
-  appKit.open();
-  getModalAccount();
-  // router.push('/account');
-  // modal.open();
+  modalOopen();
 }
 const appStore = useAppStore();
 const showSetting = ref(false);

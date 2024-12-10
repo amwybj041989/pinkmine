@@ -10,9 +10,7 @@ const prefersDark
 && window.matchMedia('(prefers-color-scheme: dark)').matches
 const useAppStore = defineStore('app', () => {
   const theme = prefersDark ? 'dark' : 'light'
-  console.log('theme',theme);
   const mode = ref<ConfigProviderTheme>(theme)
-
   const switchMode = (val: ConfigProviderTheme) => {
     mode.value = val
   }

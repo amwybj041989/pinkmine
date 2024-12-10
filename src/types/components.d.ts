@@ -7,9 +7,10 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    '副本': typeof import('./../components/Index/helpCenter - 副本.vue')['default']
+    '副本': typeof import('./../components/Index/minintForm - 副本.vue')['default']
     Audit: typeof import('./../components/Index/audit.vue')['default']
     AuditReport: typeof import('./../components/Index/auditReport.vue')['default']
+    Auth: typeof import('./../components/Index/auth.vue')['default']
     Chart: typeof import('./../components/Chart/index.vue')['default']
     GhostButton: typeof import('./../components/GhostButton.vue')['default']
     Headerbar: typeof import('./../components/headerbar.vue')['default']
@@ -18,6 +19,7 @@ declare module 'vue' {
     IndexTabs: typeof import('./../components/Index/indexTabs.vue')['default']
     Mining: typeof import('./../components/Index/mining.vue')['default']
     MinintForm: typeof import('./../components/Index/minintForm.vue')['default']
+    Minit: typeof import('./../components/Index/minit.vue')['default']
     NavBar: typeof import('./../components/NavBar.vue')['default']
     New_file: typeof import('./../components/new_file.vue')['default']
     Partner: typeof import('./../components/Index/partner.vue')['default']
