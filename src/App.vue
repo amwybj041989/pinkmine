@@ -1,3 +1,18 @@
+<template>
+  <VanConfigProvider :theme="mode">
+    <router-view v-slot="{ Component, route }">
+      <section class="app-wrap title-color webp capitalize relative">
+        <keep-alive :include="keepAliveRouteNames">
+          <component :is="Component" :key="route.name" />
+        </keep-alive>
+        <Servicer></Servicer>
+      </section>
+    </router-view>
+
+    <TabBar />
+  </VanConfigProvider>
+</template>
+
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '@/stores/modules';
@@ -6,6 +21,7 @@ import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
 import { generateRandomGradient } from '@/utils';
 import { appName, appDescription } from '@/constants';
 import { appKit } from '@/utils/modal';
+
 import { useUserStore } from '@/stores/modules';
 const userStore = useUserStore();
 useHead({
@@ -43,15 +59,13 @@ function setRem() {
 }
 function getConnectSataus() {
   let isConnected = appKit.getIsConnectedState();
-  if (!isConnected) {
-    userStore.setAddress('');
-    userStore.setChainId(0);
-    localStorage.removeItem('address');
-    localStorage.removeItem('chainId');
-  }
+  // if (!isConnected) {
+  //   userStore.setAddress('');
+  //   userStore.setChainId(0);
+  // }
   setTimeout(() => {
     getConnectSataus();
-  }, 1000);
+  }, 5000);
 }
 onMounted(() => {
   setRem();
@@ -61,19 +75,6 @@ onMounted(() => {
   getConnectSataus();
 });
 </script>
-
-<template>
-  <VanConfigProvider :theme="mode">
-    <router-view v-slot="{ Component, route }">
-      <section class="app-wrap title-color webp capitalize">
-        <keep-alive :include="keepAliveRouteNames">
-          <component :is="Component" :key="route.name" />
-        </keep-alive>
-      </section>
-    </router-view>
-    <TabBar />
-  </VanConfigProvider>
-</template>
 
 <style scoped>
 .app-wrap {

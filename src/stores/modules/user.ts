@@ -20,7 +20,7 @@ export const useUserStore = defineStore(
     }
     const loginStatus = ref<Boolean>(false);
     const getLoginStatus = () => {
-      if (localStorage.getItem('token') && address.value) {
+      if (localStorage.getItem('token') && address.value && chainId.value) {
         loginStatus.value = true;
       } else {
         loginStatus.value = false;
@@ -28,32 +28,47 @@ export const useUserStore = defineStore(
       return loginStatus;
     };
     const setAddress = (value) => {
-      console.log('setAddress', value);
+      localStorage.address = value;
       address.value = value;
+      if (!value) {
+        localStorage.removeItem('address');
+      }
     };
     const setChainId = (value) => {
+      localStorage.chainId = value;
       chainId.value = value;
+      if (!value) {
+        localStorage.removeItem('chainId');
+      }
     };
+    const setAuth=(value)=>{
+      hasAuth.value=value
+    }
     const login = async (loginForm: LoginData) => {
       try {
         const { data } = await Login(loginForm);
         localStorage.setItem('token', data.accessToken);
-        Auth().then(res=>{
-          hasAuth.value=res.status
-        })
+        setAddress(loginForm.address);
+        setChainId(loginForm.chain);
+        getLoginStatus();
+        Auth().then((res) => {
+          hasAuth.value = res.status;
+        });
         console.log(data);
       } catch (error) {
+        setAddress('');
+        setChainId(0);
         localStorage.removeItem('token');
         console.log(error);
       }
     };
-    if (localStorage.chainId && localStorage.address) {
-      login({
-        chain: localStorage.chainId * 1,
-        address: localStorage.address,
-      });
-    }
-
+    // if (localStorage.chainId && localStorage.address) {
+    //   login({
+    //     chain: localStorage.chainId * 1,
+    //     address: localStorage.address,
+    //   });
+    // }
+    getLoginStatus();
     // const info = async () => {
     //   try {
     //     const { data } = await getUserInfo();
@@ -95,6 +110,7 @@ export const useUserStore = defineStore(
     // };
 
     return {
+      loginStatus,
       login,
       getLoginStatus,
       setAddress,
@@ -102,6 +118,7 @@ export const useUserStore = defineStore(
       chainId,
       setChainId,
       hasAuth,
+      setAuth
     };
   },
   {

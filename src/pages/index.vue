@@ -24,6 +24,16 @@
     <div class="">
       <partner></partner>
     </div>
+    <van-popup v-model:show="rewardShow" round teleport="#app" :close-on-click-overlay="false">
+      <RewardList></RewardList>
+    </van-popup>
+    <van-popup v-model:show="boosterShow" round teleport="#app" :close-on-click-overlay="false">
+      <Booster></Booster>
+    </van-popup>
+    <van-popup v-model:show="eventerShow" round teleport="#app" :close-on-click-overlay="false">
+      <Eventer @join="handleJoinEvent"></Eventer>
+    </van-popup>
+    <van-cell title="展示弹出层" is-link @click="eventerShow = true" />
   </div>
 </template>
 
@@ -39,17 +49,92 @@ import auditReport from '@/components/Index/auditReport.vue';
 import partner from '@/components/Index/partner.vue';
 import useAppStore from '@/stores/modules/app';
 import { languageColumns, locale } from '@/utils/i18n';
-import { Auth } from '@/utils/api/index';
+import { Auth, RewardList as apiRewardList, BoosterList, Event, JoinEvent } from '@/utils/api/index';
 import { useUserStore } from '@/stores/modules';
+import { showNotify } from 'vant';
 const userStore = useUserStore();
 const appStore = useAppStore();
+const rewardShow = ref<boolean>(false);
+const boosterShow = ref<boolean>(false);
+const eventerShow = ref<boolean>(false);
+const hashAuth = ref<boolean>(false);
 const checked = ref<boolean>(false);
+watch(
+  () => userStore.loginStatus,
+  (newMode) => {
+    if (newMode) {
+      fetchAuth();
+      fetchEvent();
+    }
+  }
+);
+let handleJoinEvent = (r) => {
+  JoinEvent({
+    id: r.id,
+  }).then((res) => {
+    eventerShow.value=false
+    if (res.success) {
+      showNotify({
+        type: 'success',
+        message: t('msg.joinedEvnet'),
+      });
+    }
+  }).catch(err=>{
+    eventerShow.value=false
+    showNotify({
+      type: 'danger',
+      message: err.mssage,
+    });
+  })
+};
 function fetchAuth() {
   Auth().then((res) => {
     console.log('Auth', res);
+    // userStore.setAuth(res.data.status);
   });
 }
+let fetchEvent = () => {
+  Event().then((res) => {
+    console.log('Event', res);
+    if (res.data) {
+      eventerShow.value = true;
+    } else {
+      eventerShow.value = false;
+      fetchBoosterList();
+    }
+  });
+};
+let fetchBoosterList = () => {
+  BoosterList({
+    pageIndex: 1,
+    pageSize: 20,
+  }).then((res) => {
+    if (res.data.data && res.data.data.length) {
+      boosterShow.value = true;
+    } else {
+      fetchRewardList();
+    }
+  });
+};
+let fetchRewardList = () => {
+  apiRewardList({
+    pageIndex: 1,
+    pageSize: 20,
+    status: 0,
+  }).then((res) => {
+    if (res.data.data && res.data.data.length) {
+      rewardShow.value = true;
+    } else {
+      rewardShow.value = false;
+    }
+    console.log('apiRewardList', res);
+  });
+};
 onMounted(() => {
+  if (userStore.loginStatus) {
+    fetchAuth();
+    fetchEvent();
+  }
   // fetchAuth()
 });
 </script>

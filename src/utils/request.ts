@@ -1,8 +1,9 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { showNotify } from 'vant';
-import { STORAGE_TOKEN_KEY } from '@/stores/mutation-type';
-
+import { useUserStore } from '@/stores/modules';
+import { i18n } from '@/utils/i18n';
+// console.log(i18n);
 // 这里是用于设定请求后端时，所用的 Token KEY
 // 可以根据自己的需要修改，常见的如 Access-Token，Authorization
 // 需要注意的是，请尽量保证使用中横线`-` 来作为分隔符，
@@ -25,6 +26,11 @@ export type RequestError = AxiosError<{
 
 // 异常拦截处理器
 function errorHandler(error: RequestError): Promise<any> {
+  // console.log('errorHandler', error);
+  if ((error.code = 'ECONNABORTED')) {
+    // window.location.reload();
+    return;
+  }
   if (error.response) {
     const { data = {}, status, statusText } = error.response;
     // 403 无权限
@@ -36,9 +42,20 @@ function errorHandler(error: RequestError): Promise<any> {
     }
     // 401 未登录/未授权
     if (status === 401) {
+      if (localStorage.address && localStorage.chainId) {
+        let userStore = useUserStore();
+        userStore.login({
+          chain: localStorage.chainId * 1,
+          address: localStorage.address,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        return;
+      }
       showNotify({
         type: 'danger',
-        message: error.message,
+        message: i18n.global.t('msg.noLogin'),
       });
       // 如果你需要直接跳转登录页面
       // location.replace(loginRoutePath)

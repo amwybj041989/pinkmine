@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">Audit report</div>
-    <div class="fontSize_14 sub-title-color text_center mb_15">We have a secure audit report</div>
+    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">{{ t('text.auditReport') }}</div>
+    <div class="fontSize_14 sub-title-color text_center mb_15">{{ t('text.auditReportSub') }}</div>
     <div class="pad_4">
       <div class="flex flex_wrap justify_sb">
         <div class="audit_item audit_bg1"></div>
@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n();
 import { onMounted } from 'vue';
 const activeNames = ref('1');
 onMounted(() => {});

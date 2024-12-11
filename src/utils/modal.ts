@@ -45,8 +45,6 @@ async function getModalAccount() {
   let address = appKit.getAddress();
   let chainId = appKit.getChainId();
   if (address && chainId) {
-    localStorage.address = address;
-    localStorage.chainId = chainId;
     userStore.setAddress(address);
     userStore.setChainId(chainId);
     userStore.login({
@@ -64,8 +62,8 @@ async function getModalAccount() {
 export function modalOopen() {
   let userStore = useUserStore();
   if (localStorage.address != appKit.getAddress()) {
-    localStorage.removeItem('address');
-    localStorage.removeItem('chainId');
+    userStore.setAddress('');
+    userStore.setChainId(0);
     appKit.open();
     getModalAccount();
     return;
@@ -74,8 +72,6 @@ export function modalOopen() {
     let address = appKit.getAddress();
     let chainId = appKit.getChainId();
     if (address && chainId) {
-      localStorage.address = address;
-      localStorage.chainId = chainId;
       userStore.setAddress(address);
       userStore.setChainId(chainId);
       userStore.login({

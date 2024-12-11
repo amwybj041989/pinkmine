@@ -3,9 +3,20 @@
     <div class="header_padding"></div>
     <div class="heaerbar_wrap">
       <div class="gbg pad_12">
-        <Vue3Marquee>
-          <div class="">11111111111111</div>
-          <div class="">22222222</div>
+        <Vue3Marquee :duration="150">
+          <div class="flex flex_center justify_sb marquee_item ml_15" v-for="item in list" :key="item.address">
+            <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
+            <div class="ggolden ml_6" v-hash="item.address"></div>
+            <div class="shrink_0 mr_6 ml_6 red">
+              {{ t('text.outPut') }}
+            </div>
+            <div class="ggolden">
+              {{ item.quantity }}
+            </div>
+            <div class="">
+              ETH
+            </div>
+          </div>
         </Vue3Marquee>
       </div>
       <div class="heaerbar_action pad_8 flex flex_center justify_sb">
@@ -81,12 +92,24 @@ import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { modalOopen } from '@/utils/modal';
 import { useUserStore } from '@/stores/modules';
+import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
 const userStore = useUserStore();
 const route = useRoute();
 const router = useRouter();
 const address = ref(userStore.address);
+const list = ref([]);
+function initList() {
+  for (let i = 0; i < 100; i++) {
+    let obj = {
+      address: generateRandomEthAddress(),
+      quantity: generateRandomDecimalInRange(0.007, 0.018, 4),
+    };
+    list.value.push(obj);
+  }
+}
+
 function gotAccount() {
-  // appKit.open();
+  // modalOopen();
 
   router.push('/account');
 }
@@ -119,6 +142,7 @@ function toggle() {
   document.body.setAttribute('data-theme', isDark.value ? 'dark' : 'light');
 }
 onMounted(() => {
+  initList();
   // getAppKitInfo();
 });
 </script>
@@ -152,5 +176,8 @@ onMounted(() => {
   border-width: 0.16rem;
   border-top-color: var(--title-color);
   border-bottom-width: 0;
+}
+.marquee_item {
+  width: 100%;
 }
 </style>

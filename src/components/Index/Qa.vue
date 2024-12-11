@@ -1,13 +1,13 @@
 <template>
-  <div class="">
-    <div class="fontSize_32 gcolor text_center mb_15 bold_700 mt_15">{{t('text.qa')}}</div>
+  <div class="" v-if="userStore.loginStatus">
+    <div class="fontSize_32 gcolor text_center mb_15 bold_700 mt_15">{{ t('text.qa') }}</div>
     <!-- <div class="gborder br_10"> -->
     <div class="pad_4">
       <van-collapse v-model="activeNames" accordion>
         <van-collapse-item :title="item.title" :name="item.id" v-for="item in list" :key="item.id">
-        {{item.content}}
+          {{ item.content }}
         </van-collapse-item>
-     <!--  <van-collapse-item title="How do i withdraw money？" name="2">
+        <!--  <van-collapse-item title="How do i withdraw money？" name="2">
           You can convert the currency generated every day into USDT, and then initiate a withdrawal. USDT withdrawals will be automatically sent to the wallet address you added to the node, other addresses are not supported.
         </van-collapse-item>
         <van-collapse-item title="How to calculate income？" name="3"> When you join successfully, the smart contract starts to calculate your address through the node and start to calculate the revenue. </van-collapse-item>
@@ -30,16 +30,29 @@
 <script setup lang="ts">
 import { Faq } from '@/api/api';
 const { t } = useI18n();
+import { useUserStore } from '@/stores/modules';
+const userStore = useUserStore();
 const activeNames = ref(1);
 let list = ref([]);
 function fetchList() {
   Faq().then((res) => {
     list.value = res.data;
-    console.log(res);
+    console.log('Faq', res);
   });
 }
+watch(
+  () => userStore.loginStatus,
+  (newMode) => {
+    console.log(11111111111111);
+    if (newMode) {
+      fetchList();
+    }
+  }
+);
 onMounted(() => {
-  fetchList();
+  if (userStore.loginStatus) {
+    fetchList();
+  }
 });
 </script>
 

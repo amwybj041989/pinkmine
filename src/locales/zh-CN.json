@@ -1,23 +1,82 @@
 {
 
-  "event":{
-    "connectWallet":"连接钱包"
+  "event": {
+    "connectWallet": "连接钱包",
+    "joinEvent": "参与活动"
   },
-  "text":{
-    "poolData":"资金池",
-    "trendChart":"走势图",
-    "refreshTime":"剩余刷新时间",
-
-    "userRevenue":"用户收益",
-    "participant":"参与人数",
-    "validNode":"有效节点",
-    "totalOutput":"总产量",
-    "mining":"挖矿",
-    "userOutput":"用户产量",
-    "address":"用户地址",
-    "quantity":"产出数量",
-    "qa":"问答",//Question & Answer
-    "userRevenue":"用户收益"
+  "msg": {
+    "noLogin": "请重新连接钱包",
+    "noReward": "快去挖矿吧~",
+    "Claimed": "领取成功~",
+    "joinedEvnet":"活动参与成功,请等待奖励吧~"
+  },
+  "reward": {
+    "orderNo": "订单号 : 用于区别用户产出收益",
+    "userID": "用户ID : 用于区别用户产出收益",
+    "balance": "账号余额 : 用户现有钱包余额",
+    "dailyRate": "日利率 : 用户每日产出的计算利率",
+    "interest": "利息,该次挖矿产出的利息",
+    "startTime": "开始时间 : 该订单产出利息的开始时间",
+    "endTime": "结束时间 : 该订单产出利息的结束始时间",
+    "status": "订单状态,表明该订单利息是否被领取",
+    "noClaim": "未领取",
+    "Claimed": "已领取",
+    "button": "领取"
+  },
+  "text": {
+    "poolData": "资金池",
+    "trendChart": "走势图",
+    "refreshTime": "剩余刷新时间",
+    "outPut": "产出了",
+    "userRevenue": "用户收益",
+    "participant": "参与人数",
+    "validNode": "有效节点",
+    "totalOutput": "总产量",
+    "mining": "挖矿",
+    "userOutput": "用户产量",
+    "address": "用户地址",
+    "quantity": "产出数量",
+    "qa": "问答", //Question & Answer
+    "userRevenue": "用户收益",
+    "auditReport": "审计报告",
+    "auditReportSub": "我们有一份安全的审计报告",
+    "partner": "搭档",
+    "partnerSub": "我们的商业伙伴",
+    "finished": "没有更多了",
+    "loading": "加载中...",
+    "pulling": "下拉即可刷新...",
+    "loosing": "释放即可刷新...",
+    "requirement": "活动要求",
+    "requirementText": "挖矿投入大于",
+    "eventReward": "活动奖励",
+    "eventStake": "质押",
+    "eventAirdrop": "空投",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益"
 
 
   }
