@@ -8,7 +8,7 @@
       </div>
     </div>
     <van-empty image="search" :description="t('msg.noReward')" v-else />
-    <div class="pad_2_8 flex flex_center justify_center" v-show="totalPage > 1">
+    <!--  <div class="pad_2_8 flex flex_center justify_center" v-show="totalPage > 1">
       <van-pagination v-model="currentPage" @change="fetchRewardList" :total-items="totalPage" mode="simple" :items-per-page="20" :force-ellipses="true">
         <template #prev-text>
           <van-icon name="arrow-left" />
@@ -18,7 +18,7 @@
         </template>
         <template #page="{ text }">{{ text }}</template>
       </van-pagination>
-      <!-- <div class="flex flex_center shrink_0 ml_20">
+      <div class="flex flex_center shrink_0 ml_20">
         <div class="">
           {{ t('reward.noClaim') }}
         </div>
@@ -26,15 +26,17 @@
         <div class="">
           {{ t('reward.Claimed') }}
         </div>
-      </div> -->
-    </div>
+      </div>
+    </div> -->
     <i class="border_line border_scroll" style="border-radius: var(--van-popup-round-radius)"></i>
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n();
-import rewardItem from './item.vue';
+import { defineEmits } from 'vue';
+const emit = defineEmits(['close']);
+import rewardItem from './RewardItem.vue';
 import { ClaimReward, RewardList } from '@/api/api';
 import { showNotify } from 'vant';
 const list = ref([]);
@@ -53,6 +55,9 @@ let onClaim = (r, i) => {
       type: 'success',
       message: t('msg.Claimed'),
     });
+    if (list.value.length == 0) {
+      emit('close');
+    }
   });
 };
 let fetchRewardList = () => {
@@ -111,11 +116,11 @@ onMounted(() => {
 <style scoped>
 .rewardList_wrap {
   width: 75vw;
-  height: 75vh;
+  max-height: 75vh;
 }
 .rewardList {
   width: 100%;
-  height: calc(75vh - var(--base) * 60);
+  height: 100%;
   overflow-y: scroll;
 }
 .rewardList_item + .rewardList_item {

@@ -3,87 +3,139 @@
     <div class="pad_12">
       <div class="flex flex_center justify_sb mb_8">
         <div class="flex flex_center">
-          <div class="webp icon-chain-mini icon-chain-mini-bsc shrink_0"></div>
-          <div class="ml_6 title-color">Wallet Address:</div>
+          <!-- <div class="webp icon-chain-mini icon-chain-mini-bsc shrink_0"></div> -->
+          <div class="ml_6 title-color">{{ t('text.walletAddress') }}:</div>
         </div>
         <div class="flex flex_center">
           <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0"></div>
-          <div class="ml_6 fontSize_18 ggolden bold_900">0</div>
+          <div class="ml_6 fontSize_18 ggolden bold_900"><span v-bigNum="userinfo.canWithdraw"></span></div>
           <div class="ml_6 title-color">USDT</div>
         </div>
       </div>
       <div class="flex flex_center justify_sb mb_15">
-        <div class="flex flex_center">
-          <div class="fontSize_14" v-addr="address"></div>
+        <div class="flex flex_center" @click="handleCopyAdress">
+          <div class="fontSize_14" v-addr="userStore.address"></div>
           <div class="ml_6 my-icon my-icon-copy gcolor"></div>
         </div>
-        <div class="webp icon-query-normal icon-query-normal-querylink shrink-0"></div>
       </div>
-      <div class="flex flex_wrap justify_sb">
-        <div class="gborder br_50 mb_12 shrink_0 amount-item" v-for="item in list" :key="item.value" :class="item.value == amount ? 'amount_item_active' : ''" @click="handleSelect(item)">
-          <div class="flex flex_column flex_center justify_center">
-            <strong class="fontSize_16 ggolden">{{ item.value }}</strong>
-            <p><i class="webp icon-coin-mini icon-coin-mini-usdt"></i></p>
+      <div class="" v-if="withdrawConfig.withdrawable">
+        <div class="mb_12">{{ t('text.withdrawAmount') }}</div>
+        <div class="relative bg_input pad_12 br_10 mb_10">
+          <div class="van-cell__value van-field__value">
+            <div class="van-field__body"><input type="text" v-model="amount" inputmode="decimal" id="van-field-20-input" class="van-field__control" :placeholder="withdrawConfig.withdrawMin + ' - 10000'" /></div>
           </div>
-          <i class="border_line border_scroll br_50"></i>
+          <i data-v-6451d9cc="" class="absolute white bold_900 pad_0_8 input-btn gbg" @click="handleClickMax">MAX</i>
+        </div>
+        <div class="mb_20 green">
+          <div class="mb_12">
+            <van-popover v-model:show="showWithdrawFee">
+              <div class="fontSize_12 sub-title-color pad_8">{{ t('text.withdrawFeeTip') }}</div>
+              <template #reference>
+                <div class="flex flex_center justify_sb">
+                  <div class="flex flex_center">
+                    <van-icon name="question-o" size="16" />
+                    <div class="fontSize_14 title-color bold_700">{{ t('text.withdrawFee') }}</div>
+                  </div>
+                  <div class="shrink_0 fontSize_16 bold_700 title-color">
+                    {{ withdrawConfig.withdrawFee }}
+                  </div>
+                </div>
+              </template>
+            </van-popover>
+          </div>
+          <div class="mb_12">
+            <van-popover v-model:show="showWithdrawFree">
+              <div class="fontSize_12 sub-title-color pad_8">{{ t('text.withdrawFreeTip') }}</div>
+              <template #reference>
+                <div class="flex flex_center justify_sb">
+                  <div class="flex flex_center">
+                    <van-icon name="question-o" size="16" />
+                    <div class="fontSize_14 title-color bold_700">{{ t('text.withdrawFree') }}</div>
+                  </div>
+                  <div class="shrink_0 fontSize_16 bold_700 title-color">
+                    {{ withdrawConfig.withdrawFree }}
+                  </div>
+                </div>
+              </template>
+            </van-popover>
+          </div>
+          <div class="">
+            <!-- <div class="flex flex_center mb_12">
+              <div class="fontSize_14 title-color bold_700">{{ t('text.withdrawInfo') }}</div>
+            </div> -->
+            <div class="shrink_0 fontSize_14 bold_700 red line_15">
+              {{ withdrawConfig.withdrawFree }}
+            </div>
+          </div>
+        </div>
+        <div class="flex flex_center justify_center" @click="handleWithdraw">
+          <div class="btn_default">{{ t('text.withdraw') }}</div>
         </div>
       </div>
-      <div class="mb_12">Recharge amount</div>
-      <div class="relative bg_input pad_12 br_10 mb_20">
-        <div class="van-cell__value van-field__value">
-          <div class="van-field__body"><input type="text" v-model="amount" inputmode="decimal" id="van-field-20-input" class="van-field__control" placeholder="Please enter the recharge amount10~10000USDT" /></div>
-        </div>
-        <i data-v-6451d9cc="" class="absolute white bold_900 pad_0_8 input-btn gbg">MAX</i>
+      <van-empty image="error" :description="t('text.disableWithdraw')" image-size="100" v-else />
+      <div class="mt_20 flex justify_center">
+        <div class="gcolor fontSize_14 bold_600">{{ t('text.record') }} ></div>
       </div>
-      <div class="flex flex_center justify_center">
-        <div class="btn_default">mining</div>
-      </div>
-      <!-- <div class="">
-        <van-slider v-model="sliderValue" @change="onChange" />
-      </div> -->
     </div>
     <i class="border_line border_scroll br_10"></i>
   </div>
 </template>
 
 <script setup lang="ts">
-const address = '0x3ec1ee4167aad5e5de52932a64634b2871e1fc2a';
-const amount = ref(10);
-const sliderValue = ref(1);
-const list = ref([
-  {
-    value: 10,
-  },
-  {
-    value: 20,
-  },
-  {
-    value: 30,
-  },
-  {
-    value: 50,
-  },
-  {
-    value: 100,
-  },
-  {
-    value: 200,
-  },
-  {
-    value: 500,
-  },
-  {
-    value: 1000,
-  },
-]);
-function onChange(v) {
-  amount.value = v * 10;
-}
-function handleSelect(r) {
-  amount.value = r.value;
-  sliderValue.value = r.value / 100;
-}
-onMounted(() => {});
+const { t } = useI18n();
+import { useUserStore } from '@/stores/modules';
+const userStore = useUserStore();
+import { copy } from '@/utils/copy';
+import { showNotify } from 'vant';
+let amount = ref(10);
+let showWithdrawFee = ref(false);
+let showWithdrawFree = ref(false);
+let userinfo = ref(userStore.userInfo);
+let withdrawConfig = ref(userStore.withdrawConfig);
+let handleCopyAdress = () => {
+  copy(userStore.address)
+    .then((res) => {
+      showNotify({ type: 'success', message: t('msg.copyed') });
+    })
+    .catch(() => {
+      showNotify({ type: 'danger', message: t('msg.copyFail') });
+    });
+};
+let handleClickMax = () => {
+  amount.value = userinfo.canWithdraw;
+};
+let handleWithdraw = () => {
+  if (!withdrawConfig.withdrawable) {
+    showNotify({ type: 'danger', message: t('msg.disableWithdraw') });
+    return;
+  }
+  if (!userinfo.canWithdraw) {
+    showNotify({ type: 'danger', message: t('msg.noCanWithdraw') });
+    return;
+  }
+  if (!amount.value || amount.value < userStore.withdrawConfig.withdrawMin) {
+    showNotify({ type: 'danger', message: t('msg.minWithdraw') });
+    return;
+  }
+  if (amount.value > userinfo.canWithdraw) {
+    showNotify({ type: 'danger', message: t('msg.maxCanWithdraw') });
+    return;
+  }
+  Withdraw({
+    money: amount.value,
+  })
+    .then((res) => {
+      showNotify({ type: 'success', message: t('msg.withdrawed') });
+      userStore.fetchWithdrawConfig();
+      userStore.fetchUserInfo();
+    })
+    .catch((err) => {
+      showNotify({ type: 'danger', message: t('msg.withdrawFail') });
+    });
+};
+onMounted(() => {
+  userStore.fetchWithdrawConfig();
+});
 </script>
 
 <style scoped>

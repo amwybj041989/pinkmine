@@ -30,7 +30,7 @@
       </template>
       <div class="text-color mb_8 fontSize_16">{{ t('text.trendChart') }}</div>
       <div class="mb_12">
-        <span class="fontSize_18 ggolden bold_600">$ <span ref="finace"></span></span>
+        <span class="fontSize_18 ggolden bold_600">$ <span v-bigNum="nowValue"></span></span>
         <span class="green"> +{{ upValue }}% </span>
       </div>
       <div class="gborder">
@@ -69,7 +69,7 @@ import { initPoolData, clearPoolData, initTrendData } from '@/utils/mock';
 import { bigNum } from '@/utils';
 import * as echarts from 'echarts';
 const { t } = useI18n();
-const active = ref(1);
+const active = ref(0);
 const nowValue = ref(0);
 const upValue = ref(0);
 
@@ -220,11 +220,11 @@ function onFinish() {
   });
 }
 function handleVisibilityChange(isVisible, entry) {
-  console.log('handleVisibilityChange');
+  // console.log('handleVisibilityChange');
   if (isVisible) {
     nextTick(() => {
       if (finace.value) {
-        animateNumber(finace.value, 0, nowValue.value, 1500);
+        // animateNumber(finace.value, 0, nowValue.value, 1500);
       } else {
         // console.error('targetElement ref is not bound to a DOM element');
       }
@@ -236,7 +236,7 @@ function handleVisibilityChange(isVisible, entry) {
 function onChange(v) {
   console.log(finace);
   if (v == 1) {
-    animateNumber(finace.value, 0, nowValue.value, 1500);
+    // animateNumber(finace.value, 0, nowValue.value, 1500);
   }
 }
 onMounted(() => {
@@ -244,7 +244,7 @@ onMounted(() => {
   initLineOption();
   nextTick(() => {
     if (finace.value) {
-      observeVisibility(finace.value, handleVisibilityChange);
+      // observeVisibility(finace.value, handleVisibilityChange);
     } else {
       console.error('targetElement ref is not bound to a DOM element');
     }

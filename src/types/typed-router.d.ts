@@ -22,6 +22,7 @@ declare module 'vue-router/auto-routes' {
     '404': RouteRecordInfo<'404', '/:all(.*)', { all: ParamValue<true> }, { all: ParamValue<false> }>,
     '/account/': RouteRecordInfo<'/account/', '/account', Record<never, never>, Record<never, never>>,
     '/account/components/charge': RouteRecordInfo<'/account/components/charge', '/account/components/charge', Record<never, never>, Record<never, never>>,
+    '/account/components/eventerInfo': RouteRecordInfo<'/account/components/eventerInfo', '/account/components/eventerInfo', Record<never, never>, Record<never, never>>,
     '/account/components/indexTabs': RouteRecordInfo<'/account/components/indexTabs', '/account/components/indexTabs', Record<never, never>, Record<never, never>>,
     '/account/components/myAccount': RouteRecordInfo<'/account/components/myAccount', '/account/components/myAccount', Record<never, never>, Record<never, never>>,
     '/account/components/withdraw': RouteRecordInfo<'/account/components/withdraw', '/account/components/withdraw', Record<never, never>, Record<never, never>>,

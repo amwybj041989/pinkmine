@@ -2,13 +2,13 @@
   <div class="rewardList_wrap gborder">
     <div class="rewardList pad_12" v-if="list.length">
       <div class="rewardList_item br_10 gborder" v-for="(item, i) in list" :key="i" :title="item">
-        <rewardItem :data="item" @claim="onClaim(item, i)"></rewardItem>
+        <BoosterItem :data="item" @claim="onClaim(item, i)"></BoosterItem>
 
         <i class="border_line border_scroll br_10"></i>
       </div>
     </div>
     <van-empty image="search" :description="t('msg.noReward')" v-else />
-    <div class="pad_2_8 flex flex_center justify_center" v-show="totalPage > 1">
+    <!-- <div class="pad_2_8 flex flex_center justify_center" v-show="totalPage > 1">
       <van-pagination v-model="currentPage" @change="fetchRewardList" :total-items="totalPage" mode="simple" :items-per-page="20" :force-ellipses="true">
         <template #prev-text>
           <van-icon name="arrow-left" />
@@ -27,15 +27,17 @@
           {{ t('reward.Claimed') }}
         </div>
       </div>
-    </div>
+    </div> -->
     <i class="border_line border_scroll" style="border-radius: var(--van-popup-round-radius)"></i>
   </div>
 </template>
 
 <script setup lang="ts">
 const { t } = useI18n();
-import rewardItem from './item.vue';
-import { ClaimReward, RewardList } from '@/api/api';
+import { defineEmits } from 'vue';
+const emit = defineEmits(['close']);
+import BoosterItem from './BoosterItem.vue';
+import { ClaimBooster, BoosterList } from '@/api/api';
 import { showNotify } from 'vant';
 const list = ref([]);
 let currentPage = ref(1);
@@ -45,19 +47,22 @@ const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
 let onClaim = (r, i) => {
-  ClaimReward({
-    idList: [r.id],
+  ClaimBooster({
+    id: r.id,
   }).then((res) => {
-    list.value.splice(i, 1);
+    // list.value.splice(i, 1);
     showNotify({
       type: 'success',
       message: t('msg.Claimed'),
     });
+    emit('close');
+    // if(list.value.length==0){
+
+    // }
   });
-  console.log(r, i);
 };
 let fetchRewardList = () => {
-  RewardList({
+  BoosterList({
     pageIndex: currentPage.value,
     pageSize: 20,
     status: checked.value ? 1 : 0,
@@ -106,18 +111,18 @@ let fetchRewardList = () => {
 //   onLoad();
 // };
 onMounted(() => {
-  fetchRewardList();
+  // fetchRewardList();
 });
 </script>
 
 <style scoped>
 .rewardList_wrap {
   width: 75vw;
-  height: 75vh;
+  max-height: 75vh;
 }
 .rewardList {
   width: 100%;
-  height: calc(75vh - var(--base) * 60);
+  height: 100%;
   overflow-y: scroll;
 }
 .rewardList_item + .rewardList_item {

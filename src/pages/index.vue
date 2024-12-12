@@ -25,15 +25,15 @@
       <partner></partner>
     </div>
     <van-popup v-model:show="rewardShow" round teleport="#app" :close-on-click-overlay="false">
-      <RewardList></RewardList>
+      <RewardList @close="rewardShow = false"></RewardList>
     </van-popup>
     <van-popup v-model:show="boosterShow" round teleport="#app" :close-on-click-overlay="false">
-      <Booster></Booster>
+      <Booster @close="boosterShow = false"></Booster>
     </van-popup>
     <van-popup v-model:show="eventerShow" round teleport="#app" :close-on-click-overlay="false">
       <Eventer @join="handleJoinEvent"></Eventer>
     </van-popup>
-    <van-cell title="展示弹出层" is-link @click="eventerShow = true" />
+    <!-- <van-cell title="展示弹出层" is-link @click="boosterShow = true" /> -->
   </div>
 </template>
 
@@ -71,21 +71,23 @@ watch(
 let handleJoinEvent = (r) => {
   JoinEvent({
     id: r.id,
-  }).then((res) => {
-    eventerShow.value=false
-    if (res.success) {
-      showNotify({
-        type: 'success',
-        message: t('msg.joinedEvnet'),
-      });
-    }
-  }).catch(err=>{
-    eventerShow.value=false
-    showNotify({
-      type: 'danger',
-      message: err.mssage,
-    });
   })
+    .then((res) => {
+      eventerShow.value = false;
+      if (res.success) {
+        showNotify({
+          type: 'success',
+          message: t('msg.joinedEvnet'),
+        });
+      }
+    })
+    .catch((err) => {
+      eventerShow.value = false;
+      showNotify({
+        type: 'danger',
+        message: err.mssage,
+      });
+    });
 };
 function fetchAuth() {
   Auth().then((res) => {

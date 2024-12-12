@@ -3,8 +3,8 @@
     <van-tab>
       <template #title>
         <div class="flex flex_center">
-          <div class="my-icon my-icon-shujuku" :class="active == 0 ? 'gcolor' : ''"></div>
-          <div class="ml_8" :class="active == 0 ? 'gcolor' : ''">charge</div>
+          <!-- <div class="my-icon my-icon-shujuku" :class="active == 0 ? 'gcolor' : ''"></div> -->
+          <div class="ml_8" :class="active == 0 ? 'gcolor' : ''">{{ t('text.charge') }}</div>
         </div>
       </template>
       <charge></charge>
@@ -12,8 +12,8 @@
     <van-tab>
       <template #title>
         <div class="flex flex_center">
-          <div class="my-icon my-icon-zhexiantu" :class="active == 1 ? 'gcolor' : ''"></div>
-          <div class="ml_8" :class="active == 1 ? 'gcolor' : ''">withdraw</div>
+          <!-- <div class="my-icon my-icon-zhexiantu" :class="active == 1 ? 'gcolor' : ''"></div> -->
+          <div class="ml_8" :class="active == 1 ? 'gcolor' : ''">{{ t('text.withdraw') }}</div>
         </div>
       </template>
       <withdraw></withdraw>
@@ -26,7 +26,7 @@ import charge from './charge.vue';
 import withdraw from './withdraw.vue';
 import { animateNumber, observeVisibility } from '@/utils';
 const { t } = useI18n();
-const active = ref(0);
+const active = ref(1);
 const countDown = ref(null);
 const finace = ref(null);
 

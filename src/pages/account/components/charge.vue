@@ -1,7 +1,7 @@
 <template>
   <div class="gborder br_10">
     <div class="pad_12">
-      <div class="flex flex_center justify_sb mb_8">
+      <!-- <div class="flex flex_center justify_sb mb_8">
         <div class="flex flex_center">
           <div class="webp icon-chain-mini icon-chain-mini-bsc shrink_0"></div>
           <div class="ml_6 title-color">Wallet Address:</div>
@@ -34,9 +34,9 @@
           <div class="van-field__body"><input type="text" v-model="amount" inputmode="decimal" id="van-field-20-input" class="van-field__control" placeholder="Please enter the recharge amount10~10000USDT" /></div>
         </div>
         <i data-v-6451d9cc="" class="absolute white bold_900 pad_0_8 input-btn gbg">MAX</i>
-      </div>
+      </div> -->
       <div class="flex flex_center justify_center">
-        <div class="btn_default">mining</div>
+        <div class="btn_default" @click="handleCharge">{{ t('text.charge') }}</div>
       </div>
       <!-- <div class="">
         <van-slider v-model="sliderValue" @change="onChange" />
@@ -47,42 +47,11 @@
 </template>
 
 <script setup lang="ts">
-const address = '0x3ec1ee4167aad5e5de52932a64634b2871e1fc2a';
-const amount = ref(10);
-const sliderValue = ref(1);
-const list = ref([
-  {
-    value: 10,
-  },
-  {
-    value: 20,
-  },
-  {
-    value: 30,
-  },
-  {
-    value: 50,
-  },
-  {
-    value: 100,
-  },
-  {
-    value: 200,
-  },
-  {
-    value: 500,
-  },
-  {
-    value: 1000,
-  },
-]);
-function onChange(v) {
-  amount.value = v * 10;
-}
-function handleSelect(r) {
-  amount.value = r.value;
-  sliderValue.value = r.value / 100;
-}
+const { t } = useI18n();
+let binance = 'https://www.binance.com/zh-CN/crypto/buy/USD/USDT';
+let handleCharge = () => {
+  window.open(binance);
+};
 onMounted(() => {});
 </script>
 

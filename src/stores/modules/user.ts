@@ -1,7 +1,7 @@
 import pinia from '@/stores';
 import { defineStore } from 'pinia';
-import type { LoginData, UserState } from '@/api/api';
-import { Login, Auth } from '@/api/api';
+import type { LoginData, UserState, WithdrawConfigData } from '@/api/api';
+import { Login, Auth, My, WithdrawConfig } from '@/api/api';
 const expiresIn = 0;
 // const loginStatus = false;
 
@@ -10,6 +10,7 @@ export const useUserStore = defineStore(
   () => {
     const address = ref<String>('');
     const hasAuth = ref<String>(1);
+    let withdrawConfig = ref<WithdrawConfigData>({});
     if (localStorage.address) {
       address.value = localStorage.address;
     }
@@ -19,6 +20,8 @@ export const useUserStore = defineStore(
       chainId.value = localStorage.chainId * 1;
     }
     const loginStatus = ref<Boolean>(false);
+    const userInfo = ref<Object>({});
+
     const getLoginStatus = () => {
       if (localStorage.getItem('token') && address.value && chainId.value) {
         loginStatus.value = true;
@@ -41,20 +44,46 @@ export const useUserStore = defineStore(
         localStorage.removeItem('chainId');
       }
     };
-    const setAuth=(value)=>{
-      hasAuth.value=value
-    }
+    const setWithdrawConfig = (value) => {
+      withdrawConfig.value = value;
+    };
+    const setAuth = (value) => {
+      hasAuth.value = value;
+    };
+    const setUserInfo = (value) => {
+      userInfo.value = value;
+    };
+    const fetchUserInfo = async () => {
+      try {
+        const { data } = await My();
+        setUserInfo(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    let fetchWithdrawConfig = async () => {
+      try {
+        const { data } = await WithdrawConfig();
+        console.log('fetchWithdrawConfig', data);
+        setWithdrawConfig(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const login = async (loginForm: LoginData) => {
       try {
         const { data } = await Login(loginForm);
-        localStorage.setItem('token', data.accessToken);
-        setAddress(loginForm.address);
-        setChainId(loginForm.chain);
-        getLoginStatus();
-        Auth().then((res) => {
-          hasAuth.value = res.status;
-        });
-        console.log(data);
+        if (data) {
+          localStorage.setItem('token', data.accessToken);
+          setAddress(loginForm.address);
+          setChainId(loginForm.chain);
+          getLoginStatus();
+          fetchUserInfo();
+          fetchWithdrawConfig();
+          Auth().then((res) => {
+            hasAuth.value = res.status;
+          });
+        }
       } catch (error) {
         setAddress('');
         setChainId(0);
@@ -69,45 +98,6 @@ export const useUserStore = defineStore(
     //   });
     // }
     getLoginStatus();
-    // const info = async () => {
-    //   try {
-    //     const { data } = await getUserInfo();
-    //     setInfo(data);
-    //   } catch (error) {
-    //     clearToken();
-    //     throw error;
-    //   }
-    // };
-
-    // const logout = async () => {
-    //   try {
-    //     await userLogout();
-    //   } finally {
-    //     clearToken();
-    //     setInfo({ ...InitUserInfo });
-    //   }
-    // };
-
-    // const getCode = async () => {
-    //   try {
-    //     const data = await getEmailCode();
-    //     return data;
-    //   } catch {}
-    // };
-
-    // const reset = async () => {
-    //   try {
-    //     const data = await resetPassword();
-    //     return data;
-    //   } catch {}
-    // };
-
-    // const register = async () => {
-    //   try {
-    //     const data = await userRegister();
-    //     return data;
-    //   } catch {}
-    // };
 
     return {
       loginStatus,
@@ -118,7 +108,11 @@ export const useUserStore = defineStore(
       chainId,
       setChainId,
       hasAuth,
-      setAuth
+      setAuth,
+      userInfo,
+      fetchUserInfo,
+      withdrawConfig,
+      fetchWithdrawConfig,
     };
   },
   {
