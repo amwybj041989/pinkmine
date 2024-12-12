@@ -8,9 +8,9 @@ const expiresIn = 0;
 export const useUserStore = defineStore(
   'user',
   () => {
-    const address = ref<String>('');
     const hasAuth = ref<String>(1);
     let withdrawConfig = ref<WithdrawConfigData>({});
+    const address = ref<String>('');
     if (localStorage.address) {
       address.value = localStorage.address;
     }

@@ -47,14 +47,14 @@ import { useUserStore } from '@/stores/modules';
 const userStore = useUserStore();
 let userInfo = ref(userStore.userInfo);
 
-// let handleGoRecord=()=>{
-//     router.push({
-//       path:'/records',
-//       query:{
-//         type:"profit"
-//       }
-//     })
-// }
+let handleGoRecord = () => {
+  router.push({
+    path: '/records',
+    query: {
+      type: 'profit',
+    },
+  });
+};
 onMounted(() => {
   if (userStore.loginStatus) {
     userStore.fetchUserInfo();

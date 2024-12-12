@@ -13,9 +13,7 @@
             <div class="ggolden">
               {{ item.quantity }}
             </div>
-            <div class="">
-              ETH
-            </div>
+            <div class="">ETH</div>
           </div>
         </Vue3Marquee>
       </div>
@@ -76,6 +74,33 @@
     <van-popup v-model:show="showLanguagePicker" position="bottom">
       <van-picker v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm" @cancel="showLanguagePicker = false" />
     </van-popup>
+    <van-popup v-model:show="showSelectNetworks">
+      <div class="gborder">
+        <div class="network_wrap pad_14">
+          <div class="title-color fontSize_16 bold_700 gcolor text_center mb_20">
+            {{ t('text.selectNetwork') }}
+          </div>
+          <div class="flex flex_center justify_sb">
+            <div class="gborder br_50">
+              <div class="webp icon-chain-normal icon-chain-normal-tron"></div>
+              <i class="border_line border_scroll br_50"></i>
+            </div>
+            <div class="gborder br_50">
+              <div class="webp icon-chain-normal icon-chain-normal-bsc"></div>
+              <i class="border_line border_scroll br_50"></i>
+            </div>
+            <div class="gborder br_50">
+              <div class="webp icon-chain-normal icon-chain-normal-ethereum"></div>
+              <i class="border_line border_scroll br_50"></i>
+            </div>
+            <!-- <div class="network_item br_10" @click="handleSelctNetwork('tron')"></div>
+            <div class="network_item br_10"></div>
+            <div class="network_item br_10"></div> -->
+          </div>
+        </div>
+        <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -93,11 +118,23 @@ import { useRouter, useRoute } from 'vue-router';
 import { modalOopen } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
 import { useUserStore } from '@/stores/modules';
+
 const userStore = useUserStore();
+const appStore = useAppStore();
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
+import { connect as tronConnect } from '@/utils/tron';
+
 const address = ref(userStore.address);
 const list = ref([]);
+const showSelectNetworks = ref(false);
+const showSetting = ref(false);
+const checked = ref<boolean>(isDark.value);
+const showLanguagePicker = ref(false);
+const languageValues = ref<Array<string>>([locale.value]);
+const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
+
 function initList() {
   for (let i = 0; i < 100; i++) {
     let obj = {
@@ -107,22 +144,24 @@ function initList() {
     list.value.push(obj);
   }
 }
-
+let handleSelctNetwork = (v) => {
+  localStorage.network = v;
+  if (v == 'tron') {
+    tronConnect().then((res) => {
+      console.log('tronConnect', res);
+    });
+  }
+  console.log(v);
+};
 function gotAccount() {
   // modalOopen();
-
-  router.push('/account');
+  // router.push('/account');
 }
 function modalClick() {
-  modalOopen();
+  showSelectNetworks.value = true;
+  localStorage.removeItem('network');
+  // modalOopen();
 }
-const appStore = useAppStore();
-const showSetting = ref(false);
-const checked = ref<boolean>(isDark.value);
-const { t } = useI18n();
-const showLanguagePicker = ref(false);
-const languageValues = ref<Array<string>>([locale.value]);
-const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
 
 watch(
   () => isDark.value,
@@ -179,5 +218,20 @@ onMounted(() => {
 }
 .marquee_item {
   width: 100%;
+}
+.network_wrap {
+  /* height: 55vw; */
+}
+.network_item {
+  width: calc(var(--base) * 48);
+  height: calc(var(--base) * 48);
+  background-image: url('@/assets/images/tron.jpg');
+  background-size: cover;
+}
+.network_item:nth-child(2) {
+  background-image: url('@/assets/images/bsc.jpg');
+}
+.network_item:nth-child(3) {
+  background-image: url('@/assets/images/eth.jpg');
 }
 </style>

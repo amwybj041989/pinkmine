@@ -83,7 +83,7 @@ onMounted(() => {
   min-height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   font-size: calc(var(--base) * 12);
-  padding-bottom: 15vh;
+  /* padding-bottom: 15vh; */
   /* overflow-y: scroll; */
   color: var(--title-color);
 }

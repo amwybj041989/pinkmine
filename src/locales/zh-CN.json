@@ -15,8 +15,8 @@
     "minWithdraw": "操作失败,提现少于最小额度",
     "maxCanWithdraw": "操作失败,提现额度错误",
     "disableWithdraw": "平台暂停提现,等待开放",
-    "withdrawed":"提现成功",
-    "withdrawFail":"提现失败,请联系客服"
+    "withdrawed": "提现成功",
+    "withdrawFail": "提现失败,请联系客服"
   },
   "reward": {
     "orderNo": "订单号 : 用于区别用户产出收益",
@@ -30,7 +30,15 @@
     "noClaim": "未领取",
     "Claimed": "已领取",
     "button": "领取",
-    "daystext": "加速周期,在该周期内,利率会提升"
+    "daystext": "加速周期,在该周期内,利率会提升",
+    "money": "挖矿收益",
+    "createTime": "挖矿收益到账时间"
+  },
+  "withdrawStatus": {
+    "audit": "审核中",
+    "doing": "出款中",
+    "output": "已出款",
+    "fail": "提现失败"
   },
   "text": {
     "back": "返回",
@@ -82,6 +90,14 @@
     "withdrawFreeTip": "免手续费的额度,在该额度内,提现免手续费",
     "withdrawInfo": "提现说明",
     "record": "记录",
+    "profitRecord": "收益记录",
+    "withdrawRecord": "提现记录",
+    "createTime": "到账时间",
+    "withdrawStatus": "提现进度",
+    "remark": "备注",
+    "selectNetwork": "选择网络",
+    "userRevenue": "用户收益",
+    "userRevenue": "用户收益",
     "userRevenue": "用户收益",
     "userRevenue": "用户收益",
     "userRevenue": "用户收益",

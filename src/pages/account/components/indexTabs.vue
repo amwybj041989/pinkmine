@@ -26,7 +26,7 @@ import charge from './charge.vue';
 import withdraw from './withdraw.vue';
 import { animateNumber, observeVisibility } from '@/utils';
 const { t } = useI18n();
-const active = ref(1);
+const active = ref(0);
 const countDown = ref(null);
 const finace = ref(null);
 
