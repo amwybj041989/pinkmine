@@ -3,6 +3,7 @@ const userWalletStore = defineStore(
   'wallet',
   () => {
     let networkType = ref<string>('');
+    let showSelectNetwork = ref<boolean>(false);
     const chainId = ref<Number>(0);
     if (localStorage.chainId) {
       chainId.value = localStorage.chainId * 1;
@@ -28,13 +29,19 @@ const userWalletStore = defineStore(
     let setNetwork = (v) => {
       networkType.value = v;
     };
+    let setSelectNetwork = (v) => {
+      setNetwork.value = '';
+      showSelectNetwork.value = v;
+    };
     return {
       networkType,
       setNetwork,
       chainId,
       address,
       setAddress,
-      setChainId
+      setChainId,
+      showSelectNetwork,
+      setSelectNetwork,
     };
   },
   {

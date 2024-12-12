@@ -5,25 +5,25 @@
         <keep-alive :include="keepAliveRouteNames">
           <component :is="Component" :key="route.name" />
         </keep-alive>
+
         <Servicer></Servicer>
       </section>
     </router-view>
 
-    <TabBar />
+    <!-- <TabBar /> -->
   </VanConfigProvider>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useAppStore } from '@/stores/modules';
+import { useAppStore, userWalletStore, useUserStore } from '@/stores/modules';
 import useRouteCache from '@/stores/modules/routeCache';
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
 import { generateRandomGradient } from '@/utils';
 import { appName, appDescription } from '@/constants';
 import { appKit } from '@/utils/modal';
-
-import { useUserStore } from '@/stores/modules';
 const userStore = useUserStore();
+const { t } = useI18n();
 useHead({
   title: appName,
   meta: [
@@ -42,6 +42,7 @@ useHead({
 });
 
 const appStore = useAppStore();
+const walletStore = userWalletStore();
 const { mode } = storeToRefs(appStore);
 
 const { initializeThemeSwitcher } = useAutoThemeSwitcher(appStore);
@@ -63,10 +64,11 @@ function getConnectSataus() {
   //   userStore.setAddress('');
   //   userStore.setChainId(0);
   // }
-  setTimeout(() => {
-    getConnectSataus();
-  }, 5000);
+  // setTimeout(() => {
+  //   getConnectSataus();
+  // }, 5000);
 }
+
 onMounted(() => {
   setRem();
   initializeThemeSwitcher();

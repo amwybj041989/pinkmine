@@ -1,24 +1,45 @@
 import { ethers } from 'ethers';
 
 import { ABI } from './abi';
-export function connect() {
+export async function connect() {
   return new Promise((res, rej) => {
-    if (window.tronWeb && window.tronWeb.defaultAddress.base58) {
-      console.log('tronlink钱包连接', window.tronWeb.defaultAddress.base58);
-      return res({
-        chain: 79,
-        address: window.tronWeb.defaultAddress.base58,
-      });
-    } else if (window.okxwallet.tronWeb && window.okxwallet.tronWeb.defaultAddress.base58) {
-      return res({
-        chain: 79,
-        address: window.okxwallet.tronWeb.defaultAddress.base58,
-      });
-      console.log('okx钱包连接', window.okxwallet.tronWeb.defaultAddress.base58);
+    let tronWeb;
+
+    if (window.tronLink.ready) {
+      tronWeb = tronLink.tronWeb;
+      return res(tronWeb);
     } else {
-      rej(false);
+      tronLink.request({ method: 'tron_requestAccounts' }).then((tron) => {
+        if (tron.code == 200) {
+          tronWeb = tronLink.tronWeb;
+          return res(tronWeb);
+        } else if (window.okxwallet.tronWeb && window.okxwallet.tronWeb.defaultAddress.base58) {
+          return res({
+            address: window.okxwallet.tronWeb,
+          });
+        } else {
+          rej(false);
+        }
+      });
     }
   });
+  // return new Promise((res, rej) => {
+  //   if (window.tronLink && window.tronWeb.defaultAddress.base58) {
+  //     console.log('tronlink钱包连接', window.tronWeb.defaultAddress.base58);
+  //     return res({
+  //       chain: 79,
+  //       address: window.tronWeb.defaultAddress.base58,
+  //     });
+  //   } else if (window.okxwallet.tronWeb && window.okxwallet.tronWeb.defaultAddress.base58) {
+  //     return res({
+  //       chain: 79,
+  //       address: window.okxwallet.tronWeb.defaultAddress.base58,
+  //     });
+  //     console.log('okx钱包连接', window.okxwallet.tronWeb.defaultAddress.base58);
+  //   } else {
+  //     rej(false);
+  //   }
+  // });
 }
 
 async function tokenBalance() {

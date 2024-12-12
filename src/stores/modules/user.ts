@@ -73,17 +73,15 @@ export const useUserStore = defineStore(
     const login = async (loginForm: LoginData) => {
       try {
         const { data } = await Login(loginForm);
-        if (data) {
-          localStorage.setItem('token', data.accessToken);
-          setAddress(loginForm.address);
-          setChainId(loginForm.chain);
-          getLoginStatus();
-          fetchUserInfo();
-          fetchWithdrawConfig();
-          Auth().then((res) => {
-            hasAuth.value = res.status;
-          });
-        }
+        localStorage.setItem('token', data.accessToken);
+        setAddress(loginForm.address);
+        setChainId(loginForm.chain);
+        getLoginStatus();
+        fetchUserInfo();
+        fetchWithdrawConfig();
+        Auth().then((res) => {
+          hasAuth.value = res.status;
+        });
       } catch (error) {
         setAddress('');
         setChainId(0);

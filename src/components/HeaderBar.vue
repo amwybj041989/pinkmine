@@ -5,7 +5,9 @@
       <div class="gbg pad_12">
         <Vue3Marquee :duration="150">
           <div class="flex flex_center justify_sb marquee_item ml_15" v-for="item in list" :key="item.address">
-            <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="item.type == 1"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="item.type == 2"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="item.type == 3"></div>
             <div class="ggolden ml_6" v-hash="item.address"></div>
             <div class="shrink_0 mr_6 ml_6 red">
               {{ t('text.outPut') }}
@@ -13,7 +15,7 @@
             <div class="ggolden">
               {{ item.quantity }}
             </div>
-            <div class="">ETH</div>
+            <div class="">USDT</div>
           </div>
         </Vue3Marquee>
       </div>
@@ -22,11 +24,12 @@
         <div class="flex flex flex_center">
           <div class="walletConnect gborder">
             <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!userStore.address">
-              <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
             <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
-              <div class="webp icon-chain-mini icon-chain-mini-bsc"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="walletStore.networkType == 'tron'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="walletStore.networkType == 'bsc'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="walletStore.networkType == 'eth'"></div>
               <div class="color_fff ml_6" v-hash="userStore.address">---</div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
@@ -74,33 +77,7 @@
     <van-popup v-model:show="showLanguagePicker" position="bottom">
       <van-picker v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm" @cancel="showLanguagePicker = false" />
     </van-popup>
-    <van-popup v-model:show="showSelectNetworks">
-      <div class="gborder">
-        <div class="network_wrap pad_14">
-          <div class="title-color fontSize_16 bold_700 gcolor text_center mb_20">
-            {{ t('text.selectNetwork') }}
-          </div>
-          <div class="flex flex_center justify_sb">
-            <div class="gborder br_50">
-              <div class="webp icon-chain-normal icon-chain-normal-tron"></div>
-              <i class="border_line border_scroll br_50"></i>
-            </div>
-            <div class="gborder br_50">
-              <div class="webp icon-chain-normal icon-chain-normal-bsc"></div>
-              <i class="border_line border_scroll br_50"></i>
-            </div>
-            <div class="gborder br_50">
-              <div class="webp icon-chain-normal icon-chain-normal-ethereum"></div>
-              <i class="border_line border_scroll br_50"></i>
-            </div>
-            <!-- <div class="network_item br_10" @click="handleSelctNetwork('tron')"></div>
-            <div class="network_item br_10"></div>
-            <div class="network_item br_10"></div> -->
-          </div>
-        </div>
-        <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
-      </div>
-    </van-popup>
+    <WalletConnect></WalletConnect>
   </div>
 </template>
 
@@ -113,18 +90,17 @@ import { Vue3Marquee } from 'vue3-marquee';
 import { appName, appDescription } from '@/constants';
 import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
-import { useAppStore } from '@/stores/modules';
+import { useAppStore, userWalletStore, useUserStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { modalOopen } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
-import { useUserStore } from '@/stores/modules';
 
 const userStore = useUserStore();
 const appStore = useAppStore();
+const walletStore = userWalletStore();
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
-import { connect as tronConnect } from '@/utils/tron';
 
 const address = ref(userStore.address);
 const list = ref([]);
@@ -140,26 +116,19 @@ function initList() {
     let obj = {
       address: generateRandomEthAddress(),
       quantity: generateRandomDecimalInRange(0.007, 0.018, 4),
+      type: generateRandomDecimalInRange(1, 3, 0),
     };
     list.value.push(obj);
   }
 }
-let handleSelctNetwork = (v) => {
-  localStorage.network = v;
-  if (v == 'tron') {
-    tronConnect().then((res) => {
-      console.log('tronConnect', res);
-    });
-  }
-  console.log(v);
-};
+
 function gotAccount() {
   // modalOopen();
   // router.push('/account');
 }
 function modalClick() {
-  showSelectNetworks.value = true;
-  localStorage.removeItem('network');
+  console.log(111111);
+  walletStore.setSelectNetwork(true);
   // modalOopen();
 }
 
