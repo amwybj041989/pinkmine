@@ -22,7 +22,7 @@
       <div class="heaerbar_action pad_8 flex flex_center justify_sb">
         <div class="logo_title fontSize_20 gcolor light" :data-text="appName">{{ appName }}</div>
         <div class="flex flex flex_center">
-          <div class="walletConnect gborder" >
+          <div class="walletConnect gborder">
             <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <van-popup v-model:show="showSetting">
-      <div class="gborder">
+      <div class="gborder heaerbar_action_wrap">
         <div class="pad_12">
           <div class="flex flex_center justify_sb mb_12">
             <div class=""></div>
@@ -51,7 +51,7 @@
             <div class="flex flex_center justify_sb">
               <div class="flex flex_center">
                 <div class="my-icon my-icon-earth1 fontSize_24 gcolor"></div>
-                <div class="ml_12">{{ t('menus.language') }}</div>
+                <div class="ml_12">{{ language }}</div>
               </div>
               <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input" @click="showLanguagePicker = true">
                 <div class="title-color bold_600">{{ language }}</div>
@@ -59,7 +59,7 @@
               </div>
             </div>
           </div>
-          <div class="pad_0_12 flex flex_center text-color justify_sb">
+          <div class="pad_0_12 flex flex_center text-color justify_sb mb_20">
             <div class="flex flex_center">
               <div class="my-icon my-icon-sun1 gcolor fontSize_24"></div>
               <div class="ml_8">Day /</div>
@@ -68,6 +68,11 @@
             </div>
             <div class="my-icon my-icon-moon1 gcolor fontSize_24" v-if="checked" @click="toggle()"></div>
             <div class="my-icon my-icon-sun1 gcolor fontSize_24" v-else @click="toggle()"></div>
+          </div>
+        </div>
+        <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn">
+          <div class="btn_default" @click='handleLogout'>
+            {{ t('text.logout') }}
           </div>
         </div>
         <div class="pad_4"></div>
@@ -98,6 +103,7 @@ import useStateStore from '@/stores/state';
 const state = useStateStore();
 const appStore = useAppStore();
 const { t } = useI18n();
+console.log(useI18n());
 const route = useRoute();
 const router = useRouter();
 
@@ -129,7 +135,10 @@ function modalClick() {
   state.setSelectNetwork(true);
   // modalOopen();
 }
-
+let handleLogout=()=>{
+  localStorage.clear()
+  window.location.reload()
+}
 watch(
   () => isDark.value,
   (newMode) => {
@@ -189,6 +198,12 @@ onMounted(() => {
 }
 .network_wrap {
   /* height: 55vw; */
+}
+.heaerbar_action_wrap {
+  width: 75vw;
+}
+.logout_btn{
+  width: 75vw;
 }
 .network_item {
   width: calc(var(--base) * 48);
