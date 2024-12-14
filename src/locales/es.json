@@ -106,6 +106,7 @@
     "balance": "Saldo para cálculo de intereses",
     "interest": "Intereses",
     "myEventDetail": "Progreso del evento",
-    "myBooster": "Mi acelerador"
+    "myBooster": "Mi acelerador",
+    "logout": "Salir"
   }
 }

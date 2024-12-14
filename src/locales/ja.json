@@ -106,6 +106,7 @@
     "balance": "利息計算のための残高",
     "interest": "利息",
     "myEventDetail": "イベント進行状況",
-    "myBooster": "私のブースター"
+    "myBooster": "私のブースター",
+    "logout": "ログアウト"
   }
 }

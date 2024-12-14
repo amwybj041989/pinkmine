@@ -106,6 +106,7 @@
     "interest": "Interest",
     "myEventDetail": "Event Progress",
     "myBooster": "My Booster",
-    "userRevenue": "User Revenue"
+    "userRevenue": "User Revenue",
+    "logout": "Log out"
   }
 }

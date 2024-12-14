@@ -104,6 +104,7 @@
     "balance": "Số dư tính lãi",
     "interest": "Lãi suất",
     "myEventDetail": "Chi tiết sự kiện của tôi",
-    "myBooster": "Máy tăng tốc của tôi"
+    "myBooster": "Máy tăng tốc của tôi",
+    "logout": "Đăng xuất"
   }
 }
