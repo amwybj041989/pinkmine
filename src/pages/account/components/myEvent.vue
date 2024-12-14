@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">{{ t('text.myAccount') }}</div>
+    <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">{{ t('text.myEventDetail') }}</div>
     <div class="gborder br_10">
       <div class="fontSize_14 pad_12">
         <div class="text-color uppercase mb_8">{{ t('text.profitText') }}</div>
@@ -20,7 +20,7 @@
           <div class="gcolor fontSize_14 bold_600">{{ t('text.record') }} ></div>
         </div>
         <div class="">
-          <van-count-down :time="userInfo.coutDownTime" ref="countDown" >
+          <van-count-down :time="userInfo.coutDownTime" ref="countDown">
             <template #default="timeData">
               <div class="gcolor fontSize_18 bold_700 mb_12" v-if="userInfo.coutDownTime > 0">
                 <span>{{ timeData.hours }}</span>
@@ -48,18 +48,8 @@ const route = useRoute();
 const router = useRouter();
 import useStateStore from '@/stores/state';
 const state = useStateStore();
-let userInfo = ref(state.userInfo);
-const countDown = ref(null);
-watch(
-  () => userInfo,
-  (newMode) => {
-    if (newMode.value.coutDownTime) {
-      // countDown.value.start();
-    }
-  },
-  { immediate: true }
-);
-
+import { Event, EventDetail } from '@/api/api';
+let eventInfo = ref({});
 let handleGoRecord = () => {
   router.push({
     path: '/records',
@@ -68,10 +58,19 @@ let handleGoRecord = () => {
     },
   });
 };
+let fetchEvent = () => {
+  Event().then((res) => {
+    if (res.data) {
+      EventDetail({ id: res.data.id }).then((detail) => {
+        if (detail.data) {
+          eventInfo.value = detail.data;
+        }
+      });
+    }
+  });
+};
 onMounted(() => {
-  if (state.loginStatus) {
-    state.fetchUserInfo();
-  }
+  fetchEvent();
 });
 </script>
 

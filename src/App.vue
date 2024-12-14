@@ -9,20 +9,28 @@
         <Servicer></Servicer>
       </section>
     </router-view>
+    <div class="" v-if="state.loading">
+      <van-overlay :show="true" teleport="body" :z-index="99999">
+        <div class="flex flex_center justify_center loader_wrap">
+          <div class="loader"></div>
+        </div>
+      </van-overlay>
+    </div>
+    <!--  <van-popup v-model:show="state.login" round  :close-on-click-overlay="false">
 
+    </van-popup> -->
     <!-- <TabBar /> -->
   </VanConfigProvider>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useAppStore, userWalletStore, useUserStore } from '@/stores/modules';
+import { useAppStore } from '@/stores/modules';
 import useRouteCache from '@/stores/modules/routeCache';
 import useAutoThemeSwitcher from '@/hooks/useAutoThemeSwitcher';
 import { generateRandomGradient } from '@/utils';
 import { appName, appDescription } from '@/constants';
 import { appKit } from '@/utils/modal';
-const userStore = useUserStore();
 const { t } = useI18n();
 useHead({
   title: appName,
@@ -40,9 +48,9 @@ useHead({
     },
   ],
 });
-
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 const appStore = useAppStore();
-const walletStore = userWalletStore();
 const { mode } = storeToRefs(appStore);
 
 const { initializeThemeSwitcher } = useAutoThemeSwitcher(appStore);
@@ -75,6 +83,7 @@ onMounted(() => {
   generateRandomGradient();
   window.addEventListener('resize', setRem);
   getConnectSataus();
+  state.setLoading(false);
 });
 </script>
 
@@ -88,5 +97,35 @@ onMounted(() => {
   /* padding-bottom: 15vh; */
   /* overflow-y: scroll; */
   color: var(--title-color);
+}
+/* HTML: <div class="loader"></div> */
+.loader_wrap {
+  width: 100vw;
+  height: 100vh;
+}
+/* HTML: <div class="loader"></div> */
+.loader {
+  --r1: 154%;
+  --r2: 68.5%;
+  width: 80px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(var(--r1) var(--r2) at top, #0000 79.5%, var(--gradient-color1) 80%), radial-gradient(var(--r1) var(--r2) at bottom, var(--gradient-color2) 79.5%, #0000 80%),
+    radial-gradient(var(--r1) var(--r2) at top, #0000 79.5%, var(--gradient-color3) 80%), #ccc;
+  background-size: 50.5% 220%;
+  background-position: -100% 0%, 0% 0%, 100% 0%;
+  background-repeat: no-repeat;
+  animation: l9 2s infinite linear;
+}
+@keyframes l9 {
+  33% {
+    background-position: 0% 33%, 100% 33%, 200% 33%;
+  }
+  66% {
+    background-position: -100% 66%, 0% 66%, 100% 66%;
+  }
+  100% {
+    background-position: 0% 100%, 100% 100%, 200% 100%;
+  }
 }
 </style>

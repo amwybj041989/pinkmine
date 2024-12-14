@@ -1,33 +1,11 @@
 <template>
-  <div class="rewardList_wrap gborder">
-    <div class="rewardList pad_12" v-if="list.length">
+  <div class="rewardList_wrap gborder" v-loading="list.length">
+    <div class="rewardList pad_12">
       <div class="rewardList_item br_10 gborder" v-for="(item, i) in list" :key="i" :title="item">
         <rewardItem :data="item" @claim="onClaim(item, i)"></rewardItem>
-
         <i class="border_line border_scroll br_10"></i>
       </div>
     </div>
-    <van-empty image="search" :description="t('msg.noReward')" v-else />
-    <!--  <div class="pad_2_8 flex flex_center justify_center" v-show="totalPage > 1">
-      <van-pagination v-model="currentPage" @change="fetchRewardList" :total-items="totalPage" mode="simple" :items-per-page="20" :force-ellipses="true">
-        <template #prev-text>
-          <van-icon name="arrow-left" />
-        </template>
-        <template #next-text>
-          <van-icon name="arrow" />
-        </template>
-        <template #page="{ text }">{{ text }}</template>
-      </van-pagination>
-      <div class="flex flex_center shrink_0 ml_20">
-        <div class="">
-          {{ t('reward.noClaim') }}
-        </div>
-        <van-switch v-model="checked" />
-        <div class="">
-          {{ t('reward.Claimed') }}
-        </div>
-      </div>
-    </div> -->
     <i class="border_line border_scroll" style="border-radius: var(--van-popup-round-radius)"></i>
   </div>
 </template>
@@ -70,44 +48,6 @@ let fetchRewardList = () => {
     totalPage.value = res.data.total;
   });
 };
-// const onLoad = () => {
-//   fetchRewardList();
-//   // setTimeout(() => {
-//   //   if (refreshing.value) {
-//   //     list.value = [];
-//   //     refreshing.value = false;
-//   //   }
-
-//   //   for (let i = 0; i < 10; i++) {
-//   //     list.value.push({
-//   //       id: i + 1,
-//   //       orderNo: '22222222222',
-//   //       userID: '22222',
-//   //       balance: '2222',
-//   //       dailyRate: 0.33,
-//   //       interest: '1231',
-//   //       startTime: 123132,
-//   //       endTime: '123213',
-//   //       status: 11111,
-//   //     });
-//   //   }
-//   //   loading.value = false;
-
-//   //   if (list.value.length >= 40) {
-//   //     finished.value = true;
-//   //   }
-//   // }, 1000);
-// };
-
-// const onRefresh = () => {
-//   // 清空列表数据
-//   finished.value = false;
-
-//   // 重新加载数据
-//   // 将 loading 设置为 true，表示处于加载状态
-//   loading.value = true;
-//   onLoad();
-// };
 onMounted(() => {
   fetchRewardList();
 });
@@ -117,8 +57,11 @@ onMounted(() => {
 .rewardList_wrap {
   width: 75vw;
   max-height: 75vh;
+  display: flex;
+  flex-direction: column;
 }
 .rewardList {
+  flex: 1;
   width: 100%;
   height: 100%;
   overflow-y: scroll;

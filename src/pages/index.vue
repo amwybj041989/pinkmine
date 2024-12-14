@@ -2,7 +2,7 @@
   <HeaderBar></HeaderBar>
   <div class="vuemarquee_padding"></div>
   <div class="pad_12">
-    <div class="mb_15" v-if="userStore.hasAuth != 2">
+    <div class="mb_15" v-if="state.hasAuth != 2">
       <auth></auth>
     </div>
     <div class="mb_15">
@@ -33,7 +33,7 @@
     <van-popup v-model:show="eventerShow" round teleport="#app" :close-on-click-overlay="false">
       <Eventer @join="handleJoinEvent"></Eventer>
     </van-popup>
-    <!-- <van-cell title="展示弹出层" is-link @click="boosterShow = true" /> -->
+    <!-- <van-cell title="展示弹出层" is-link @click="handleTest" /> -->
   </div>
 </template>
 
@@ -47,27 +47,31 @@ import helpCenter from '@/components/Index/helpCenter.vue';
 import Qa from '@/components/Index/Qa.vue';
 import auditReport from '@/components/Index/auditReport.vue';
 import partner from '@/components/Index/partner.vue';
-import useAppStore from '@/stores/modules/app';
 import { languageColumns, locale } from '@/utils/i18n';
-import { Auth, RewardList as apiRewardList, BoosterList, Event, JoinEvent } from '@/utils/api/index';
-import { useUserStore } from '@/stores/modules';
+import { Auth, RewardList as apiRewardList, BoosterList, Event, JoinEvent, EventDetail } from '@/utils/api/index';
 import { showNotify } from 'vant';
-const userStore = useUserStore();
-const appStore = useAppStore();
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 const rewardShow = ref<boolean>(false);
 const boosterShow = ref<boolean>(false);
 const eventerShow = ref<boolean>(false);
 const hashAuth = ref<boolean>(false);
 const checked = ref<boolean>(false);
 watch(
-  () => userStore.loginStatus,
+  () => state.loginStatus,
   (newMode) => {
     if (newMode) {
       fetchAuth();
-      fetchEvent();
+      fetchRewardList();
     }
   }
 );
+let handleTest = () => {
+  boosterShow.value = true;
+  // state.setAuth(2);
+  // console.log(state.hasAuth);
+  // console.log(state.loginStatus);
+};
 let handleJoinEvent = (r) => {
   JoinEvent({
     id: r.id,
@@ -91,18 +95,26 @@ let handleJoinEvent = (r) => {
 };
 function fetchAuth() {
   Auth().then((res) => {
-    console.log('Auth', res);
-    // userStore.setAuth(res.data.status);
+    if (res) {
+      state.setAuth(res.data.status);
+    }
   });
 }
 let fetchEvent = () => {
   Event().then((res) => {
     console.log('Event', res);
+
     if (res.data) {
-      eventerShow.value = true;
+      EventDetail({ id: res.data.id }).then((detail) => {
+        if (detail.data) {
+          eventerShow.value = false;
+        } else {
+          eventerShow.value = true;
+        }
+      });
     } else {
       eventerShow.value = false;
-      fetchBoosterList();
+      // fetchBoosterList();
     }
   });
 };
@@ -111,10 +123,22 @@ let fetchBoosterList = () => {
     pageIndex: 1,
     pageSize: 20,
   }).then((res) => {
-    if (res.data.data && res.data.data.length) {
-      boosterShow.value = true;
+    console.log('BoosterList', res);
+    if (res.data && res.data.length) {
+      let checkout = res.data.some((item) => {
+        return item.canClaim == true;
+      });
+      console.log('fetchBoosterList', checkout);
+      if (checkout) {
+        boosterShow.value = true;
+      } else {
+        boosterShow.value = false;
+        fetchEvent();
+      }
     } else {
-      fetchRewardList();
+      boosterShow.value = false;
+      fetchEvent();
+      // fetchRewardList();
     }
   });
 };
@@ -128,14 +152,15 @@ let fetchRewardList = () => {
       rewardShow.value = true;
     } else {
       rewardShow.value = false;
+      fetchBoosterList();
     }
     console.log('apiRewardList', res);
   });
 };
 onMounted(() => {
-  if (userStore.loginStatus) {
+  if (state.loginStatus) {
     fetchAuth();
-    fetchEvent();
+    fetchRewardList();
   }
   // fetchAuth()
 });

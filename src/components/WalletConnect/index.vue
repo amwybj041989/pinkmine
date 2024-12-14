@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <van-popup v-model:show="walletStore.showSelectNetwork" teleport='#app'>
+  <div v-if="state.showSelectNetwork">
+    <van-popup v-model:show="state.showSelectNetwork" teleport="#app">
       <div class="gborder">
         <div class="network_wrap pad_14">
           <div class="title-color fontSize_16 bold_700 gcolor text_center mb_20">
@@ -12,7 +12,7 @@
               <i class="border_line border_scroll br_50"></i>
             </div>
             <div class="gborder br_50" @click="handleSelctNetwork('bsc')">
-              <div class="webp icon-chain-normal icon-chain-normal-bsc" ></div>
+              <div class="webp icon-chain-normal icon-chain-normal-bsc"></div>
               <i class="border_line border_scroll br_50"></i>
             </div>
             <div class="gborder br_50" @click="handleSelctNetwork('eth')">
@@ -38,31 +38,28 @@ const props = defineProps({
 });
 //const emit = defineEmits(['childToParent']);
 const { t } = useI18n();
-import { userWalletStore, useUserStore } from '@/stores/modules';
-const walletStore = userWalletStore();
-const userStore = useUserStore();
+import useStateStore from '@/stores/state';
 import { connect as tronConnect } from '@/utils/tron';
 import { modalOopen } from '@/utils/modal';
+const state = useStateStore();
 let handleSelctNetwork = (v) => {
-  walletStore.setSelectNetwork(false);
+  state.setSelectNetwork(false);
   localStorage.network = v;
   if (v == 'tron') {
+    state.setLoading(true)
     tronConnect().then((res) => {
       if (res) {
-        walletStore.setNetwork('tron');
-        walletStore.setChainId(79);
-        walletStore.setAddress(res.defaultAddress.base58);
-        userStore.login({
-          chain: 79 * 1,
+        state.setNetwork('tron');
+        state.setChainId(0);
+        state.setAddress(res.defaultAddress.base58);
+        state.login({
           address: res.defaultAddress.base58,
         });
       }
     });
-    return
+    return;
   }
-  if(v=='bsc'){
-    modalOopen(v)
-  }
+  modalOopen(v);
 };
 onMounted(() => {});
 </script>

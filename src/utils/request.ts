@@ -1,7 +1,8 @@
 import type { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import { showNotify } from 'vant';
-import { useUserStore } from '@/stores/modules';
+import useStateStore from '@/stores/state';
+// const state = useStateStore();
 import { i18n } from '@/utils/i18n';
 // console.log(i18n);
 // 这里是用于设定请求后端时，所用的 Token KEY
@@ -26,33 +27,52 @@ export type RequestError = AxiosError<{
 
 // 异常拦截处理器
 function errorHandler(error: RequestError): Promise<any> {
-  // console.log('errorHandler', error);
+  console.log('errorHandler', error);
+  if (error.status == 500) {
+    let state = useStateStore();
+    state.setLoading(false);
+    showNotify({
+      type: 'danger',
+      message: 'network error',
+    });
+    return;
+  }
   if ((error.code = 'ECONNABORTED')) {
     // window.location.reload();
     return;
   }
   if (error.response) {
-    const { data = {}, status, statusText } = error.response;
+    const { data = {}, status } = error.response;
+    if (!data.success) {
+      let state = useStateStore();
+      state.setLoading(false);
+      showNotify({
+        type: 'danger',
+        message: data && data.message,
+      });
+
+      return;
+    }
     // 403 无权限
     if (status === 403) {
       showNotify({
         type: 'danger',
-        message: (data && data.message) || statusText,
+        message: data && data.message,
       });
     }
     // 401 未登录/未授权
     if (status === 401) {
-      if (localStorage.address && localStorage.chainId) {
-        let userStore = useUserStore();
-        userStore.login({
-          chain: localStorage.chainId * 1,
-          address: localStorage.address,
-        });
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
-        return;
-      }
+      // if (localStorage.address && localStorage.chainId) {
+      //   let state = useStateStore();
+      //   state.login({
+      //     chain: localStorage.chainId * 1,
+      //     address: localStorage.address,
+      //   });
+      //   setTimeout(() => {
+      //     window.location.reload();
+      //   }, 500);
+      //   return;
+      // }
       showNotify({
         type: 'danger',
         message: i18n.global.t('msg.noLogin'),
@@ -77,7 +97,21 @@ request.interceptors.request.use(requestHandler, errorHandler);
 
 // 响应拦截器
 function responseHandler(response: { data: any }) {
-  return response.data;
+  // console.log('responseHandler', response);
+  if (response.status == 200 && response.data.success) {
+    return response.data;
+  } else {
+    showNotify({
+      type: 'danger',
+      message: i18n.global.t('msg.networkError'),
+    });
+    return null;
+    // return {
+    //   success: false,
+    //   message: '',
+    //   data: null,
+    // };
+  }
 }
 
 // Add a response interceptor

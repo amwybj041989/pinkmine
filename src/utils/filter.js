@@ -3,10 +3,41 @@ import {
 } from './tools.js'
 
 export default {
+  loading: (el, binding) => {
+    let value = binding.value;
+    // if (!value) {
+    //   el.classList.add('loading')
+    // }
+    // console.log('loading', value);
+    var newNode = document.createElement('div');
+    newNode.classList.add('loading')
+    newNode.id = 'newNodeId';
+    var rect = el.getBoundingClientRect();
+    if (!value) {
+      el.classList.add('relative')
+      el.insertAdjacentElement('beforeend', newNode);
+      var width = rect.width; // 元素的宽度
+      var height = el.offsetHeight; // 元素的高度
+      newNode.style.width = el.clientWidth + 'px'
+      newNode.style.height = height + 'px'
+      newNode.style.borderRadius = (el.clientHeight / 2) + 'px'
+    } else {
+      el.classList.remove('relative')
+      var nodeToRemove = document.getElementById('newNodeId');
+      if (nodeToRemove) {
+        nodeToRemove.remove();
+      }
+    }
+  },
   balance: (el, binding) => {
     let value = binding.value + '';
     let html = formNumber(value, 2)
     el.innerHTML = html
+  },
+  rate: (el, binding) => {
+    let value = binding.value + '';
+    let html = parseFloat(value * 100).toFixed(2)
+    el.innerHTML = html + '%'
   },
   bigNum: (el, binding) => {
     // let value = el.innerHTML * 1;
@@ -51,7 +82,7 @@ export default {
     el.innerHTML = times;
   },
   date: (el, binding) => {
-    let value = binding.value * 1;
+    let value = binding.value;
     let date = new Date(value);
     let month = date.getMonth() + 1;
     let day = date.getDate();

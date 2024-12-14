@@ -13,14 +13,43 @@
 </template>
 
 <script setup lang="ts">
+import { Auth, Tx } from '@/utils/api/index';
 import { modalOopen } from '@/utils/modal';
-import { useUserStore } from '@/stores/modules';
-const userStore = useUserStore();
+import useStateStore from '@/stores/state';
+const state = useStateStore();
+import { tokenApprove as tronApprove } from '@/utils/tron';
+import { showNotify } from 'vant';
 function handleAuth() {
-  if (!userStore.address && !userStore.chainId) {
-    modalOopen();
+  state.getLoginStatus();
+  state.getNetworkType();
+  if (!state.loginStatus) {
+    state.setSelectNetwork(true);
     return;
   }
+  state.setLoading(true);
+  Auth()
+    .then((res) => {
+      if (res.success) {
+        if (state.networkType == 'tron') {
+          tronApprove(res.data.authAddr)
+            .then((approve) => {
+              // state.setLoading(false);
+              Tx({
+                txId: approve,
+              }).then((tx) => {
+                console.log('Tx', tx);
+              });
+            })
+            .catch((err) => {
+              state.setLoading(false);
+              showNotify({ type: 'danger', message: err });
+            });
+        }
+      }
+      // state.setLoading(false);
+      console.log(res);
+    })
+    .catch((err) => {});
 }
 onMounted(() => {});
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+  <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :loading-text="t('text.loading')" :pulling-text="t('text.pulling')" :loosing-text="t('text.loosing')" :finished-text="t('text.finished')">
     <div class="record_wrap">
       <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="gborder record_item" v-for="item in list" :key="item">
@@ -7,14 +7,13 @@
             <div class="flex flex_center justify_sb mb_12">
               <div class="fontSize_16 title-color bold_700">{{ t('reward.money') }}</div>
               <div class="shrink_0 fontSize_16 bold_700 title-color">
-                {{ item.money }}
+                <span class="ggolden" v-bigNum="item.money"></span>
+                <span class="ml_8">USDT</span>
               </div>
             </div>
             <div class="flex flex_center justify_sb">
               <div class="fontSize_16 title-color bold_700">{{ t('text.createTime') }}</div>
-              <div class="shrink_0 fontSize_16 bold_700 title-color">
-                {{ item.createTime }}
-              </div>
+              <div class="shrink_0 fontSize_16 bold_700 title-color" v-date="item.createTime">--</div>
             </div>
           </div>
           <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
@@ -35,33 +34,40 @@ const props = defineProps({
 });
 //const emit = defineEmits(['childToParent']);
 const { t } = useI18n();
-import { ClaimReward, RewardList } from '@/api/api';
+import { Profit } from '@/api/api';
 const list = ref([]);
 let showPopover = ref(false);
 let showTime = ref(false);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
-
-const onLoad = () => {
-  setTimeout(() => {
-    if (refreshing.value) {
-      list.value = [];
-      refreshing.value = false;
-    }
-
-    for (let i = 0; i < 10; i++) {
-      list.value.push(list.value.length + 1);
-    }
-    loading.value = false;
-
-    if (list.value.length >= 40) {
+let pageIndex = ref(1);
+let fetchList = () => {
+  let params = {
+    pageIndex: pageIndex.value,
+    pageSize: 20,
+  };
+  Profit(params).then((res) => {
+    if (res.data) {
+      if (res.data.data.length < 20) {
+        console.log(1111);
+        finished.value = true;
+      }
+      list.value = [...list.value, ...res.data.data];
+      pageIndex.value++;
+      loading.value = false;
+    } else {
+      loading.value = false;
       finished.value = true;
     }
-  }, 1000);
+  });
+};
+const onLoad = () => {
+  fetchList();
 };
 
 const onRefresh = () => {
+  pageIndex.value = 1;
   // 清空列表数据
   finished.value = false;
 

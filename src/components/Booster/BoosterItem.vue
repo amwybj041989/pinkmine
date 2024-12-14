@@ -9,12 +9,13 @@
         <template #reference>
           <div class="flex flex_center">
             <van-icon name="question-o" size="16" />
-            <div class="fontSize_16 title-color bold_700">threshold</div>
+            <div class="fontSize_16 title-color bold_700">{{ t('text.threshold') }}</div>
           </div>
         </template>
       </van-popover>
       <div class="shrink_0 fontSize_16 bold_700 red">
         <span>{{ data.threshold }}</span>
+        <span class="ml_8 fontSize_14 ggolden">USDT</span>
       </div>
     </div>
     <div class="flex flex_center justify_sb mb_12">
@@ -23,7 +24,7 @@
         <template #reference>
           <div class="flex flex_center">
             <van-icon name="question-o" size="16" />
-            <div class="fontSize_16 title-color bold_700">days</div>
+            <div class="fontSize_16 title-color bold_700">{{ t('text.days') }}</div>
           </div>
         </template>
       </van-popover>
@@ -35,13 +36,11 @@
         <template #reference>
           <div class="flex flex_center">
             <van-icon name="question-o" size="16" />
-            <div class="fontSize_16 title-color bold_700">dailyRate</div>
+            <div class="fontSize_16 title-color bold_700">{{ t('text.dailyRate') }}</div>
           </div>
         </template>
       </van-popover>
-      <div class="shrink_0 fontSize_16 bold_700 title-color">
-        {{ data.dailyRate }}
-      </div>
+      <div class="shrink_0 fontSize_16 bold_700 title-color" v-rate="data.dailyRate">--</div>
     </div>
 
     <div class="flex flex_center justify_center" v-if="data.canClaim" @click="handleClaim">

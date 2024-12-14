@@ -22,15 +22,15 @@
       <div class="heaerbar_action pad_8 flex flex_center justify_sb">
         <div class="logo_title fontSize_20 gcolor light" :data-text="appName">{{ appName }}</div>
         <div class="flex flex flex_center">
-          <div class="walletConnect gborder">
-            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!userStore.address">
+          <div class="walletConnect gborder" >
+            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
             <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
-              <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="walletStore.networkType == 'tron'"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="walletStore.networkType == 'bsc'"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="walletStore.networkType == 'eth'"></div>
-              <div class="color_fff ml_6" v-hash="userStore.address">---</div>
+              <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
+              <div class="color_fff ml_6" v-hash="state.address">---</div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
           </div>
@@ -90,19 +90,18 @@ import { Vue3Marquee } from 'vue3-marquee';
 import { appName, appDescription } from '@/constants';
 import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
-import { useAppStore, userWalletStore, useUserStore } from '@/stores/modules';
+import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { modalOopen } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
-
-const userStore = useUserStore();
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 const appStore = useAppStore();
-const walletStore = userWalletStore();
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 
-const address = ref(userStore.address);
+const address = ref(state.address);
 const list = ref([]);
 const showSelectNetworks = ref(false);
 const showSetting = ref(false);
@@ -110,7 +109,7 @@ const checked = ref<boolean>(isDark.value);
 const showLanguagePicker = ref(false);
 const languageValues = ref<Array<string>>([locale.value]);
 const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
-
+const loading = ref(false);
 function initList() {
   for (let i = 0; i < 100; i++) {
     let obj = {
@@ -124,11 +123,10 @@ function initList() {
 
 function gotAccount() {
   // modalOopen();
-  // router.push('/account');
+  router.push('/account');
 }
 function modalClick() {
-  console.log(111111);
-  walletStore.setSelectNetwork(true);
+  state.setSelectNetwork(true);
   // modalOopen();
 }
 
@@ -151,6 +149,7 @@ function toggle() {
 }
 onMounted(() => {
   initList();
+  state.setNetwork(localStorage.network);
   // getAppKitInfo();
 });
 </script>

@@ -25,6 +25,8 @@ declare module 'vue-router/auto-routes' {
     '/account/components/eventerInfo': RouteRecordInfo<'/account/components/eventerInfo', '/account/components/eventerInfo', Record<never, never>, Record<never, never>>,
     '/account/components/indexTabs': RouteRecordInfo<'/account/components/indexTabs', '/account/components/indexTabs', Record<never, never>, Record<never, never>>,
     '/account/components/myAccount': RouteRecordInfo<'/account/components/myAccount', '/account/components/myAccount', Record<never, never>, Record<never, never>>,
+    '/account/components/myBoosterComponents': RouteRecordInfo<'/account/components/myBoosterComponents', '/account/components/myBoosterComponents', Record<never, never>, Record<never, never>>,
+    '/account/components/myEvent': RouteRecordInfo<'/account/components/myEvent', '/account/components/myEvent', Record<never, never>, Record<never, never>>,
     '/account/components/withdraw': RouteRecordInfo<'/account/components/withdraw', '/account/components/withdraw', Record<never, never>, Record<never, never>>,
     '/account/new_file': RouteRecordInfo<'/account/new_file', '/account/new_file', Record<never, never>, Record<never, never>>,
     'charts': RouteRecordInfo<'charts', '/charts', Record<never, never>, Record<never, never>>,

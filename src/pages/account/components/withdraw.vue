@@ -14,7 +14,7 @@
       </div>
       <div class="flex flex_center justify_sb mb_15">
         <div class="flex flex_center" @click="handleCopyAdress">
-          <div class="fontSize_14" v-addr="userStore.address"></div>
+          <div class="fontSize_14" v-addr="state.address"></div>
           <div class="ml_6 my-icon my-icon-copy gcolor"></div>
         </div>
       </div>
@@ -73,7 +73,7 @@
         </div>
       </div>
       <van-empty image="error" :description="t('text.disableWithdraw')" image-size="100" v-else />
-      <div class="mt_20 flex justify_center">
+      <div class="mt_20 flex justify_center" @click="handleGoRecord">
         <div class="gcolor fontSize_14 bold_600">{{ t('text.record') }} ></div>
       </div>
     </div>
@@ -83,17 +83,20 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
-import { useUserStore } from '@/stores/modules';
-const userStore = useUserStore();
+import { useRouter, useRoute } from 'vue-router';
+const route = useRoute();
+const router = useRouter();
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 import { copy } from '@/utils/copy';
 import { showNotify } from 'vant';
 let amount = ref(10);
 let showWithdrawFee = ref(false);
 let showWithdrawFree = ref(false);
-let userinfo = ref(userStore.userInfo);
-let withdrawConfig = ref(userStore.withdrawConfig);
+let userinfo = ref(state.userInfo);
+let withdrawConfig = ref(state.withdrawConfig);
 let handleCopyAdress = () => {
-  copy(userStore.address)
+  copy(state.address)
     .then((res) => {
       showNotify({ type: 'success', message: t('msg.copyed') });
     })
@@ -113,7 +116,7 @@ let handleWithdraw = () => {
     showNotify({ type: 'danger', message: t('msg.noCanWithdraw') });
     return;
   }
-  if (!amount.value || amount.value < userStore.withdrawConfig.withdrawMin) {
+  if (!amount.value || amount.value < state.withdrawConfig.withdrawMin) {
     showNotify({ type: 'danger', message: t('msg.minWithdraw') });
     return;
   }
@@ -126,15 +129,24 @@ let handleWithdraw = () => {
   })
     .then((res) => {
       showNotify({ type: 'success', message: t('msg.withdrawed') });
-      userStore.fetchWithdrawConfig();
-      userStore.fetchUserInfo();
+      state.fetchWithdrawConfig();
+      state.fetchUserInfo();
     })
     .catch((err) => {
       showNotify({ type: 'danger', message: t('msg.withdrawFail') });
     });
 };
+let handleGoRecord = () => {
+  router.push({
+    path: '/records',
+    query: {
+      type: 'withdraw',
+    },
+  });
+};
 onMounted(() => {
-  userStore.fetchWithdrawConfig();
+  state.fetchWithdrawConfig();
+  state.fetchUserInfo()
 });
 </script>
 

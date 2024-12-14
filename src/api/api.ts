@@ -35,6 +35,9 @@ export let Faq = (params): Promise<any> => {
 export let My = (params): Promise<any> => {
   return request.get('/Home/My', params);
 };
+export let MyBooster = (params): Promise<any> => {
+  return request.get('/Home/MyBooster', params);
+};
 export let WithdrawConfig = (params): Promise<any> => {
   return request.get('/Home/Withdraw', params);
 };

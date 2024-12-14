@@ -6,11 +6,15 @@
     <div class="mb_15">
       <myAccount></myAccount>
     </div>
+
+    <div class="mb_15">
+      <indexTabs></indexTabs>
+    </div>
     <div class="mb_15" v-if="hasEvent">
       <eventerInfo></eventerInfo>
     </div>
-    <div class="mb_15">
-      <indexTabs></indexTabs>
+    <div class="mb_15" v-if="hasBooster">
+      <Booster></Booster>
     </div>
     <div class="mb_15">
       <auditReport></auditReport>
@@ -26,29 +30,44 @@ const { t } = useI18n();
 import { useRouter, useRoute } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
-import { Event } from '@/utils/api/index';
+import { Event, EventDetail, MyBooster } from '@/api/api';
 import myAccount from './components/myAccount.vue';
+import Booster from './components/myBoosterComponents.vue';
 import eventerInfo from './components/eventerInfo.vue';
 import indexTabs from './components/indexTabs.vue';
 import auditReport from '@/components/Index/auditReport.vue';
 import partner from '@/components/Index/partner.vue';
-import { useUserStore } from '@/stores/modules';
-const userStore = useUserStore();
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 let hasEvent = ref(false);
+let hasBooster = ref(false);
 function onClickLeft() {
   router.go(-1);
 }
 let fetchEvent = () => {
   Event().then((res) => {
     if (res.data) {
-      hasEvent.value = true;
+      EventDetail({ id: res.data.id }).then((detail) => {
+        if (detail.data) {
+          hasEvent.value = true;
+        }
+      });
     }
   });
 };
+let fetchMyBooster = () => {
+  MyBooster().then((res) => {
+    if (res.data) {
+      hasEvent.value = true;
+    }
+    console.log('MyBooster', res);
+  });
+};
 onMounted(() => {
-  userStore.fetchWithdrawConfig();
-  userStore.fetchUserInfo();
-  fetchEvent()
+  state.fetchWithdrawConfig();
+  state.fetchUserInfo();
+  fetchEvent();
+  fetchMyBooster();
 });
 </script>
 

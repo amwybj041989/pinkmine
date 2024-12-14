@@ -33,6 +33,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         '@': path.join(__dirname, './src'),
         '~': path.join(__dirname, './src/assets'),
         '~root': path.join(__dirname, '.'),
+        // 'ethers': 'ethers/dist/ethers.cjs.js',
       },
     },
 

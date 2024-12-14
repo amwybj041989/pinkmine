@@ -33,6 +33,13 @@ for (let key in filter) {
     item(el, binding);
   });
 }
+app.config.errorHandler = (err, vm, info) => {
+  // 处理错误
+  // `err` 是错误对象
+  // `vm` 是发生错误的组件实例
+  // `info` 是 Vue 特定的错误信息，比如错误所在的生命周期钩子
+  console.error(err, info);
+};
 app.use(pinia);
 app.use(head);
 app.use(router);

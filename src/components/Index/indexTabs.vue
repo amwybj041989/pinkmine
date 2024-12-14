@@ -203,7 +203,7 @@ function initPieOption() {
 }
 function initLineOption() {
   let data = initTrendData();
-  console.log(data);
+  // console.log(data);
   refLineOption.value.series[0].data = data.list;
   nowValue.value = data.now * 1;
   // if (active.value == 1) {
@@ -234,7 +234,7 @@ function handleVisibilityChange(isVisible, entry) {
   }
 }
 function onChange(v) {
-  console.log(finace);
+  // console.log(finace);
   if (v == 1) {
     // animateNumber(finace.value, 0, nowValue.value, 1500);
   }
