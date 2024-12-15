@@ -40,23 +40,27 @@ const props = defineProps({
 const { t } = useI18n();
 import useStateStore from '@/stores/state';
 import { connect as tronConnect } from '@/utils/tron';
+import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
 import { modalOopen } from '@/utils/modal';
 const state = useStateStore();
 let handleSelctNetwork = (v) => {
   state.setSelectNetwork(false);
   localStorage.network = v;
   if (v == 'tron') {
-    state.setLoading(true)
-    tronConnect().then((res) => {
-      if (res) {
-        state.setNetwork('tron');
-        state.setChainId(0);
-        state.setAddress(res.defaultAddress.base58);
-        state.login({
-          address: res.defaultAddress.base58,
-        });
-      }
-    });
+    state.setLoading(true);
+    tronConnect()
+      .then((res) => {
+        if (res) {
+          state.setNetwork('tron');
+          state.login({
+            chain: 0,
+            address: res.defaultAddress.base58,
+          });
+        }
+      })
+      .catch(() => {
+        state.setLoading(false);
+      });
     return;
   }
   modalOopen(v);

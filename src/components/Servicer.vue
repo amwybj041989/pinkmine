@@ -1,5 +1,5 @@
 <template>
-  <div class="server_wrap gborder" v-if="userStore.loginStatus">
+  <div class="server_wrap gborder" v-if="stateStore.loginStatus">
     <div class="pad_4">
       <div class="server_list" v-show="showList">
         <div class="server_btn gbg br_50 mb_10" @click="openHref(customerService)">
@@ -30,8 +30,8 @@ import close from '@/components/Svg/close.vue';
 import serviceBtn from '@/components/Svg/serviceBtn.vue';
 import service from '@/components/Svg/service.vue';
 import { CustomerService } from '@/api/api';
-import { useUserStore } from '@/stores/modules';
-const userStore = useUserStore();
+import { useStateStore } from '@/stores/state';
+const stateStore = useStateStore();
 const showList = ref(false);
 const customerService = ref('');
 function openHref(v) {
@@ -44,7 +44,7 @@ function fetchCustomerService() {
   });
 }
 watch(
-  () => userStore.loginStatus,
+  () => stateStore.loginStatus,
   (newMode) => {
     if (newMode) {
       fetchCustomerService();
@@ -52,7 +52,7 @@ watch(
   }
 );
 onMounted(() => {
-  if (userStore.loginStatus) {
+  if (stateStore.loginStatus) {
     fetchCustomerService();
   }
 });

@@ -39,6 +39,12 @@ function errorHandler(error: RequestError): Promise<any> {
   }
   if ((error.code = 'ECONNABORTED')) {
     // window.location.reload();
+    let state = useStateStore();
+    state.setLoading(false);
+    showNotify({
+      type: 'danger',
+      message: error.message,
+    });
     return;
   }
   if (error.response) {
@@ -101,6 +107,8 @@ function responseHandler(response: { data: any }) {
   if (response.status == 200 && response.data.success) {
     return response.data;
   } else {
+    let state = useStateStore();
+    state.setLoading(false);
     showNotify({
       type: 'danger',
       message: i18n.global.t('msg.networkError'),

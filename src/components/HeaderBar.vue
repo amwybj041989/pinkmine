@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn">
-          <div class="btn_default" @click='handleLogout'>
+          <div class="btn_default" @click="handleLogout">
             {{ t('text.logout') }}
           </div>
         </div>
@@ -97,13 +97,12 @@ import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
-import { modalOopen } from '@/utils/modal';
+import { modalOopen, appKit } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
 const appStore = useAppStore();
 const { t } = useI18n();
-console.log(useI18n());
 const route = useRoute();
 const router = useRouter();
 
@@ -135,10 +134,13 @@ function modalClick() {
   state.setSelectNetwork(true);
   // modalOopen();
 }
-let handleLogout=()=>{
-  localStorage.clear()
-  window.location.reload()
-}
+let handleLogout = () => {
+  if (state.networkType != 'tron') {
+    appKit.disconnect();
+  }
+  localStorage.clear();
+  window.location.reload();
+};
 watch(
   () => isDark.value,
   (newMode) => {
@@ -202,7 +204,7 @@ onMounted(() => {
 .heaerbar_action_wrap {
   width: 75vw;
 }
-.logout_btn{
+.logout_btn {
   width: 75vw;
 }
 .network_item {

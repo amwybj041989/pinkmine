@@ -49,7 +49,9 @@ function handleAuth() {
       // state.setLoading(false);
       console.log(res);
     })
-    .catch((err) => {});
+    .catch((err) => {
+      state.setSelectNetwork(false);
+    });
 }
 onMounted(() => {});
 </script>

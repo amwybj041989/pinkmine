@@ -1,5 +1,6 @@
 import pinia from '@/stores';
-import { useUserStore } from '@/stores/modules';
+import useStateStore from '@/stores/state';
+// const state = useStateStore();
 // import { getCurrentInstance } from 'vue';
 // const {
 //   proxy: { $forceUpdate },
@@ -48,34 +49,36 @@ export let appKit = createAppKit({
 });
 
 async function getModalAccount(v) {
-  let userStore = useUserStore();
+  console.log('getModalAccount');
   let address = appKit.getAddress();
   let chainId = appKit.getChainId();
-  if (address && chainId) {
-    userStore.setAddress(address);
-    userStore.setChainId(chainId);
-    userStore.login({
-      chain: chainId * 1,
+  console.log(address != undefined && chainId);
+  if (address != undefined && chainId) {
+    let state = useStateStore();
+    let chain = v == 'bsc' ? 2 : 1;
+    state.login({
+      chain: chain * 1,
       address: address,
     });
-    // $forceUpdate();
+    return;
   }
-  if (!userStore.address && !userStore.chainId) {
-    setTimeout(() => {
-      getModalAccount();
-    }, 500);
-  }
+  setTimeout(() => {
+    getModalAccount(v);
+  }, 1000);
 }
 export function modalOopen(v) {
+  let state = useStateStore();
+  console.log(v);
   if (v == 'bsc') {
+    state.setNetwork('bsc');
     appKit.switchNetwork(bscTestnet);
   } else {
+    state.setNetwork('eth');
     appKit.switchNetwork(mainnet);
   }
-  let userStore = useUserStore();
   if (localStorage.address != appKit.getAddress()) {
-    userStore.setAddress('');
-    userStore.setChainId(0);
+    state.setAddress('');
+    state.setChainId(null);
     appKit.open();
     getModalAccount(v);
     return;
@@ -84,10 +87,9 @@ export function modalOopen(v) {
     let address = appKit.getAddress();
     let chainId = appKit.getChainId();
     if (address && chainId) {
-      userStore.setAddress(address);
-      userStore.setChainId(chainId);
-      userStore.login({
-        chain: chainId * 1,
+      let chain = v == 'bsc' ? 2 : 1;
+      state.login({
+        chain: chain * 1,
         address: address,
       });
       return;

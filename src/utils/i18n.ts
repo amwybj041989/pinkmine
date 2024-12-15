@@ -81,7 +81,6 @@ async function setLang(lang: string, i18n: I18n) {
 // 加载本地语言包
 async function loadLocaleMsg(locale: string, i18n: I18n) {
   const messages = await import(`../locales/${locale}.json`);
-  console.log('loadLocaleMsg', messages);
   i18n.global.setLocaleMessage(locale, messages.default);
 }
 

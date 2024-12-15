@@ -36,12 +36,15 @@ export const useStateStore = defineStore(
     };
 
     const getLoginStatus = () => {
-      if (localStorage.getItem('token') && address.value && chainId.value != null) {
+      // console.log('token', localStorage.getItem('token'));
+      // console.log('address', address.value);
+      // console.log('chainId', chainId.value);
+      if (localStorage.getItem('token') != null && localStorage.getItem('token') != '' && localStorage.getItem('token') != undefined && address.value && chainId.value != null) {
         loginStatus.value = true;
       } else {
         loginStatus.value = false;
       }
-      return loginStatus;
+      // return loginStatus;
     };
     const setAddress = (value) => {
       localStorage.address = value;
@@ -111,15 +114,21 @@ export const useStateStore = defineStore(
     };
 
     const login = async (loginForm) => {
+      console.log('loginForm', loginForm);
       try {
-        let parmas = {
-          chain: chainId.value,
-          address: loginForm.address,
-        };
-        const { data } = await Login(parmas);
+        // let parmas = {
+        //   chain: loginForm.chain,
+        //   address: loginForm.address,
+        // };
+        const { data, success } = await Login(loginForm);
+        if (!success) {
+          setLoading(false);
+          return;
+        }
         setLoading(false);
         localStorage.setItem('token', data.accessToken);
-        setAddress(parmas.address);
+        setAddress(loginForm.address);
+        setChainId(loginForm.chain);
         getLoginStatus();
         fetchUserInfo();
         fetchWithdrawConfig();
@@ -148,12 +157,6 @@ export const useStateStore = defineStore(
       }
     };
 
-    // if (localStorage.chainId && localStorage.address) {
-    //   login({
-    //     chain: localStorage.chainId * 1,
-    //     address: localStorage.address,
-    //   });
-    // }
     getLoginStatus();
 
     return {

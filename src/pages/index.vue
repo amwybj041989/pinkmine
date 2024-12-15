@@ -52,6 +52,7 @@ import { Auth, RewardList as apiRewardList, BoosterList, Event, JoinEvent, Event
 import { showNotify } from 'vant';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
+import { tokenBalance as tronBalance } from '@/utils/tron';
 const rewardShow = ref<boolean>(false);
 const boosterShow = ref<boolean>(false);
 const eventerShow = ref<boolean>(false);
@@ -72,6 +73,14 @@ let handleTest = () => {
   // console.log(state.hasAuth);
   // console.log(state.loginStatus);
 };
+let checkBalance = (r) => {
+  if (state.networkType == 'tron') {
+    tronBalance().then((res) => {
+      console.log(res);
+    });
+    return;
+  }
+};
 let handleJoinEvent = (r) => {
   JoinEvent({
     id: r.id,
@@ -82,6 +91,11 @@ let handleJoinEvent = (r) => {
         showNotify({
           type: 'success',
           message: t('msg.joinedEvnet'),
+        });
+      } else {
+        showNotify({
+          type: 'danger',
+          message: res.mssage,
         });
       }
     })
@@ -122,25 +136,29 @@ let fetchBoosterList = () => {
   BoosterList({
     pageIndex: 1,
     pageSize: 20,
-  }).then((res) => {
-    console.log('BoosterList', res);
-    if (res.data && res.data.length) {
-      let checkout = res.data.some((item) => {
-        return item.canClaim == true;
-      });
-      console.log('fetchBoosterList', checkout);
-      if (checkout) {
-        boosterShow.value = true;
+  })
+    .then((res) => {
+      console.log('BoosterList', res);
+      if (res.data && res.data.length) {
+        let checkout = res.data.some((item) => {
+          return item.canClaim == true;
+        });
+        console.log('fetchBoosterList', checkout);
+        if (checkout) {
+          boosterShow.value = true;
+        } else {
+          boosterShow.value = false;
+          fetchEvent();
+        }
       } else {
         boosterShow.value = false;
         fetchEvent();
+        // fetchRewardList();
       }
-    } else {
-      boosterShow.value = false;
-      fetchEvent();
-      // fetchRewardList();
-    }
-  });
+    })
+    .catch((err) => {
+      console.log('fetchBoosterList', err);
+    });
 };
 let fetchRewardList = () => {
   apiRewardList({
@@ -158,9 +176,12 @@ let fetchRewardList = () => {
   });
 };
 onMounted(() => {
+  console.log('loginStatus', state.loginStatus);
+  state.getLoginStatus();
   if (state.loginStatus) {
     fetchAuth();
     fetchRewardList();
+    // checkBalance();
   }
   // fetchAuth()
 });

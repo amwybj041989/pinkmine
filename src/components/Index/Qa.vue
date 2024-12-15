@@ -1,5 +1,5 @@
 <template>
-  <div class="" v-if="userStore.loginStatus">
+  <div class="" v-if="state.loginStatus">
     <div class="fontSize_32 gcolor text_center mb_15 bold_700 mt_15">{{ t('text.qa') }}</div>
     <!-- <div class="gborder br_10"> -->
     <div class="pad_4">
@@ -30,8 +30,8 @@
 <script setup lang="ts">
 import { Faq } from '@/api/api';
 const { t } = useI18n();
-import { useUserStore } from '@/stores/modules';
-const userStore = useUserStore();
+import { useStateStore } from '@/stores/state';
+const state = useStateStore();
 const activeNames = ref(1);
 let list = ref([]);
 function fetchList() {
@@ -41,7 +41,7 @@ function fetchList() {
   });
 }
 watch(
-  () => userStore.loginStatus,
+  () => state.loginStatus,
   (newMode) => {
     console.log(11111111111111);
     if (newMode) {
@@ -50,7 +50,7 @@ watch(
   }
 );
 onMounted(() => {
-  if (userStore.loginStatus) {
+  if (state.loginStatus) {
     fetchList();
   }
 });

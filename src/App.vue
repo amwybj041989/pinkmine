@@ -10,16 +10,12 @@
       </section>
     </router-view>
     <div class="" v-if="state.loading">
-      <van-overlay :show="true" teleport="body" :z-index="99999">
+      <van-overlay show teleport="body" :z-index="99999">
         <div class="flex flex_center justify_center loader_wrap">
           <div class="loader"></div>
         </div>
       </van-overlay>
     </div>
-    <!--  <van-popup v-model:show="state.login" round  :close-on-click-overlay="false">
-
-    </van-popup> -->
-    <!-- <TabBar /> -->
   </VanConfigProvider>
 </template>
 
