@@ -18,7 +18,8 @@
     "withdrawed": "Retiro exitoso",
     "withdrawFail": "Retiro fallido, contacta al soporte técnico",
     "connectFail": "Conexión fallida, verifica si estás usando un navegador DApp",
-    "networkError": "Error de red, actualiza la página"
+    "networkError": "Error de red, actualiza la página",
+    "noBalance": "Saldo insuficiente da carteira, você quer recarregar?"
   },
   "reward": {
     "orderNo": "Número de orden: Para identificar las ganancias generadas por el usuario",

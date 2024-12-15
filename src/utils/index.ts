@@ -123,3 +123,8 @@ export function bigNum(params) {
     }
   }
 }
+export let chargeList={
+  tron:"https://tronscan.org/#/",
+  bsc:"https://www.binance.com/",
+  eth:"https://portfolio.metamask.io/explore/tokens"
+}

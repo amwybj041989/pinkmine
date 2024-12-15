@@ -18,7 +18,8 @@
     "withdrawed": "Retrait réussi",
     "withdrawFail": "Échec du retrait. Veuillez contacter le support client",
     "connectFail": "Échec de la connexion. Assurez-vous d'utiliser un navigateur DApp",
-    "networkError": "Erreur réseau. Veuillez actualiser la page"
+    "networkError": "Erreur réseau. Veuillez actualiser la page",
+    "noBalance": "Le solde du portefeuille est insuffisant, voulez - vous le recharger?"
   },
   "reward": {
     "orderNo": "Numéro de commande : utilisé pour distinguer les gains des utilisateurs",

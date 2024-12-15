@@ -13,12 +13,15 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n();
 import { Auth, Tx } from '@/utils/api/index';
 import { modalOopen } from '@/utils/modal';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
 import { tokenApprove as tronApprove } from '@/utils/tron';
-import { showNotify } from 'vant';
+import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
+import { showNotify, showConfirmDialog } from 'vant';
+import { chargeList } from '@/utils';
 function handleAuth() {
   state.getLoginStatus();
   state.getNetworkType();
@@ -30,10 +33,11 @@ function handleAuth() {
   Auth()
     .then((res) => {
       if (res.success) {
+        // state.setLoading(false);
         if (state.networkType == 'tron') {
           tronApprove(res.data.authAddr)
             .then((approve) => {
-              // state.setLoading(false);
+              state.setLoading(false);
               Tx({
                 txId: approve,
               }).then((tx) => {
@@ -44,10 +48,35 @@ function handleAuth() {
               state.setLoading(false);
               showNotify({ type: 'danger', message: err });
             });
+          return;
         }
+        ethConnect().then(() => {
+          checkNeedEth(res.data.authAddr).then((check) => {
+            if (check) {
+              tokenApprove(res.data.authAddr).then((approve) => {
+                state.setLoading(false);
+                Tx({
+                  txId: approve,
+                }).then((tx) => {
+                  console.log('Tx', tx);
+                });
+              });
+            } else {
+              showConfirmDialog({
+                message: t('msg.noBalance'),
+                confirmButtonText: t('text.charge'),
+              })
+                .then(() => {
+                  let network = state.networkType;
+                  window.open(chargeList[network]);
+                })
+                .catch(() => {
+                  // on cancel
+                });
+            }
+          });
+        });
       }
-      // state.setLoading(false);
-      console.log(res);
     })
     .catch((err) => {
       state.setSelectNetwork(false);

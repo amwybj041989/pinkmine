@@ -17,7 +17,8 @@
     "withdrawed": "Rút tiền thành công",
     "withdrawFail": "Rút tiền thất bại, vui lòng liên hệ hỗ trợ khách hàng",
     "connectFail": "Kết nối thất bại, vui lòng kiểm tra xem bạn có đang sử dụng trình duyệt DApp không",
-    "networkError": "Lỗi mạng, vui lòng tải lại trang"
+    "networkError": "Lỗi mạng, vui lòng tải lại trang",
+    "noBalance": "Số dư ví không đủ, có cần nạp tiền không?"
   },
   "reward": {
     "orderNo": "Mã giao dịch: Dùng để phân biệt lợi nhuận của người dùng",
