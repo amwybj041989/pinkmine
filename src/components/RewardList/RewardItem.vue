@@ -25,7 +25,7 @@
         </template>
       </van-popover>
       <div class="shrink_0 fontSize_16 bold_700 title-color">
-        {{ data.balance }}
+        {{ data.balance }} <span>{{ state.walletToken }}</span>
       </div>
     </div>
     <div class="flex flex_center justify_sb mb_12">
@@ -83,6 +83,8 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { defineEmits } from 'vue';
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 const emit = defineEmits(['claim']);
 const { t } = useI18n();
 const showOrderNo = ref(false);

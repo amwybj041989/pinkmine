@@ -39,7 +39,7 @@ function initList() {
     let type = generateRandomDecimalInRange(1, 3, 0);
     let obj = {
       address: type != 1 ? generateRandomEthAddress() : generateFakeTronAddress(),
-      quantity: generateRandomDecimalInRange(0.007, 0.018, 8),
+      quantity: type != 1 ? generateRandomDecimalInRange(0.007, 0.018, 8) : generateRandomDecimalInRange(100, 1000, 6),
       type: type,
     };
     list.value.push(obj);

@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { ethers } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.min.js';
 import { showNotify } from 'vant';
 import { ABI, contractAddress } from './abi';
 import { i18n } from '@/utils/i18n';

@@ -77,15 +77,7 @@ const languageValues = ref<Array<string>>([locale.value]);
 const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
 const countDown = ref(null);
 const finace = ref(null);
-watch(
-  locale,
-  (nv) => {
-    initPieOption();
-    initLineOption();
-    console.log(nv);
-  },
-  { immediate: true }
-);
+
 const lineOption = {
   grid: {
     // left: 15,
@@ -111,9 +103,6 @@ const lineOption = {
         color: '#3bd04a',
       },
     },
-  },
-  tooltip: {
-    trigger: 'item',
   },
   yAxis: {
     type: 'value',
@@ -249,6 +238,15 @@ function onChange(v) {
     // animateNumber(finace.value, 0, nowValue.value, 1500);
   }
 }
+watch(
+  locale,
+  (nv) => {
+    initPieOption();
+    initLineOption();
+    console.log(nv);
+  },
+  { immediate: true }
+);
 onMounted(() => {
   initPieOption();
   initLineOption();

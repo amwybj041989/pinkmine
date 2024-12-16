@@ -1,15 +1,15 @@
-import path from 'node:path'
-import process from 'node:process'
-import { loadEnv } from 'vite'
-import type { ConfigEnv, UserConfig } from 'vite'
-import viewport from 'postcss-mobile-forever'
-import autoprefixer from 'autoprefixer'
-import { createVitePlugins } from './build/vite'
-import { exclude, include } from './build/vite/optimize'
+import path from 'node:path';
+import process from 'node:process';
+import { loadEnv } from 'vite';
+import type { ConfigEnv, UserConfig } from 'vite';
+import viewport from 'postcss-mobile-forever';
+import autoprefixer from 'autoprefixer';
+import { createVitePlugins } from './build/vite';
+import { exclude, include } from './build/vite/optimize';
 
 export default ({ mode }: ConfigEnv): UserConfig => {
-  const root = process.cwd()
-  const env = loadEnv(mode, root)
+  const root = process.cwd();
+  const env = loadEnv(mode, root);
 
   return {
     base: env.VITE_APP_PUBLIC_PATH,
@@ -46,10 +46,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
             appSelector: '#app',
             viewportWidth: 375,
             maxDisplayWidth: 600,
-            rootContainingBlockSelectorList: [
-              'van-tabbar',
-              'van-popup',
-            ],
+            rootContainingBlockSelectorList: ['van-tabbar', 'van-popup'],
             border: true,
           }),
         ],
@@ -60,8 +57,30 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       cssCodeSplit: false,
       chunkSizeWarningLimit: 2048,
       outDir: env.VITE_APP_OUT_DIR || 'dist',
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString();
+            }
+          },
+        },
+      },
+      // target: ['chrome64', 'edge79', 'es2020', 'firefox67', 'safari12', 'esnext'],
+      target: ['esnext','chrome64', 'edge79', 'es2020', 'firefox67', 'safari12',],
     },
-
-    optimizeDeps: { include, exclude },
-  }
-}
+    optimizeDeps: {
+      include,
+      exclude,
+      esbuildOptions: {
+        target: 'esnext',
+        define: {
+          global: 'globalThis',
+        },
+        supported: {
+          bigint: true,
+        },
+      },
+    },
+  };
+};
