@@ -68,14 +68,24 @@ import { animateNumber, observeVisibility } from '@/utils';
 import { initPoolData, clearPoolData, initTrendData } from '@/utils/mock';
 import { bigNum } from '@/utils';
 import * as echarts from 'echarts';
+import { languageColumns, locale } from '@/utils/i18n';
 const { t } = useI18n();
 const active = ref(0);
 const nowValue = ref(0);
 const upValue = ref(0);
-
+const languageValues = ref<Array<string>>([locale.value]);
+const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
 const countDown = ref(null);
 const finace = ref(null);
-
+watch(
+  locale,
+  (nv) => {
+    initPieOption();
+    initLineOption();
+    console.log(nv);
+  },
+  { immediate: true }
+);
 const lineOption = {
   grid: {
     // left: 15,

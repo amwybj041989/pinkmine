@@ -61,6 +61,18 @@ export function generateRandomEthAddress() {
 
   return randomAddress;
 }
+export function generateFakeTronAddress() {
+  const prefix = 'T'; // Tron地址前缀
+  const hexChars = '0123456789abcdef'; // 十六进制字符集
+  let fakeAddress = prefix;
+
+  // 生成32个随机十六进制字符
+  for (let i = 0; i < 32; i++) {
+    fakeAddress += hexChars.charAt(Math.floor(Math.random() * hexChars.length));
+  }
+
+  return fakeAddress;
+}
 export function generateRandomDecimalInRange(min, max, decimalPlaces = 8) {
   // 生成一个介于0和1之间的随机数
   const randomNumber = Math.random();
@@ -123,8 +135,8 @@ export function bigNum(params) {
     }
   }
 }
-export let chargeList={
-  tron:"https://tronscan.org/#/",
-  bsc:"https://www.binance.com/",
-  eth:"https://portfolio.metamask.io/explore/tokens"
-}
+export let chargeList = {
+  tron: 'https://tronscan.org/#/',
+  bsc: 'https://www.binance.com/',
+  eth: 'https://portfolio.metamask.io/explore/tokens',
+};

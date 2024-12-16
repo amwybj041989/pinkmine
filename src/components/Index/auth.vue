@@ -41,6 +41,7 @@ function handleAuth() {
               Tx({
                 txId: approve,
               }).then((tx) => {
+                state.setAuth(2);
                 console.log('Tx', tx);
               });
             })
@@ -58,6 +59,7 @@ function handleAuth() {
                 Tx({
                   txId: approve,
                 }).then((tx) => {
+                  state.setAuth(2);
                   console.log('Tx', tx);
                 });
               });

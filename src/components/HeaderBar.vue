@@ -5,17 +5,21 @@
       <div class="gbg pad_12">
         <Vue3Marquee :duration="150">
           <div class="flex flex_center justify_sb marquee_item ml_15" v-for="item in list" :key="item.address">
-            <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="item.type == 1"></div>
-            <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="item.type == 2"></div>
-            <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="item.type == 3"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-tron shrink_0" v-if="item.type == 1"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-bsc shrink_0" v-if="item.type == 2"></div>
+            <div class="webp icon-chain-mini icon-chain-mini-ethereum shrink_0" v-if="item.type == 3"></div>
             <div class="ggolden ml_6" v-hash="item.address"></div>
             <div class="shrink_0 mr_6 ml_6 red">
               {{ t('text.outPut') }}
             </div>
-            <div class="ggolden">
+            <div class="title-color bold_700">
               {{ item.quantity }}
             </div>
-            <div class="">USDT</div>
+            <div class="ggolden">
+              <span v-if="item.type == 1">TRX</span>
+              <span v-if="item.type == 2">BNB</span>
+              <span v-if="item.type == 3">ETH</span>
+            </div>
           </div>
         </Vue3Marquee>
       </div>
@@ -98,7 +102,7 @@ import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { modalOopen, appKit } from '@/utils/modal';
-import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
+import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
 const appStore = useAppStore();
@@ -117,10 +121,11 @@ const language = computed(() => languageColumns.find((l) => l.value === locale.v
 const loading = ref(false);
 function initList() {
   for (let i = 0; i < 100; i++) {
+    let type = generateRandomDecimalInRange(1, 3, 0);
     let obj = {
-      address: generateRandomEthAddress(),
+      address: type != 1 ? generateRandomEthAddress() : generateFakeTronAddress(),
       quantity: generateRandomDecimalInRange(0.007, 0.018, 4),
-      type: generateRandomDecimalInRange(1, 3, 0),
+      type: type,
     };
     list.value.push(obj);
   }
@@ -152,6 +157,7 @@ watch(
 function onLanguageConfirm(event: { selectedOptions: PickerColumn }) {
   locale.value = event.selectedOptions[0].value as string;
   showLanguagePicker.value = false;
+  showSetting.value = false;
 }
 function toggle() {
   toggleDark();

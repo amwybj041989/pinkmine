@@ -48,9 +48,12 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
-let binance = 'https://www.binance.com/zh-CN/crypto/buy/USD/USDT';
+import useStateStore from '@/stores/state';
+const state = useStateStore();
+import { chargeList } from '@/utils';
 let handleCharge = () => {
-  window.open(binance);
+  let network = state.networkType;
+  window.open(chargeList[network]);
 };
 onMounted(() => {});
 </script>

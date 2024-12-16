@@ -3,10 +3,12 @@
     <van-nav-bar :title="t('text.myAccount')" :left-text="t('text.back')" left-arrow @click-left="onClickLeft" />
   </div>
   <div class="pad_14">
-    <div class="mb_15">
+    <div class="mb_15" v-if="state.hasAuth == 2">
       <myAccount></myAccount>
     </div>
-
+    <div class="mb_15" v-if="state.hasAuth != 2">
+      <auth></auth>
+    </div>
     <div class="mb_15">
       <indexTabs></indexTabs>
     </div>
@@ -30,7 +32,8 @@ const { t } = useI18n();
 import { useRouter, useRoute } from 'vue-router';
 const route = useRoute();
 const router = useRouter();
-import { Event, EventDetail, MyBooster } from '@/api/api';
+import { Event, EventDetail, MyBooster, Auth } from '@/api/api';
+import auth from '@/components/Index/auth.vue';
 import myAccount from './components/myAccount.vue';
 import Booster from './components/myBoosterComponents.vue';
 import eventerInfo from './components/eventerInfo.vue';
@@ -38,7 +41,9 @@ import indexTabs from './components/indexTabs.vue';
 import auditReport from '@/components/Index/auditReport.vue';
 import partner from '@/components/Index/partner.vue';
 import useStateStore from '@/stores/state';
+
 const state = useStateStore();
+const hashAuth = ref<boolean>(false);
 let hasEvent = ref(false);
 let hasBooster = ref(false);
 function onClickLeft() {
@@ -63,11 +68,19 @@ let fetchMyBooster = () => {
     console.log('MyBooster', res);
   });
 };
+function fetchAuth() {
+  Auth().then((res) => {
+    if (res) {
+      state.setAuth(res.data.status);
+    }
+  });
+}
 onMounted(() => {
   state.fetchWithdrawConfig();
   state.fetchUserInfo();
   fetchEvent();
   fetchMyBooster();
+  fetchAuth();
 });
 </script>
 

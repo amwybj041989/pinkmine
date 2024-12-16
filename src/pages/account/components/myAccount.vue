@@ -5,12 +5,16 @@
       <div class="fontSize_14 pad_12">
         <div class="text-color uppercase mb_8">{{ t('text.profitText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
-          <span v-if="userInfo.profit"> <span v-bigNum="userInfo.profit"></span> <span>USDT</span></span>
+          <span v-if="userInfo.profit">
+            <span v-bigNum="userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
+          >
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>
         <div class="text-color uppercase mb_8 flex flex_center">{{ t('text.canWithdrawText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
-          <span v-if="userInfo.canWithdraw"> <span v-bigNum="userInfo.profit"></span> <span>USDT</span></span>
+          <span v-if="userInfo.canWithdraw">
+            <span v-bigNum="userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
+          >
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>
         <div class="text-color uppercase mb_8 flex flex_center">{{ t('text.rateText') }}</div>
@@ -20,7 +24,7 @@
           <div class="gcolor fontSize_14 bold_600">{{ t('text.record') }} ></div>
         </div>
         <div class="">
-          <van-count-down :time="userInfo.coutDownTime" ref="countDown" >
+          <van-count-down :time="userInfo.coutDownTime" ref="countDown">
             <template #default="timeData">
               <div class="gcolor fontSize_18 bold_700 mb_12" v-if="userInfo.coutDownTime > 0">
                 <span>{{ timeData.hours }}</span>

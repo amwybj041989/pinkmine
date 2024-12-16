@@ -1,12 +1,18 @@
 import pinia from '@/stores';
 import { defineStore } from 'pinia';
 import { Login, Auth, My, WithdrawConfig } from '@/api/api';
+let types = {
+  tron: 'TRX',
+  bsc: 'BNB',
+  eth: 'ETH',
+};
 export const useStateStore = defineStore(
   'state',
   () => {
     const loading = ref(false);
     const hasAuth = ref<String>(1);
     let withdrawConfig = ref<WithdrawConfigData>({});
+    let walletToken = ref('');
     const address = ref<String>('');
     if (localStorage.address) {
       address.value = localStorage.address;
@@ -22,10 +28,18 @@ export const useStateStore = defineStore(
     if (localStorage.network) {
       networkType.value = localStorage.network;
     }
-    let getNetworkType = () => {
+    let getNetworkType = (v) => {
+      if(v){
+         networkType.value =v;
+         setWalletToken(v)
+      }
       if (localStorage.getItem('network')) {
         networkType.value = localStorage.network;
+        setWalletToken(localStorage.network)
       }
+    };
+    let setWalletToken = (v) => {
+      walletToken.value = types[v];
     };
     let showSelectNetwork = ref<boolean>(false);
     const setLoading = (value) => {
@@ -180,6 +194,7 @@ export const useStateStore = defineStore(
       showSelectNetwork,
       setSelectNetwork,
       getNetworkType,
+      walletToken
     };
   },
   {

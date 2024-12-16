@@ -14,7 +14,12 @@
             <div class="flex flex_center">
               <div class="yellow" v-address="item.address">----</div>
             </div>
-            <div class="">{{ item.quantity }} ETH</div>
+            <div class="">
+              <span> {{ item.quantity }}</span>
+              <span v-if="item.type == 1">TRX</span>
+              <span v-if="item.type == 2">BNB</span>
+              <span v-if="item.type == 3">ETH</span>
+            </div>
           </div>
         </Vue3Marquee>
       </div>
@@ -26,14 +31,16 @@
 <script setup lang="ts">
 import { Vue3Marquee } from 'vue3-marquee';
 import { onMounted } from 'vue';
-import { generateRandomEthAddress, generateRandomDecimalInRange } from '@/utils';
+import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 const { t } = useI18n();
 const list = ref([]);
 function initList() {
   for (let i = 0; i < 100; i++) {
+    let type = generateRandomDecimalInRange(1, 3, 0);
     let obj = {
-      address: generateRandomEthAddress(),
+      address: type != 1 ? generateRandomEthAddress() : generateFakeTronAddress(),
       quantity: generateRandomDecimalInRange(0.007, 0.018, 8),
+      type: type,
     };
     list.value.push(obj);
   }
