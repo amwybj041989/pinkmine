@@ -12,7 +12,7 @@
             <div class="shrink_0 mr_6 ml_6 red">
               {{ t('text.outPut') }}
             </div>
-            <div class="title-color bold_700">
+            <div class="ggolden bold_700">
               {{ item.quantity }}
             </div>
             <div class="ggolden">
@@ -55,7 +55,7 @@
             <div class="flex flex_center justify_sb">
               <div class="flex flex_center">
                 <div class="my-icon my-icon-earth1 fontSize_24 gcolor"></div>
-                <div class="ml_12">{{ language }}</div>
+                <!-- <div class="ml_12">{{ language }}</div> -->
               </div>
               <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input" @click="showLanguagePicker = true">
                 <div class="title-color bold_600">{{ language }}</div>
@@ -66,15 +66,18 @@
           <div class="pad_0_12 flex flex_center text-color justify_sb mb_20">
             <div class="flex flex_center">
               <div class="my-icon my-icon-sun1 gcolor fontSize_24"></div>
-              <div class="ml_8">Day /</div>
+              <!-- <div class="ml_8">Day /</div> -->
+              <div class="ml_8">
+                /
+              </div>
               <div class="my-icon my-icon-moon1 gcolor fontSize_24 ml_8"></div>
-              <div class="ml_8">Ninght</div>
+              <!-- <div class="ml_8">Ninght</div> -->
             </div>
             <div class="my-icon my-icon-moon1 gcolor fontSize_24" v-if="checked" @click="toggle()"></div>
             <div class="my-icon my-icon-sun1 gcolor fontSize_24" v-else @click="toggle()"></div>
           </div>
         </div>
-        <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn">
+        <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn" v-if="state.loginStatus">
           <div class="btn_default" @click="handleLogout">
             {{ t('text.logout') }}
           </div>

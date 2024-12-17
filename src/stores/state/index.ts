@@ -14,7 +14,7 @@ export const useStateStore = defineStore(
     let withdrawConfig = ref<WithdrawConfigData>({});
     let walletToken = ref('');
     const address = ref<String>('');
-    const myBooster = ref({});
+    const myBooster = ref<any>(null);
     if (localStorage.address) {
       address.value = localStorage.address;
     }
@@ -49,6 +49,8 @@ export const useStateStore = defineStore(
           let now = new Date().getTime();
           myBooster.value.expireTimestamp = res.data.expireTimestamp * 1000 - now;
           myBooster.value.hasBooster = true;
+        } else {
+          myBooster.value = null;
         }
       });
     };

@@ -67,7 +67,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         },
       },
       // target: ['chrome64', 'edge79', 'es2020', 'firefox67', 'safari12', 'esnext'],
-      target: ['esnext','chrome64', 'edge79', 'es2020', 'firefox67', 'safari12',],
+      target: ['esnext'],
     },
     optimizeDeps: {
       include,

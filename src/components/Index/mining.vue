@@ -12,13 +12,18 @@
         <Vue3Marquee :vertical="true" style="height: 300px; width: 100%" :duration="50">
           <div class="flex flex_center justify_sb fontSize_14 sub-title-color marquee_item" v-for="item in list" :key="item.address">
             <div class="flex flex_center">
-              <div class="yellow" v-address="item.address">----</div>
+              <div class="webp icon-chain-mini icon-chain-mini-tron shrink_0" v-if="item.type == 1"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-bsc shrink_0" v-if="item.type == 2"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-ethereum shrink_0" v-if="item.type == 3"></div>
+              <div class="title-color ml_8" v-hash="item.address">----</div>
             </div>
-            <div class="">
-              <span> {{ item.quantity }}</span>
-              <span v-if="item.type == 1">TRX</span>
+            <div class="green flex flex_center">
+              <div class="">{{ item.quantity }}</div>
+              <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0 ml_8"></div>
+              <!-- <span > {{ item.quantity }}</span> -->
+              <!--  <span v-if="item.type == 1">TRX</span>
               <span v-if="item.type == 2">BNB</span>
-              <span v-if="item.type == 3">ETH</span>
+              <span v-if="item.type == 3">ETH</span> -->
             </div>
           </div>
         </Vue3Marquee>
@@ -39,7 +44,8 @@ function initList() {
     let type = generateRandomDecimalInRange(1, 3, 0);
     let obj = {
       address: type != 1 ? generateRandomEthAddress() : generateFakeTronAddress(),
-      quantity: type != 1 ? generateRandomDecimalInRange(0.007, 0.018, 8) : generateRandomDecimalInRange(100, 1000, 6),
+      // quantity: type != 1 ? generateRandomDecimalInRange(0.007, 0.018, 8) : generateRandomDecimalInRange(100, 1000, 6),
+      quantity: generateRandomDecimalInRange(100, 999, 2),
       type: type,
     };
     list.value.push(obj);

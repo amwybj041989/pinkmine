@@ -5,16 +5,29 @@
       <div class="fontSize_14 pad_12">
         <div class="text-color uppercase mb_8">{{ t('text.profitText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
-          <span v-if="userInfo.profit">
-            <span v-bigNum="state.userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
-          >
+          <div class="flex flex_center green" v-if="userInfo.profit">
+            <div class="" v-bigNum="state.userInfo.profit"></div>
+            <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0 ml_8"></div>
+          </div>
+          <!--  <span v-if="userInfo.profit" class="green">
+            <span v-bigNum="state.userInfo.profit"></span>
+            <span>{{ state.walletToken }}</span>
+            <span class="ml_8">USDT</span>
+            <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0 ml_8"></div>
+          </span> -->
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>
         <div class="text-color uppercase mb_8 flex flex_center">{{ t('text.canWithdrawText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
-          <span v-if="userInfo.canWithdraw">
-            <span v-bigNum="state.userInfo.canWithdraw"></span> <span>{{ state.walletToken }}</span></span
-          >
+          <div class="flex flex_center green" v-if="userInfo.canWithdraw">
+            <div class="" v-bigNum="state.userInfo.canWithdraw"></div>
+            <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0 ml_8"></div>
+          </div>
+        <!--  <span v-if="userInfo.canWithdraw" class="green">
+            <span v-bigNum="state.userInfo.canWithdraw"></span>
+            <span class="ml_8">USDT</span>
+            <span>{{ state.walletToken }}</span>
+          </span> -->
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>
         <div class="text-color uppercase mb_8 flex flex_center">{{ t('text.rateText') }}</div>

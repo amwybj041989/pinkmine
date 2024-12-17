@@ -27,9 +27,11 @@ const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
 let onClaim = (r, i) => {
+  state.setLoading(true);
   ClaimReward({
     idList: [r.id],
   }).then((res) => {
+    state.setLoading(false);
     list.value.splice(i, 1);
     showNotify({
       type: 'success',

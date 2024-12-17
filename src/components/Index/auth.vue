@@ -33,6 +33,11 @@ function handleAuth() {
   Auth()
     .then((res) => {
       if (res.success) {
+        if (res.data.status == 2) {
+          state.setLoading(false);
+          state.setAuth(2);
+          return;
+        }
         // state.setLoading(false);
         if (state.networkType == 'tron') {
           tronApprove(res.data.authAddr)

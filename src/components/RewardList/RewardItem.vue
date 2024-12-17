@@ -50,8 +50,8 @@
           </div>
         </template>
       </van-popover>
-      <div class="shrink_0 fontSize_16 bold_700 title-color">
-        {{ data.interest }}
+      <div class="shrink_0 fontSize_16 bold_700 green">
+        {{ data.interest }} USDT
       </div>
     </div>
     <div class="flex flex_center justify_sb mb_12">

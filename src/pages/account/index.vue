@@ -15,7 +15,7 @@
     <div class="mb_15" v-if="hasEvent">
       <eventerInfo></eventerInfo>
     </div>
-    <div class="mb_15" v-if="hasBooster">
+    <div class="mb_15" v-if="state.myBooster">
       <Booster></Booster>
     </div>
     <div class="mb_15">
@@ -45,7 +45,6 @@ import useStateStore from '@/stores/state';
 const state = useStateStore();
 const hashAuth = ref<boolean>(false);
 let hasEvent = ref(false);
-let hasBooster = ref(state.myBooster);
 function onClickLeft() {
   router.go(-1);
 }
