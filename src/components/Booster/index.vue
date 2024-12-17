@@ -63,7 +63,7 @@ onMounted(() => {
 <style scoped>
 .rewardList_wrap {
   width: 75vw;
-  min-height: 20px;
+  /* min-height: 20px; */
   max-height: 75vh;
   display: flex;
   flex-direction: column;

@@ -37,6 +37,9 @@ let onClaim = (r, i) => {
       type: 'success',
       message: t('msg.Claimed'),
     });
+    // if (list.value.length < 1) {
+    //   fetchRewardList();
+    // }
     if (list.value.length == 0) {
       emit('close');
     }

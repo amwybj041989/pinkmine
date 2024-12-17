@@ -35,6 +35,7 @@ declare module 'vue' {
     Servicer: typeof import('./../components/Servicer.vue')['default']
     TabBar: typeof import('./../components/TabBar.vue')['default']
     VanButton: typeof import('vant/es')['Button']
+    VanCell: typeof import('vant/es')['Cell']
     VanCollapse: typeof import('vant/es')['Collapse']
     VanCollapseItem: typeof import('vant/es')['CollapseItem']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
