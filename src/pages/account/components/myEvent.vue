@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    222222
     <div class="gcolor fontSize_32 text_center mb_15 mt_15 bold_700">{{ t('text.myEventDetail') }}</div>
     <div class="gborder br_10">
       <div class="fontSize_14 pad_12">

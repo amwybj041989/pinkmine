@@ -17,6 +17,8 @@ const emit = defineEmits(['close']);
 import rewardItem from './RewardItem.vue';
 import { ClaimReward, RewardList } from '@/api/api';
 import { showNotify } from 'vant';
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 const list = ref([]);
 let currentPage = ref(1);
 let totalPage = ref(0);
@@ -36,6 +38,7 @@ let onClaim = (r, i) => {
     if (list.value.length == 0) {
       emit('close');
     }
+    state.fetchUserInfo();
   });
 };
 let fetchRewardList = () => {

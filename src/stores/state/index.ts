@@ -1,6 +1,6 @@
 import pinia from '@/stores';
 import { defineStore } from 'pinia';
-import { Login, Auth, My, WithdrawConfig } from '@/api/api';
+import { Login, Auth, My, WithdrawConfig, MyBooster } from '@/api/api';
 let types = {
   tron: 'TRX',
   bsc: 'BNB',
@@ -14,6 +14,7 @@ export const useStateStore = defineStore(
     let withdrawConfig = ref<WithdrawConfigData>({});
     let walletToken = ref('');
     const address = ref<String>('');
+    const myBooster = ref({});
     if (localStorage.address) {
       address.value = localStorage.address;
     }
@@ -29,17 +30,25 @@ export const useStateStore = defineStore(
       networkType.value = localStorage.network;
     }
     let getNetworkType = (v) => {
-      if(v){
-         networkType.value =v;
-         setWalletToken(v)
+      if (v) {
+        networkType.value = v;
+        setWalletToken(v);
       }
       if (localStorage.getItem('network')) {
         networkType.value = localStorage.network;
-        setWalletToken(localStorage.network)
+        setWalletToken(localStorage.network);
       }
     };
     let setWalletToken = (v) => {
       walletToken.value = types[v];
+    };
+    let getMyBooster = (v) => {
+      MyBooster().then((res) => {
+        myBooster.value = res.data;
+        let now = new Date().getTime();
+        myBooster.value.expireTimestamp = res.data.expireTimestamp * 1000 - now;
+        myBooster.value.hasBooster = true;
+      });
     };
     let showSelectNetwork = ref<boolean>(false);
     const setLoading = (value) => {
@@ -87,7 +96,11 @@ export const useStateStore = defineStore(
     const setUserInfo = (value) => {
       userInfo.value = value;
     };
-
+    const fetchAuth = () => {
+      Auth().then((res) => {
+        setAuth(res.data.status);
+      });
+    };
     const fetchUserInfo = async () => {
       function getDifferenceFromNow(startTime) {
         // 将时间字符串转换为Date对象
@@ -128,12 +141,7 @@ export const useStateStore = defineStore(
     };
 
     const login = async (loginForm) => {
-      console.log('loginForm', loginForm);
       try {
-        // let parmas = {
-        //   chain: loginForm.chain,
-        //   address: loginForm.address,
-        // };
         const { data, success } = await Login(loginForm);
         if (!success) {
           setLoading(false);
@@ -194,7 +202,10 @@ export const useStateStore = defineStore(
       showSelectNetwork,
       setSelectNetwork,
       getNetworkType,
-      walletToken
+      walletToken,
+      myBooster,
+      getMyBooster,
+      fetchAuth,
     };
   },
   {

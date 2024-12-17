@@ -64,6 +64,7 @@ watch(
     if (newMode) {
       fetchAuth();
       fetchRewardList();
+      state.getMyBooster();
     }
   }
 );
@@ -119,13 +120,17 @@ let fetchEvent = () => {
     console.log('Event', res);
 
     if (res.data) {
-      EventDetail({ id: res.data.id }).then((detail) => {
-        if (detail.data) {
-          eventerShow.value = false;
-        } else {
-          eventerShow.value = true;
-        }
-      });
+      EventDetail({ id: res.data.id })
+        .then((detail) => {
+          if (detail.data) {
+            eventerShow.value = false;
+          } else {
+            eventerShow.value = true;
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       eventerShow.value = false;
       // fetchBoosterList();
@@ -181,6 +186,7 @@ onMounted(() => {
   if (state.loginStatus) {
     fetchAuth();
     fetchRewardList();
+    state.getMyBooster();
     // checkBalance();
   }
   // fetchAuth()

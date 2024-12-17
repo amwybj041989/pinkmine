@@ -90,11 +90,13 @@ import useStateStore from '@/stores/state';
 const state = useStateStore();
 import { copy } from '@/utils/copy';
 import { showNotify } from 'vant';
+import { Withdraw } from '@/api/api';
 let amount = ref(10);
 let showWithdrawFee = ref(false);
 let showWithdrawFree = ref(false);
 let userinfo = ref(state.userInfo);
 let withdrawConfig = ref(state.withdrawConfig);
+console.log(withdrawConfig);
 let handleCopyAdress = () => {
   copy(state.address)
     .then((res) => {
@@ -105,14 +107,15 @@ let handleCopyAdress = () => {
     });
 };
 let handleClickMax = () => {
-  amount.value = userinfo.canWithdraw;
+  console.log(userinfo);
+  amount.value = userinfo.value.canWithdraw;
 };
 let handleWithdraw = () => {
-  if (!withdrawConfig.withdrawable) {
+  if (!withdrawConfig.value.withdrawable) {
     showNotify({ type: 'danger', message: t('msg.disableWithdraw') });
     return;
   }
-  if (!userinfo.canWithdraw) {
+  if (!userinfo.value.canWithdraw) {
     showNotify({ type: 'danger', message: t('msg.noCanWithdraw') });
     return;
   }
@@ -120,19 +123,22 @@ let handleWithdraw = () => {
     showNotify({ type: 'danger', message: t('msg.minWithdraw') });
     return;
   }
-  if (amount.value > userinfo.canWithdraw) {
+  if (amount.value > userinfo.value.canWithdraw) {
     showNotify({ type: 'danger', message: t('msg.maxCanWithdraw') });
     return;
   }
+  state.setLoading(true);
   Withdraw({
     money: amount.value,
   })
     .then((res) => {
+      state.setLoading(false);
       showNotify({ type: 'success', message: t('msg.withdrawed') });
       state.fetchWithdrawConfig();
       state.fetchUserInfo();
     })
     .catch((err) => {
+      state.setLoading(false);
       showNotify({ type: 'danger', message: t('msg.withdrawFail') });
     });
 };
@@ -146,7 +152,7 @@ let handleGoRecord = () => {
 };
 onMounted(() => {
   state.fetchWithdrawConfig();
-  state.fetchUserInfo()
+  state.fetchUserInfo();
 });
 </script>
 

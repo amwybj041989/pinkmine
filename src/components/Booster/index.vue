@@ -41,6 +41,7 @@ let onClaim = (r, i) => {
     });
     // if (!list.value.length) {
     emit('close');
+    state.getMyBooster();
     // }
   });
 };

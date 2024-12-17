@@ -45,7 +45,7 @@ import useStateStore from '@/stores/state';
 const state = useStateStore();
 const hashAuth = ref<boolean>(false);
 let hasEvent = ref(false);
-let hasBooster = ref(false);
+let hasBooster = ref(state.myBooster.hasBooster);
 function onClickLeft() {
   router.go(-1);
 }
@@ -63,7 +63,7 @@ let fetchEvent = () => {
 let fetchMyBooster = () => {
   MyBooster().then((res) => {
     if (res.data) {
-      hasEvent.value = true;
+      hasBooster.value = true;
     }
     console.log('MyBooster', res);
   });
@@ -76,11 +76,12 @@ function fetchAuth() {
   });
 }
 onMounted(() => {
+  fetchEvent();
+  // fetchMyBooster();
   state.fetchWithdrawConfig();
   state.fetchUserInfo();
-  fetchEvent();
-  fetchMyBooster();
-  fetchAuth();
+  state.getMyBooster();
+  state.fetchAuth();
 });
 </script>
 

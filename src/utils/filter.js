@@ -35,8 +35,10 @@ export default {
     el.innerHTML = html
   },
   rate: (el, binding) => {
-    let value = binding.value + '';
+    let value = binding.value * 1;
+    // console.log(value);
     let html = parseFloat(value * 100).toFixed(2)
+    // console.log(html);
     el.innerHTML = html + '%'
   },
   bigNum: (el, binding) => {
@@ -44,19 +46,25 @@ export default {
     let value = binding.value * 1;
     if (value < 0.0001) {
       el.innerHTML = 0;
-      return
+      return;
     }
     if (typeof value == 'number') {
       function formatNumberWithCommasAndDecimals(number) {
-        let roundedNumber = number * 1;
-        let [integerPart, decimalPart] = roundedNumber.toString().split('.');
+        // 保留两位小数
+        let roundedNumber = Math.round(number * 100) / 100;
+        let numberString = roundedNumber.toString();
+        let [integerPart, decimalPart] = numberString.split('.');
         let formattedIntegerPart = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        // return formattedIntegerPart + '.' + decimalPart;
-        return formattedIntegerPart;
+        // 如果有小数部分，则添加到格式化后的整数部分
+        if (decimalPart) {
+          return formattedIntegerPart + '.' + decimalPart;
+        } else {
+          return formattedIntegerPart;
+        }
       }
       if (value) {
         el.innerHTML = formatNumberWithCommasAndDecimals(value);
-        return
+        return;
       }
     }
   },
