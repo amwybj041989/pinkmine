@@ -91,6 +91,13 @@ const lineOption = {
         backgroundColor: '#6a7985',
       },
     },
+    formatter: function (params) {
+      let data = params[0].data;
+      console.log(data);
+      let str = ``;
+      str = `${bigNum(data)} USDT`;
+      return str;
+    },
   },
   xAxis: {
     data: ['96H', '72H', '48H', '24H', 'NOW'],
@@ -215,7 +222,9 @@ function onFinish() {
   nextTick(() => {
     countDown.value.reset();
     initPieOption();
-    initLineOption();
+    if (active == 1) {
+      initLineOption();
+    }
   });
 }
 function handleVisibilityChange(isVisible, entry) {
@@ -243,7 +252,6 @@ watch(
   (nv) => {
     initPieOption();
     initLineOption();
-    console.log(nv);
   },
   { immediate: true }
 );
@@ -251,11 +259,11 @@ onMounted(() => {
   initPieOption();
   initLineOption();
   nextTick(() => {
-    if (finace.value) {
-      // observeVisibility(finace.value, handleVisibilityChange);
-    } else {
-      console.error('targetElement ref is not bound to a DOM element');
-    }
+    // if (finace.value) {
+    //   // observeVisibility(finace.value, handleVisibilityChange);
+    // } else {
+    //   console.error('targetElement ref is not bound to a DOM element');
+    // }
   });
 });
 </script>

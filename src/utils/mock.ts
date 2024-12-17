@@ -39,10 +39,13 @@ export function initTrendData() {
     let data = initPoolData();
     now = data.userRevenue;
   }
-  let randon_base = Math.random() * (0.03 - 0.001) + 0.001;
+  function random() {
+    return Math.random() * (0.05 - 0.001) + 0.001;
+  }
+
   return {
     now,
-    up: randon_base,
-    list: [parseFloat(now * (1 - randon_base)).toFixed(2), parseFloat(now * (1 - randon_base)).toFixed(2), parseFloat(now * (1 - randon_base)).toFixed(2), parseFloat(now * (1 - randon_base)).toFixed(2), now],
+    up: random(),
+    list: [parseFloat(now * (1 - random())).toFixed(2), parseFloat(now * (1 - random())).toFixed(2), parseFloat(now * (1 - random())).toFixed(2), parseFloat(now * (1 - random())).toFixed(2), now],
   };
 }

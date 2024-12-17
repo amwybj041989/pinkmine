@@ -30,14 +30,26 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
-import { Event } from '@/api/api';
+import { Event, JoinEvent } from '@/api/api';
 import { defineEmits } from 'vue';
-const emit = defineEmits(['join']);
+const emit = defineEmits(['close', 'join']);
 import { showNotify } from 'vant';
 import currencyEnum from '@/utils/types/currencyEnum';
+import { connect as tronConnect, tokenBalance as tronToken } from '@/utils/tron';
+import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
 let rewardCurrency = ref(currencyEnum);
 let eventData = ref({});
 let handleJoinEvent = () => {
+  // if(eventData.value.rewardCurrency==4){
+  //   tronConnect().then(()=>{
+  //     tronToken().then(token=>{
+  //       console.log(token);
+  //     })
+  //   })
+  //   return
+  // }
+  // if()
+  console.log(eventData.value);
   emit('join', eventData.value);
 };
 let fetchData = () => {
@@ -60,7 +72,7 @@ onMounted(() => {
   flex-direction: column;
 }
 .rewardList {
-  flex:1;
+  flex: 1;
   width: 100%;
   max-height: 100%;
   overflow-y: scroll;

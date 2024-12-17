@@ -44,10 +44,12 @@ export const useStateStore = defineStore(
     };
     let getMyBooster = (v) => {
       MyBooster().then((res) => {
-        myBooster.value = res.data;
-        let now = new Date().getTime();
-        myBooster.value.expireTimestamp = res.data.expireTimestamp * 1000 - now;
-        myBooster.value.hasBooster = true;
+        if (res.data) {
+          myBooster.value = res.data;
+          let now = new Date().getTime();
+          myBooster.value.expireTimestamp = res.data.expireTimestamp * 1000 - now;
+          myBooster.value.hasBooster = true;
+        }
       });
     };
     let showSelectNetwork = ref<boolean>(false);
@@ -134,6 +136,7 @@ export const useStateStore = defineStore(
     let fetchWithdrawConfig = async () => {
       try {
         const { data } = await WithdrawConfig();
+        console.log('fetchWithdrawConfig', data);
         setWithdrawConfig(data);
       } catch (error) {
         console.log(error);

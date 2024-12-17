@@ -45,14 +45,16 @@ import useStateStore from '@/stores/state';
 const state = useStateStore();
 const hashAuth = ref<boolean>(false);
 let hasEvent = ref(false);
-let hasBooster = ref(state.myBooster.hasBooster);
+let hasBooster = ref(state.myBooster);
 function onClickLeft() {
   router.go(-1);
 }
 let fetchEvent = () => {
   Event().then((res) => {
+    console.log('fetchEvent', res);
     if (res.data) {
       EventDetail({ id: res.data.id }).then((detail) => {
+        console.log('detail', detail);
         if (detail.data) {
           hasEvent.value = true;
         }

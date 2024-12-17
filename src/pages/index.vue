@@ -31,7 +31,7 @@
       <Booster @close="boosterShow = false"></Booster>
     </van-popup>
     <van-popup v-model:show="eventerShow" round teleport="#app" :close-on-click-overlay="false">
-      <Eventer @join="handleJoinEvent"></Eventer>
+      <Eventer @close="eventerShow = false" @join="handleJoinEvent"></Eventer>
     </van-popup>
     <!-- <van-cell title="展示弹出层" is-link @click="handleTest" /> -->
   </div>
@@ -83,10 +83,15 @@ let checkBalance = (r) => {
   }
 };
 let handleJoinEvent = (r) => {
+  if (!r) {
+    return;
+  }
+  state.setLoading(true);
   JoinEvent({
     id: r.id,
   })
     .then((res) => {
+      state.setLoading(false);
       eventerShow.value = false;
       if (res.success) {
         showNotify({
@@ -101,6 +106,7 @@ let handleJoinEvent = (r) => {
       }
     })
     .catch((err) => {
+      state.setLoading(false);
       eventerShow.value = false;
       showNotify({
         type: 'danger',

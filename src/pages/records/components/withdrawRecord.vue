@@ -6,14 +6,12 @@
           <div class="pad_12">
             <div class="flex flex_center justify_sb mb_12">
               <div class="fontSize_16 title-color bold_700">{{ t('text.withdrawAmount') }}</div>
-              <div class="shrink_0 fontSize_16 bold_700 title-color">
-                {{ item.money }}
-              </div>
+              <div class="shrink_0 fontSize_16 bold_700 green">{{ item.money }} USDT</div>
             </div>
             <div class="flex flex_center justify_sb mb_12">
               <div class="fontSize_16 title-color bold_700">{{ t('text.withdrawStatus') }}</div>
               <div class="shrink_0 fontSize_16 bold_700 title-color">
-                {{ item.statusValue }}
+                {{ statusList[item.statusValue] }}
               </div>
             </div>
             <div class="" v-if="item.remark">

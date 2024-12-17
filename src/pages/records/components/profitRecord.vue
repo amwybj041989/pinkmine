@@ -6,8 +6,8 @@
           <div class="pad_12">
             <div class="flex flex_center justify_sb mb_12">
               <div class="fontSize_16 title-color bold_700">{{ t('reward.money') }}</div>
-              <div class="shrink_0 fontSize_16 bold_700 title-color">
-                <span class="ggolden" v-bigNum="item.money"></span>
+              <div class="shrink_0 fontSize_16 bold_700 green">
+                <span class="" v-bigNum="item.money"></span>
                 <span class="ml_8">USDT</span>
               </div>
             </div>

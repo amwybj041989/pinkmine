@@ -6,14 +6,14 @@
         <div class="text-color uppercase mb_8">{{ t('text.profitText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
           <span v-if="userInfo.profit">
-            <span v-bigNum="userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
+            <span v-bigNum="state.userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
           >
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>
         <div class="text-color uppercase mb_8 flex flex_center">{{ t('text.canWithdrawText') }}</div>
         <div class="gcolor fontSize_18 bold_700 mb_12">
           <span v-if="userInfo.canWithdraw">
-            <span v-bigNum="userInfo.profit"></span> <span>{{ state.walletToken }}</span></span
+            <span v-bigNum="state.userInfo.canWithdraw"></span> <span>{{ state.walletToken }}</span></span
           >
           <span v-else>{{ t('text.waitOut') }}</span>
         </div>

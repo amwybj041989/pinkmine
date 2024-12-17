@@ -8,7 +8,7 @@
         </div>
         <div class="flex flex_center">
           <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0"></div>
-          <div class="ml_6 fontSize_18 ggolden bold_900"><span v-bigNum="userinfo.canWithdraw"></span></div>
+          <div class="ml_6 fontSize_18 ggolden bold_900"><span v-bigNum="state.userInfo.canWithdraw"></span></div>
           <div class="ml_6 title-color">USDT</div>
         </div>
       </div>
@@ -91,7 +91,7 @@ const state = useStateStore();
 import { copy } from '@/utils/copy';
 import { showNotify } from 'vant';
 import { Withdraw } from '@/api/api';
-let amount = ref(10);
+let amount = ref(state.withdrawConfig.withdrawMin);
 let showWithdrawFee = ref(false);
 let showWithdrawFree = ref(false);
 let userinfo = ref(state.userInfo);
