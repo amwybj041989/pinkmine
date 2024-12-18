@@ -23,7 +23,7 @@
             <div class="" v-bigNum="state.userInfo.canWithdraw"></div>
             <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0 ml_8"></div>
           </div>
-        <!--  <span v-if="userInfo.canWithdraw" class="green">
+          <!--  <span v-if="userInfo.canWithdraw" class="green">
             <span v-bigNum="state.userInfo.canWithdraw"></span>
             <span class="ml_8">USDT</span>
             <span>{{ state.walletToken }}</span>

@@ -11,12 +11,12 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(145deg, var(--gradient-color1), var(--gradient-color2), var(--gradient-color3))
+  background-image: var(--linear)
 }
 
 .gbg {
   background-color: var(--gradient-color1);
-  background-image: linear-gradient(145deg, var(--gradient-color1), var(--gradient-color2), var(--gradient-color3))
+  background-image: var(--linear)
 }
 
 .ggolden {
@@ -211,7 +211,7 @@ input {
   -moz-user-select: none;
   user-select: none;
   color: white;
-  background: linear-gradient(145deg, var(--gradient-color1), var(--gradient-color2), var(--gradient-color3));
+  background: var(--linear);
   border: 0px;
   --btn-shadow-color: var(--gradient-color2);
   font-size: calc(var(--base) * 16);

@@ -63,13 +63,24 @@
               </div>
             </div>
           </div>
+          <div class="pad_0_12 text-color mb_20">
+            <div class="flex flex_center justify_sb">
+              <div class="flex flex_center">
+                <div class="my-icon my-icon-jiaohuan fontSize_24 gcolor"></div>
+                <!-- <div class="ml_12">{{ language }}</div> -->
+              </div>
+
+              <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input gbg" @click="showColors = true">
+                <div class="title-color bold_600"></div>
+                <div class="arrow"></div>
+              </div>
+            </div>
+          </div>
           <div class="pad_0_12 flex flex_center text-color justify_sb mb_20">
             <div class="flex flex_center">
               <div class="my-icon my-icon-sun1 gcolor fontSize_24"></div>
               <!-- <div class="ml_8">Day /</div> -->
-              <div class="ml_8">
-                /
-              </div>
+              <div class="ml_8">/</div>
               <div class="my-icon my-icon-moon1 gcolor fontSize_24 ml_8"></div>
               <!-- <div class="ml_8">Ninght</div> -->
             </div>
@@ -88,6 +99,19 @@
     </van-popup>
     <van-popup v-model:show="showLanguagePicker" position="bottom">
       <van-picker v-model="languageValues" :columns="languageColumns" @confirm="onLanguageConfirm" @cancel="showLanguagePicker = false" />
+    </van-popup>
+    <van-popup v-model:show="showColors" position="bottom" closeable>
+      <div class="pad_10_0"></div>
+      <div class="pad_14 colorSelect_wrap flex flex_wrap justify_sb mt_20">
+        <div class="colorSelect_item br_50" v-for="(item, i) in colors" :key="i" :style="{ backgroundImage: linear(i) }" @click="handleChangeTheme(i)"></div>
+      </div>
+      <!-- <van-picker v-model="languageValues" :columns="colorsColumns" @confirm="onLanguageConfirm" @cancel="showColors = false">
+        <template #option="option">
+          <div class="gcolor" :style="{ backgroundImage:linear(option.value) }">
+            {{ option.text }}
+          </div>
+        </template>
+      </van-picker> -->
     </van-popup>
     <WalletConnect></WalletConnect>
   </div>
@@ -108,6 +132,7 @@ import { modalOopen, appKit } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
+import { colors } from '@/utils/types/colors';
 const appStore = useAppStore();
 const { t } = useI18n();
 const route = useRoute();
@@ -122,18 +147,29 @@ const showLanguagePicker = ref(false);
 const languageValues = ref<Array<string>>([locale.value]);
 const language = computed(() => languageColumns.find((l) => l.value === locale.value).text);
 const loading = ref(false);
+const showColors = ref(false);
+function linear(v) {
+  let color = colors[v];
+  let str = `linear-gradient(145deg, ${color[0]}, ${color[1]} 33%, ${color[2]})`;
+  return str;
+}
 function initList() {
   for (let i = 0; i < 100; i++) {
     let type = generateRandomDecimalInRange(1, 3, 0);
     let obj = {
       address: type != 1 ? generateRandomEthAddress() : generateFakeTronAddress(),
-      quantity: type != 1?generateRandomDecimalInRange(0.007, 0.018, 4):generateRandomDecimalInRange(100, 1000, 4),
+      quantity: type != 1 ? generateRandomDecimalInRange(0.007, 0.018, 4) : generateRandomDecimalInRange(100, 1000, 4),
       type: type,
     };
     list.value.push(obj);
   }
 }
-
+let handleChangeTheme = (v) => {
+  let color = colors[v];
+  document.documentElement.style.setProperty('--gradient-color1', color[0]);
+  document.documentElement.style.setProperty('--gradient-color2', color[1]);
+  document.documentElement.style.setProperty('--gradient-color3', color[2]);
+};
 function gotAccount() {
   // modalOopen();
   router.push('/account');
@@ -227,5 +263,13 @@ onMounted(() => {
 }
 .network_item:nth-child(3) {
   background-image: url('@/assets/images/eth.jpg');
+}
+.colorSelect_wrap {
+  border-radius: calc(var(--base) * 12) calc(var(--base) * 12) 0 0;
+}
+.colorSelect_item {
+  width: 18vw;
+  height: 18vw;
+  margin-top: 2vw;
 }
 </style>

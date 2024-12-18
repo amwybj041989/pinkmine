@@ -48,15 +48,18 @@ body[data-theme='dark'] {
 }
 
 body[data-theme='dark'] .app-wrap {
-  background: url(https://img.hash.best/background/bg_earth.png) 0 0 / 100% auto repeat-y;
+  // background: url(https://img.hash.best/background/bg_earth.png) 0 0 / 100% auto repeat-y;
+  background: url('@/assets/night.jpg') 0 0 / 100% auto repeat-y;
 }
 
 body[data-theme='dark'] .app-wrap:before {
-  background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
+  // background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
+  background: url('@/assets/night.jpg') left top / cover no-repeat;
 }
 
 body[data-theme='dark'] .app-wrap.webp {
-  background-image: url(https://img.hash.best/background/bg_earth.webp);
+  // background-image: url(https://img.hash.best/background/bg_earth.webp);
+  background-image: url('@/assets/night.jpg');
 }
 
 body[data-theme='dark'] .app-wrap.webp:before {
@@ -64,30 +67,20 @@ body[data-theme='dark'] .app-wrap.webp:before {
 }
 
 body[data-theme='light'] .app-wrap {
-  background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
+  // background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
+  background: url('@/assets/light.jpg') center / cover no-repeat;
 }
 
 body[data-theme='light'] .app-wrap.webp:before {
-  background-image: url(https://img.hash.best/background/city.webp);
+  // background-image: url(https://img.hash.best/background/city.webp);
+  background-image: url('@/assets/light.jpg');
 }
 body[data-theme='dark'] .app-wrap:before {
   background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
 }
 
-body[data-theme='dark'] .app-wrap.webp {
-  background-image: url(https://img.hash.best/background/bg_earth.webp);
-}
-
 body[data-theme='dark'] .app-wrap.webp:before {
   background-image: url(https://img.hash.best/background/bg_meteor.webp);
-}
-
-body[data-theme='light'] .app-wrap:before {
-  background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
-}
-
-body[data-theme='light'] .app-wrap.webp:before {
-  background-image: url(https://img.hash.best/background/city.webp);
 }
 
 h1,
@@ -105,9 +98,8 @@ p {
   overflow: hidden;
   color: var(--title-color);
   font-size: calc(var(--base) * 12);
-
 }
-  // color: var(--title-color);
+// color: var(--title-color);
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;

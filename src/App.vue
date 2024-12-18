@@ -1,22 +1,24 @@
 <template>
-  <VanConfigProvider :theme="mode">
-    <router-view v-slot="{ Component, route }">
-      <section class="app-wrap title-color webp capitalize relative">
-        <keep-alive :include="keepAliveRouteNames">
-          <component :is="Component" :key="route.name" />
-        </keep-alive>
+  <div class="">
+    <VanConfigProvider :theme="mode">
+      <router-view v-slot="{ Component, route }">
+        <section class="app-wrap title-color webp capitalize relative">
+          <keep-alive :include="keepAliveRouteNames">
+            <component :is="Component" :key="route.name" />
+          </keep-alive>
 
-        <Servicer></Servicer>
-      </section>
-    </router-view>
-    <div class="" v-if="state.loading">
-      <van-overlay show teleport="body" :z-index="99999">
-        <div class="flex flex_center justify_center loader_wrap">
-          <div class="loader"></div>
-        </div>
-      </van-overlay>
-    </div>
-  </VanConfigProvider>
+          <Servicer></Servicer>
+        </section>
+      </router-view>
+      <div class="" v-if="state.loading">
+        <van-overlay show teleport="body" :z-index="99999">
+          <div class="flex flex_center justify_center loader_wrap">
+            <div class="loader"></div>
+          </div>
+        </van-overlay>
+      </div>
+    </VanConfigProvider>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -75,11 +77,13 @@ function getConnectSataus() {
 
 onMounted(() => {
   setRem();
-  initializeThemeSwitcher();
-  generateRandomGradient();
   window.addEventListener('resize', setRem);
-  getConnectSataus();
-  state.setLoading(false);
+  nextTick(() => {
+    initializeThemeSwitcher();
+    generateRandomGradient();
+    getConnectSataus();
+    state.setLoading(false);
+  });
 });
 </script>
 

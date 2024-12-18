@@ -64,7 +64,7 @@ watch(
     if (newMode) {
       fetchAuth();
       fetchRewardList();
-      state.getMyBooster();
+      // state.getMyBooster();
     }
   }
 );

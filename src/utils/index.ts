@@ -1,4 +1,7 @@
+import { getColors,colors } from '@/utils/types/colors';
+
 // animateNumber(numberElement, 0, 3519699.366184, 1000); // 从0增长到$3,519,699.366184，持续1秒
+
 export function animateNumber(targetElement, startValue, endValue, duration) {
   const interval = 50;
   const increment = (endValue - startValue) / (duration / interval);
@@ -89,31 +92,35 @@ export function generateRandomDecimalInRange(min, max, decimalPlaces = 8) {
 
 // console.log(generateRandomDecimalInRange(0.07, 0.08, 8));
 
-export function generateRandomGradient() {
-  // 生成随机颜色的函数，排除黑色系和灰色系
-  function getRandomColor() {
-    let color;
-    let isBlackOrGray;
-    do {
-      color =
-        '#' +
-        Math.floor(Math.random() * 0xffffff)
-          .toString(16)
-          .padStart(6, '0');
-      // 将颜色转换为RGB值
-      const r = parseInt(color.substr(1, 2), 16);
-      const g = parseInt(color.substr(3, 2), 16);
-      const b = parseInt(color.substr(5, 2), 16);
-      // 检查颜色是否接近黑色或灰色
-      isBlackOrGray = (r < 64 && g < 64 && b < 64) || (Math.abs(r - g) < 32 && Math.abs(r - b) < 32 && Math.abs(g - b) < 32);
-    } while (isBlackOrGray); // 如果是黑色或灰色，重新生成
-    return color;
+export function generateRandomGradient(v) {
+  if(v!=undefined){
+
   }
+  let colors = getColors();
+  // 生成随机颜色的函数，排除黑色系和灰色系
+  // function getRandomColor() {
+  //   let color;
+  //   let isBlackOrGray;
+  //   do {
+  //     color =
+  //       '#' +
+  //       Math.floor(Math.random() * 0xffffff)
+  //         .toString(16)
+  //         .padStart(6, '0');
+  //     // 将颜色转换为RGB值
+  //     const r = parseInt(color.substr(1, 2), 16);
+  //     const g = parseInt(color.substr(3, 2), 16);
+  //     const b = parseInt(color.substr(5, 2), 16);
+  //     // 检查颜色是否接近黑色或灰色
+  //     isBlackOrGray = (r < 64 && g < 64 && b < 64) || (Math.abs(r - g) < 32 && Math.abs(r - b) < 32 && Math.abs(g - b) < 32);
+  //   } while (isBlackOrGray); // 如果是黑色或灰色，重新生成
+  //   return color;
+  // }
 
   // 更新CSS变量的值
-  document.documentElement.style.setProperty('--gradient-color1', getRandomColor());
-  document.documentElement.style.setProperty('--gradient-color2', getRandomColor());
-  document.documentElement.style.setProperty('--gradient-color3', getRandomColor());
+  document.documentElement.style.setProperty('--gradient-color1', colors[0]);
+  document.documentElement.style.setProperty('--gradient-color2', colors[1]);
+  document.documentElement.style.setProperty('--gradient-color3', colors[2]);
 }
 
 export function bigNum(params) {
