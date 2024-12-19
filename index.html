@@ -13,16 +13,16 @@
       });;
       (function() {
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        if(!localStorage.getItem('vueuse-color-scheme')){
-          localStorage.setItem('vueuse-color-scheme', 'light')
-        }
+        // if(!localStorage.getItem('vueuse-color-scheme')){
+        //   localStorage.setItem('vueuse-color-scheme', 'light')
+        // }
         const setting = localStorage.getItem('vueuse-color-scheme') || 'light'
         if (setting === 'dark' || (prefersDark && setting !== 'light'))
           document.documentElement.classList.toggle('dark', true)
-          // document.addEventListener('DOMContentLoaded', function() {
-          //   // 现在可以安全地设置data-theme属性
-          //   document.body.setAttribute('data-theme', 'dark');
-          // });
+          document.addEventListener('DOMContentLoaded', function() {
+            // 现在可以安全地设置data-theme属性
+            document.body.setAttribute('data-theme', 'dark');
+          });
       })()
     </script>
   </head>

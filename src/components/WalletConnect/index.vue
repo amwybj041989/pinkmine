@@ -7,16 +7,16 @@
             {{ t('text.selectNetwork') }}
           </div>
           <div class="flex flex_center justify_sb">
-            <div class="gborder br_50" @click="handleSelctNetwork('tron')">
-              <div class="webp icon-chain-normal icon-chain-normal-tron"></div>
-              <i class="border_line border_scroll br_50"></i>
-            </div>
             <div class="gborder br_50" @click="handleSelctNetwork('bsc')">
               <div class="webp icon-chain-normal icon-chain-normal-bsc"></div>
               <i class="border_line border_scroll br_50"></i>
             </div>
             <div class="gborder br_50" @click="handleSelctNetwork('eth')">
               <div class="webp icon-chain-normal icon-chain-normal-ethereum"></div>
+              <i class="border_line border_scroll br_50"></i>
+            </div>
+            <div class="gborder br_50" @click="handleSelctNetwork('tron')">
+              <div class="webp icon-chain-normal icon-chain-normal-tron"></div>
               <i class="border_line border_scroll br_50"></i>
             </div>
           </div>

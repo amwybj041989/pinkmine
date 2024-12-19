@@ -1,11 +1,11 @@
 [class*=icon-chain-] {
   display: block;
-  background-image: url(https://img.hash.best/sprites/chain.png);
+  background-image: url(@/assets/sprites/chain.png);
   background-repeat: no-repeat
 }
 
 [class*="webp icon-chain-"] {
-  background-image: url(https://img.hash.best/sprites/chain.webp)
+  background-image: url(@/assets/sprites/chain.webp)
 }
 
 .icon-chain-mini {
@@ -322,12 +322,12 @@
 
 [class*=icon-coin-] {
   display: block;
-  background-image: url(https://img.hash.best/sprites/coin.png);
+  background-image: url(@/assets/sprites/coin.png);
   background-repeat: no-repeat
 }
 
 [class*="webp icon-coin-"] {
-  background-image: url(https://img.hash.best/sprites/coin.webp)
+  background-image: url(@/assets/sprites/coin.webp)
 }
 
 .icon-coin-mini {
@@ -932,12 +932,12 @@
 
 [class*=icon-socialize-] {
   display: block;
-  background-image: url(https://img.hash.best/sprites/socialize.png);
+  background-image: url(@/assets/sprites/socialize.png);
   background-repeat: no-repeat
 }
 
 [class*="webp icon-socialize-"] {
-  background-image: url(https://img.hash.best/sprites/socialize.webp)
+  background-image: url(@/assets/sprites/socialize.webp)
 }
 
 .icon-socialize-normal {
@@ -1034,12 +1034,12 @@
 
 [class*=icon-query-] {
   display: block;
-  background-image: url(https://img.hash.best/sprites/query.png);
+  background-image: url(@/assets/sprites/query.png);
   background-repeat: no-repeat
 }
 
 [class*="webp icon-query-"] {
-  background-image: url(https://img.hash.best/sprites/query.webp)
+  background-image: url(@/assets/sprites/query.webp)
 }
 
 .icon-query-normal {
@@ -1104,12 +1104,12 @@
 
 [class*=icon-get-] {
   display: block;
-  background-image: url(https://img.hash.best/sprites/get.png);
+  background-image: url(@/assets/sprites/get.png);
   background-repeat: no-repeat
 }
 
 [class*="webp icon-get-"] {
-  background-image: url(https://img.hash.best/sprites/get.webp)
+  background-image: url(@/assets/sprites/get.webp)
 }
 
 .icon-get-normal {

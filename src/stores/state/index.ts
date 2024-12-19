@@ -148,6 +148,15 @@ export const useStateStore = defineStore(
     const login = async (loginForm) => {
       try {
         const { data, success } = await Login(loginForm);
+        if (loginForm.chain == 0) {
+          getNetworkType('tron');
+        }
+        if (loginForm.chain == 1) {
+          getNetworkType('eth');
+        }
+        if (loginForm.chain == 2) {
+          getNetworkType('bsc');
+        }
         if (!success) {
           setLoading(false);
           return;

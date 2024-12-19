@@ -27,14 +27,23 @@
         <div class="logo_title fontSize_20 gcolor light" :data-text="appName">{{ appName }}</div>
         <div class="flex flex flex_center">
           <div class="walletConnect gborder">
-            <div class="flex flex_center pad_2_4 gborder_container" @click="modalClick" v-if="!state.address">
+            <div class="flex flex_center pad_2_4 gborder_container" @click="connectWallet" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
             <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
+              <!-- <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
+              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div> -->
+              <div class="color_fff ml_6 fontSize_16 bold_700" v-hash="state.address">---</div>
+            </div>
+            <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
+          </div>
+          <div class="walletConnect gborder ml_8" @click="modalClick" v-if="state.address">
+            <div class="flex flex_center pad_2_4 gborder_container">
+              <div class="my-icon my-icon-jiaohuan fontSize_14 gcolor"></div>
               <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
-              <div class="color_fff ml_6" v-hash="state.address">---</div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
           </div>
@@ -63,11 +72,10 @@
               </div>
             </div>
           </div>
-          <div class="pad_0_12 text-color mb_20">
+          <!-- <div class="pad_0_12 text-color mb_20">
             <div class="flex flex_center justify_sb">
               <div class="flex flex_center">
                 <div class="my-icon my-icon-jiaohuan fontSize_24 gcolor"></div>
-                <!-- <div class="ml_12">{{ language }}</div> -->
               </div>
 
               <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input gbg" @click="showColors = true">
@@ -75,7 +83,7 @@
                 <div class="arrow"></div>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="pad_0_12 flex flex_center text-color justify_sb mb_20">
             <div class="flex flex_center">
               <div class="my-icon my-icon-sun1 gcolor fontSize_24"></div>
@@ -87,12 +95,24 @@
             <div class="my-icon my-icon-moon1 gcolor fontSize_24" v-if="checked" @click="toggle()"></div>
             <div class="my-icon my-icon-sun1 gcolor fontSize_24" v-else @click="toggle()"></div>
           </div>
+          <div class="pad_0_12 text-color">
+            <div class="flex flex_center justify_sb">
+              <div class=""></div>
+              <!-- <div class="flex flex_center">
+              <div class="my-icon my-icon-jiaohuan fontSize_24 gcolor"></div>
+            </div> -->
+
+              <div class="" @click="showColors = true">
+                <div class="color_show gbg br_50"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn" v-if="state.loginStatus">
+        <!-- <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn" v-if="state.loginStatus">
           <div class="btn_default" @click="handleLogout">
             {{ t('text.logout') }}
           </div>
-        </div>
+        </div> -->
         <div class="pad_4"></div>
         <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
       </div>
@@ -129,6 +149,7 @@ import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { modalOopen, appKit } from '@/utils/modal';
+import { test } from '@/utils/wallet';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -174,6 +195,9 @@ function gotAccount() {
   // modalOopen();
   router.push('/account');
 }
+let connectWallet = () => {
+  test();
+};
 function modalClick() {
   state.setSelectNetwork(true);
   // modalOopen();
@@ -271,5 +295,9 @@ onMounted(() => {
   width: 18vw;
   height: 18vw;
   margin-top: 2vw;
+}
+.color_show {
+  width: calc(var(--base) * 32);
+  height: calc(var(--base) * 32);
 }
 </style>
