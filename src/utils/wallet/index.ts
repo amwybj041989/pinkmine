@@ -3,7 +3,7 @@ import { modalOopen, appKit } from '@/utils/modal';
 import useStateStore from '@/stores/state';
 import { showNotify } from 'vant';
 const state = useStateStore();
-export let test = () => {
+export let connectWallet = () => {
   if (window.ethereum) {
     modalOopen('bsc');
     return;

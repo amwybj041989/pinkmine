@@ -148,8 +148,7 @@ import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
-import { modalOopen, appKit } from '@/utils/modal';
-import { test } from '@/utils/wallet';
+import { connectWallet } from '@/utils/wallet';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -192,15 +191,13 @@ let handleChangeTheme = (v) => {
   document.documentElement.style.setProperty('--gradient-color3', color[2]);
 };
 function gotAccount() {
-  // modalOopen();
   router.push('/account');
 }
 let connectWallet = () => {
-  test();
+  connectWallet();
 };
 function modalClick() {
   state.setSelectNetwork(true);
-  // modalOopen();
 }
 let handleLogout = () => {
   if (state.networkType != 'tron') {

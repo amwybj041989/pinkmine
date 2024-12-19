@@ -32,6 +32,7 @@ export const useStateStore = defineStore(
     let getNetworkType = (v) => {
       if (v) {
         networkType.value = v;
+        localStorage.network = v;
         setWalletToken(v);
       }
       if (localStorage.getItem('network')) {
