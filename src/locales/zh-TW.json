@@ -107,6 +107,8 @@
     "interest": "利息",
     "myEventDetail": "活動進度",
     "myBooster": "我的加速機",
-    "logout": "退出"
+    "logout": "退出",
+    "eventDeposited": "活动存入金额",
+    "eventDiff":"额度缺口"
   }
 }

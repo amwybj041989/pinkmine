@@ -9,14 +9,14 @@
     <div class="mb_15" v-if="state.hasAuth != 2">
       <auth></auth>
     </div>
-    <div class="mb_15">
-      <indexTabs></indexTabs>
-    </div>
     <div class="mb_15" v-if="hasEvent">
       <eventerInfo></eventerInfo>
     </div>
     <div class="mb_15" v-if="state.myBooster">
       <Booster></Booster>
+    </div>
+    <div class="mb_15">
+      <indexTabs></indexTabs>
     </div>
     <div class="mb_15">
       <auditReport></auditReport>

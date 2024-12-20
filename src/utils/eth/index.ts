@@ -72,12 +72,16 @@ export async function tokenApprove(approve) {
   // }
 }
 
-async function tokenBalance() {
+export async function tokenBalance() {
+  console.log(1111);
   //非gas币的余额获取
   let signer = await provider.getSigner(); //连接钱包地址
-  let contractAddress = contractAddress; //合约地址
   let contract = new ethers.Contract(contractAddress, ABI, provider);
   let decimals = await contract.decimals();
   let balance = await contract.balanceOf(signer.address);
-  console.log('余额', ethers.formatUnits(balance, decimals));
+  return new Promise((res) => {
+    console.log('余额', ethers.formatUnits(balance, decimals));
+    return res(ethers.formatUnits(balance, decimals));
+  });
+  // console.log('余额', ethers.formatUnits(balance, decimals));
 }

@@ -37,7 +37,7 @@ let onClaim = (r, i) => {
       type: 'success',
       message: t('msg.Claimed'),
     });
-    // if (list.value.length < 1) {
+    // if (list.value.length < 3) {
     //   fetchRewardList();
     // }
     if (list.value.length == 0) {

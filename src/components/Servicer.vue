@@ -15,7 +15,7 @@
           <service class="gcolor"></service>
         </div> -->
       </div>
-      <div class="server_btn gbg br_50" @click="showList = !showList">
+      <div class="server_btn  br_50" @click="showList = !showList">
         <serviceBtn class="gcolor" v-if="!showList"></serviceBtn>
         <close class="gcolor" v-else></close>
       </div>

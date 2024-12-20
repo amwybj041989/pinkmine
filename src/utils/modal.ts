@@ -1,12 +1,5 @@
 import pinia from '@/stores';
 import useStateStore from '@/stores/state';
-// const state = useStateStore();
-// import { getCurrentInstance } from 'vue';
-// const {
-//   proxy: { $forceUpdate },
-// }: any = getCurrentInstance();
-// const userStore = useUserStore();
-
 import { createAppKit } from '@reown/appkit';
 import { Ethers5Adapter } from '@reown/appkit-adapter-ethers5';
 import { bscTestnet, mainnet, bsc } from '@reown/appkit/networks';
@@ -14,21 +7,6 @@ import { bscTestnet, mainnet, bsc } from '@reown/appkit/networks';
 import { appName, appDescription } from '@/constants';
 // console.log(networks);
 const projectId = 'b5b9bf25c2eb3ffdf92152e71cfa4627';
-// const mainnetNetwork = {
-//   chainId: 1,
-//   name: 'Ethereum',
-//   currency: 'ETH',
-//   explorerUrl: 'https://etherscan.io',
-//   rpcUrl: 'https://cloudflare-eth.com',
-// };
-// const bscNetwork = {
-//   chainId: 56,
-//   name: 'Binance Smart Chain Mainnet',
-//   currency: 'BNB',
-//   explorerUrl: 'https://bscscan.com',
-//   rpcUrl: 'https://bsc-dataseed.binance.org/',
-// };
-// 2. Create your application's metadata object
 const metadata = {
   name: appName,
   description: appDescription,
@@ -40,6 +18,7 @@ export let appKit = createAppKit({
   adapters: [new Ethers5Adapter()],
   metadata: metadata,
   networks: [bscTestnet, mainnet, bsc],
+  defaultNetwork: bsc,
   projectId,
   features: {
     email: false, // default to true
@@ -68,10 +47,10 @@ async function getModalAccount(v) {
 }
 export function modalOopen(v) {
   let state = useStateStore();
-  console.log(v);
   if (v == 'bsc') {
     state.setNetwork('bsc');
-    appKit.switchNetwork(bscTestnet);
+    // appKit.switchNetwork(bscTestnet);
+    appKit.switchNetwork(bsc);
   } else {
     state.setNetwork('eth');
     appKit.switchNetwork(mainnet);

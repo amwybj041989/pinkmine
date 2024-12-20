@@ -8,7 +8,8 @@
         {{ eventData.content }}
       </div>
       <div class="fontSize_12 red mb_10">
-        <span>{{ t('text.requirement') }} : {{ t('text.requirementText') }}</span>
+        <!-- <span>{{ t('text.requirement') }} : {{ t('text.requirementText') }}</span> -->
+        <span>{{ t('text.requirement') }} : </span>
         <span class="fontSize_18 bold_600 ml_6 mr_6"> {{ eventData.requirement }} </span>
         <span>{{ rewardCurrency[eventData.rewardCurrency] }}</span>
       </div>

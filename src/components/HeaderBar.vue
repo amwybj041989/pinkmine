@@ -148,7 +148,7 @@ import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
-import { connectWallet } from '@/utils/wallet';
+import { walletConnect } from '@/utils/wallet';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -194,7 +194,7 @@ function gotAccount() {
   router.push('/account');
 }
 let connectWallet = () => {
-  connectWallet();
+  walletConnect();
 };
 function modalClick() {
   state.setSelectNetwork(true);

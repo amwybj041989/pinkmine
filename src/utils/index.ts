@@ -1,4 +1,4 @@
-import { getColors,colors } from '@/utils/types/colors';
+import { getColors, colors } from '@/utils/types/colors';
 
 // animateNumber(numberElement, 0, 3519699.366184, 1000); // 从0增长到$3,519,699.366184，持续1秒
 
@@ -93,8 +93,7 @@ export function generateRandomDecimalInRange(min, max, decimalPlaces = 8) {
 // console.log(generateRandomDecimalInRange(0.07, 0.08, 8));
 
 export function generateRandomGradient(v) {
-  if(v!=undefined){
-
+  if (v != undefined) {
   }
   let colors = getColors();
   // 生成随机颜色的函数，排除黑色系和灰色系
@@ -144,6 +143,6 @@ export function bigNum(params) {
 }
 export let chargeList = {
   tron: 'https://tronscan.org/#/',
-  bsc: 'https://www.binance.com/',
-  eth: 'https://portfolio.metamask.io/explore/tokens',
+  bsc: 'https://p2p.binance.com/express/buy/USDT/USD',
+  eth: 'https://p2p.binance.com/express/buy/USDT/USD',
 };
