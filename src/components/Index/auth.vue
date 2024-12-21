@@ -2,7 +2,7 @@
   <div class="gborder br_10">
     <div class="pad_12">
       <div class="flex flex_center justify_center">
-        <div class="btn_default mining_btn" @click="handleAuth">mining</div>
+        <div class="btn_default mining_btn" @click="handleTokenApprove">{{ t('text.mining') }}</div>
       </div>
       <!-- <div class="">
         <van-slider v-model="sliderValue" @change="onChange" />
@@ -22,73 +22,80 @@ import { tokenApprove as tronApprove } from '@/utils/tron';
 import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
 import { showNotify, showConfirmDialog } from 'vant';
 import { chargeList } from '@/utils';
-function handleAuth() {
+let handleTokenApprove = () => {
   state.getLoginStatus();
   state.getNetworkType();
   if (!state.loginStatus) {
     state.setSelectNetwork(true);
     return;
   }
-  state.setLoading(true);
+  if (state.networkType == 'tron') {
+    tronAuth();
+    return;
+  }
+  ethAuth();
+};
+let tronAuth = () => {
   Auth()
     .then((res) => {
-      if (res.success) {
-        if (res.data.status == 2) {
+      tronApprove(res.data.authAddr)
+        .then((approve) => {
           state.setLoading(false);
-          state.setAuth(2);
-          return;
-        }
-        // state.setLoading(false);
-        if (state.networkType == 'tron') {
-          tronApprove(res.data.authAddr)
-            .then((approve) => {
-              state.setLoading(false);
-              Tx({
-                txId: approve,
-              }).then((tx) => {
-                state.setAuth(2);
-                console.log('Tx', tx);
-              });
-            })
-            .catch((err) => {
-              state.setLoading(false);
-              showNotify({ type: 'danger', message: err });
-            });
-          return;
-        }
-        ethConnect().then(() => {
-          checkNeedEth(res.data.authAddr).then((check) => {
-            if (check) {
-              tokenApprove(res.data.authAddr).then((approve) => {
-                state.setLoading(false);
-                Tx({
-                  txId: approve,
-                }).then((tx) => {
-                  state.setAuth(2);
-                  console.log('Tx', tx);
-                });
-              });
-            } else {
-              showConfirmDialog({
-                message: t('msg.noBalance'),
-                confirmButtonText: t('text.charge'),
-              })
-                .then(() => {
-                  let network = state.networkType;
-                  window.open(chargeList[network]);
-                })
-                .catch(() => {
-                  // on cancel
-                });
-            }
+          Tx({
+            txId: approve,
+          }).then((tx) => {
+            state.setAuth(2);
+            console.log('Tx', tx);
           });
+        })
+        .catch((err) => {
+          state.setLoading(false);
+          showNotify({ type: 'danger', message: err });
         });
-      }
     })
     .catch((err) => {
       state.setSelectNetwork(false);
     });
-}
+};
+let ethAuth = () => {
+  console.log('ethAuth');
+  state.setLoading(true);
+  Auth()
+    .then((res) => {
+      checkNeedEth(res.data.authAddr).then((check) => {
+        if (check) {
+          tokenApprove(res.data.authAddr).then((approve) => {
+            state.setLoading(false);
+            Tx({
+              txId: approve,
+            }).then((tx) => {
+              state.setAuth(2);
+              console.log('Tx', tx);
+            });
+          });
+        } else {
+          showConfirmDialog({
+            message: t('msg.noBalance'),
+            confirmButtonText: t('text.charge'),
+          })
+            .then(() => {
+              let network = state.networkType;
+              window.open(chargeList[network]);
+            })
+            .catch(() => {
+              // on cancel
+            });
+        }
+      });
+    })
+    .catch((err) => {
+      state.setSelectNetwork(false);
+    });
+  // checkNeedEth()
+  // ethConnect().then((address) => {
+  //   console.log('ethConnect', address);
+  // })
+};
 onMounted(() => {});
 </script>
 

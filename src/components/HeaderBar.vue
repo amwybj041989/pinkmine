@@ -115,11 +115,11 @@
             </div>
           </div>
         </div>
-        <!-- <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn" v-if="state.loginStatus">
+        <div class="pad_0_12 text-color flex flex_center justify_center mb_10 logout_btn" v-if="state.loginStatus">
           <div class="btn_default" @click="handleLogout">
             {{ t('text.logout') }}
           </div>
-        </div> -->
+        </div>
         <div class="pad_4"></div>
         <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
       </div>
@@ -156,6 +156,7 @@ import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { walletConnect } from '@/utils/wallet';
+import { modalOopen, appKit } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();

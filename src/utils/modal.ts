@@ -17,8 +17,8 @@ const metadata = {
 export let appKit = createAppKit({
   adapters: [new Ethers5Adapter()],
   metadata: metadata,
-  networks: [bscTestnet, mainnet, bsc],
-  defaultNetwork: bsc,
+  networks: [bsc, mainnet],
+  // defaultNetwork: bsc,
   projectId,
   features: {
     email: false, // default to true
@@ -26,14 +26,35 @@ export let appKit = createAppKit({
     socials: [],
   },
 });
-
+let initApp = (type) => {
+  let networks = type == 'bsc' ? [bsc] : [mainnet];
+  let defaultNetwork = type == 'bsc' ? bsc : mainnet;
+  return createAppKit({
+    adapters: [new Ethers5Adapter()],
+    metadata: metadata,
+    networks: networks,
+    defaultNetwork: defaultNetwork,
+    projectId,
+    features: {
+      email: false, // default to true
+      analytics: true, // Optional - defaults to your Cloud configuration
+      socials: [],
+    },
+  });
+};
 async function getModalAccount(v) {
-  console.log('getModalAccount');
+  let state = useStateStore();
   let address = appKit.getAddress();
   let chainId = appKit.getChainId();
   console.log(address != undefined && chainId);
   if (address != undefined && chainId) {
-    let state = useStateStore();
+    // if (v == 'bsc') {
+    //   state.setNetwork('bsc');
+    //   appKit.switchNetwork(bsc);
+    // } else {
+    //   state.setNetwork('eth');
+    //   appKit.switchNetwork(mainnet);
+    // }
     let chain = v == 'bsc' ? 2 : 1;
     state.login({
       chain: chain * 1,
@@ -55,16 +76,16 @@ export function modalOopen(v) {
     state.setNetwork('eth');
     appKit.switchNetwork(mainnet);
   }
-  if (localStorage.address != appKit.getAddress()) {
+  if (localStorage.address != initApp(v).getAddress()) {
     state.setAddress('');
     state.setChainId(null);
-    appKit.open();
+    initApp(v).open();
     getModalAccount(v);
     return;
   }
-  if (appKit.getAddress() && appKit.getChainId()) {
-    let address = appKit.getAddress();
-    let chainId = appKit.getChainId();
+  if (initApp(v).getAddress() && initApp(v).getChainId()) {
+    let address = initApp(v).getAddress();
+    let chainId = initApp(v).getChainId();
     if (address && chainId) {
       let chain = v == 'bsc' ? 2 : 1;
       state.login({
@@ -74,6 +95,6 @@ export function modalOopen(v) {
       return;
     }
   }
-  appKit.open();
+  initApp(v).open();
   getModalAccount(v);
 }

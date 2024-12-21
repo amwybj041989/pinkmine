@@ -71,13 +71,13 @@ const gradientColor = {
   '100%': 'var(--gradient-color3)',
 };
 let eventData = ref({
-  title: '大理女房东，一棵玉树养了18年',
-  content: '1900 年，美国・旧金山唐人街，阿鬼（王宝强饰）与秦福（刘昊然饰）因为一起凶杀案偶然结识，误打误撞组成“唐人街神探”组合，一场精彩又刺激的笑闹探案就此展开……',
-  requirement: 20000,
-  rewardCurrency: 2,
-  deposited: 333,
-  reward: 35,
-  status: 0,
+  // title: '大理女房东，一棵玉树养了18年',
+  // content: '1900 年，美国・旧金山唐人街，阿鬼（王宝强饰）与秦福（刘昊然饰）因为一起凶杀案偶然结识，误打误撞组成“唐人街神探”组合，一场精彩又刺激的笑闹探案就此展开……',
+  // requirement: 20000,
+  // rewardCurrency: 2,
+  // deposited: 333,
+  // reward: 35,
+  // status: 0,
 });
 let currentRate = ref((eventData.value.deposited / eventData.value.requirement) * 100);
 
@@ -101,7 +101,7 @@ let fetchData = () => {
   });
 };
 onMounted(() => {
-  // fetchData();
+  fetchData();
 });
 </script>
 

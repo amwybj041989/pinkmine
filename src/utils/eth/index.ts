@@ -1,19 +1,27 @@
 import { ethers, BrowserProvider } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.min.js';
-// Your code here...
-import { ABI, contractAddress } from './config';
-let provider = null;
+import pinia from '@/stores';
+import useStateStore from '@/stores/state';
+const state = useStateStore();
+import { ABI, bscAddress, ethAddress } from './config';
+let addressList = {
+  bsc: bscAddress,
+  eth: ethAddress,
+};
+var provider = new BrowserProvider(window.ethereum);
 export async function connectWallet() {
+  // // if (provider == null) {
+  // provider = new BrowserProvider(window.ethereum);
+  // // }
+  // console.log(1111);
   return new Promise((res, rej) => {
-    if (provider == null) {
-      provider = new BrowserProvider(window.ethereum);
-      // provider = new ethers.providers.Web3Provider(window.ethereum, 'any');
-    }
     provider
       .send('eth_requestAccounts', [])
       .then((a) => {
+        console.log(22222);
         return res(a[0]);
       })
       .catch(() => {
+        state.setLoading(false);
         return rej('user rejected request');
       });
   });
@@ -21,12 +29,18 @@ export async function connectWallet() {
 export let checkNeedEth = async (approve) => {
   let signer = await provider.getSigner(); //连接钱包地址
   let adr = approve; //授权地址，从api获取
-  // let contractAddress = contractAddress; //合约地址
+  let type = state.networkType;
+  let contractAddress = addressList[type]; //合约地址
   let contract = new ethers.Contract(contractAddress, ABI, signer);
   let feeData = await provider.getFeeData();
+  console.log('checkNeedEth', 1);
   let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
+  console.log('checkNeedEth', 2);
   let needEth = ethers.formatEther(feeData.gasPrice * gasUsed);
+  console.log('checkNeedEth', 3);
   let ethBalance = await provider.getBalance(signer.address);
+  console.log('checkNeedEth', 4);
+  console.log('contractAddress', contractAddress);
   return new Promise((res, rej) => {
     if (needEth > ethBalance) {
       console.log('eth not enough');
@@ -40,18 +54,32 @@ export async function tokenApprove(approve) {
   let signer = await provider.getSigner(); //连接钱包地址
   let adr = approve; //授权地址，从api获取
   // let contractAddress = contractAddress; //合约地址
+  let type = state.networkType;
+  let contractAddress = addressList[type]; //合约地址
+  console.log('contractAddress', contractAddress);
   let contract = new ethers.Contract(contractAddress, ABI, signer);
   return new Promise((res, rej) => {
-    contract.approve(adr, ethers.MaxUint256).then((tx) => {
-      tx.wait().then((txReceipt) => {
-        if (txReceipt && txReceipt.status == 1) {
-          //交易成功
-          return res(txReceipt.hash);
-        } else {
-          return rej();
-        }
+    contract
+      .approve(adr, ethers.MaxUint256)
+      .then((tx) => {
+        tx.wait()
+          .then((txReceipt) => {
+            if (txReceipt && txReceipt.status == 1) {
+              //交易成功
+              return res(txReceipt.hash);
+            } else {
+              return rej();
+            }
+          })
+          .catch((err) => {
+            state.setLoading(false);
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        state.setLoading(false);
+        console.log(err);
       });
-    });
   });
   // try {
   //     let feeData =await provider.getFeeData();
@@ -73,8 +101,9 @@ export async function tokenApprove(approve) {
 }
 
 export async function tokenBalance() {
-  console.log(1111);
   //非gas币的余额获取
+  let type = state.networkType;
+  let contractAddress = addressList[type]; //合约地址
   let signer = await provider.getSigner(); //连接钱包地址
   let contract = new ethers.Contract(contractAddress, ABI, provider);
   let decimals = await contract.decimals();

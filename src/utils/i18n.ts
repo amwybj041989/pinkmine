@@ -13,7 +13,7 @@ import vi from 'vant/es/locale/lang/vi-VN';
 import hi from 'vant/es/locale/lang/hi-IN';
 import { Locale, type PickerColumn } from 'vant';
 
-const FALLBACK_LOCALE = 'zh-TW';
+const FALLBACK_LOCALE = 'en';
 
 const vantLocales = {
   'zh-TW': zhTW,

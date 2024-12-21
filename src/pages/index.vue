@@ -63,8 +63,6 @@ watch(
   (newMode) => {
     if (newMode) {
       fetchAuth();
-      fetchRewardList();
-      // state.getMyBooster();
     }
   }
 );
@@ -118,6 +116,10 @@ function fetchAuth() {
   Auth().then((res) => {
     if (res) {
       state.setAuth(res.data.status);
+      if (res.data.status == 2) {
+        fetchRewardList();
+        state.getMyBooster()
+      }
     }
   });
 }
@@ -191,9 +193,6 @@ onMounted(() => {
   state.getLoginStatus();
   if (state.loginStatus) {
     fetchAuth();
-    fetchRewardList();
-    state.getMyBooster();
-    // checkBalance();
   }
   // fetchAuth()
 });
