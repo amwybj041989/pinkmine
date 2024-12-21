@@ -108,6 +108,10 @@
     "interest": "Intérêt",
     "myEventDetail": "Progression de l'événement",
     "myBooster": "Mon accélérateur",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "eventDeposited": "montant déposé pour l’activité",
+    "eventDiff": "manque à gagner ",
+    "walletBalance": "solde du portefeuille",
+    "poolBalance": "Pool balance"
   }
 }

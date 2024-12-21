@@ -30,15 +30,22 @@
             <div class="flex flex_center pad_2_4 gborder_container" @click="connectWallet" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
-            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
-              <!-- <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
+            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="modalClick">
+              <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div> -->
-              <div class="color_fff ml_6 fontSize_16 bold_700" v-hash="state.address">---</div>
+              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
+              <div class="color_fff ml_6 bold_700" v-hash="state.address">---</div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
           </div>
-          <div class="walletConnect gborder ml_8" @click="modalClick" v-if="state.address">
+          <div class="walletConnect gborder ml_8" @click="gotAccount" v-if="state.address">
+            <div class="flex flex_center pad_2_4 gborder_container">
+              <div class="my-icon my-icon-jinrong gcolor fontSize_16"></div>
+              <div class="color_fff ml_6">{{ t('text.myAccount') }}</div>
+            </div>
+            <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
+          </div>
+          <!--  <div class="walletConnect gborder ml_8" @click="modalClick" v-if="state.address">
             <div class="flex flex_center pad_2_4 gborder_container">
               <div class="my-icon my-icon-jiaohuan fontSize_14 gcolor"></div>
               <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
@@ -46,7 +53,7 @@
               <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
-          </div>
+          </div> -->
           <div class="iconfont icon-shezhi fontSize_24 gcolor ml_12" @click="showSetting = true"></div>
         </div>
       </div>

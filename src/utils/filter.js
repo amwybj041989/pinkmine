@@ -48,6 +48,10 @@ export default {
       el.innerHTML = 0;
       return;
     }
+    if (!value) {
+      el.innerHTML = 0;
+      return;
+    }
     if (typeof value == 'number') {
       function formatNumberWithCommasAndDecimals(number) {
         // 保留两位小数

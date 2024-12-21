@@ -108,6 +108,10 @@
     "interest": "Intereses",
     "myEventDetail": "Progreso del evento",
     "myBooster": "Mi acelerador",
-    "logout": "Salir"
+    "logout": "Salir",
+    "eventDeposited": "Importe depositado en la actividad",
+    "eventDiff": "Brecha de cuota",
+    "walletBalance": "Saldo de la billetera",
+    "poolBalance": "Saldo de la piscina minera"
   }
 }

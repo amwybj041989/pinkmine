@@ -108,6 +108,10 @@
     "interest": "الفائدة",
     "myEventDetail": "تقدم الحدث",
     "myBooster": "جهاز التسريع الخاص بي",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "eventDeposited": "المبلغ المودع للنشاط",
+    "eventDiff": "الفجوة في الحصص ",
+    "walletBalance": "رصيد المحفظة",
+    "poolBalance": "رصيد البركة "
   }
 }

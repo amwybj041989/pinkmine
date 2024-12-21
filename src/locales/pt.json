@@ -108,6 +108,10 @@
     "interest": "Intereses",
     "myEventDetail": "Progreso del evento",
     "myBooster": "Mi acelerador",
-    "logout": "Sair"
+    "logout": "Sair",
+    "eventDeposited": "Montante do depósito para a actividade",
+    "eventDiff": "Falta de limite de crédito",
+    "walletBalance": "Saldo da carteira",
+    "poolBalance": "Balanço da Piscina Mineral"
   }
 }

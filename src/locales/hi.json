@@ -105,6 +105,10 @@
     "interest": "ब्याज",
     "myEventDetail": "इवेंट प्रगति",
     "myBooster": "मेरा बूस्टर",
-    "logout": "लॉग आउट"
+    "logout": "लॉग आउट",
+    "eventDeposited": "क्रिया के लिए डिपोस्ट मात्रा",
+    "eventDiff": "क्रेडिट सीमा की छोटी",
+    "walletBalance": "वालेट बैलेट",
+    "poolBalance": "माइनराल पूल संतुलन"
   }
 }

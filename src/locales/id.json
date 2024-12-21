@@ -108,6 +108,10 @@
     "interest": "Intérêt",
     "myEventDetail": "Progression de l'événement",
     "myBooster": "Mon accélérateur",
-    "logout": "Daftar keluar"
+    "logout": "Daftar keluar",
+    "eventDeposited": "Jumlah deposit untuk aktivitas",
+    "eventDiff": "Kekurangan batas kredit",
+    "walletBalance": "Kesimbangan dompet",
+    "poolBalance": "Balansi Pool Mineral"
   }
 }

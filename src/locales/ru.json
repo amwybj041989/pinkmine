@@ -108,6 +108,10 @@
     "interest": "Intérêt",
     "myEventDetail": "Progression de l'événement",
     "myBooster": "Mon accélérateur",
-    "logout": "Выход"
+    "logout": "Выход",
+    "eventDeposited": "Сумма депонирования деятельности",
+    "eventDiff": "Номерный разрыв",
+    "walletBalance": "Сальдо кошелька",
+    "poolBalance": "Сальдо пула"
   }
 }

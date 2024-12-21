@@ -1333,24 +1333,29 @@
 .icon_10 {
   width: calc(var(--base) * 10);
   height: calc(var(--base) * 10);
+  background-size: 100% 100%;
 }
 
 .icon_12 {
   width: calc(var(--base) * 12);
   height: calc(var(--base) * 12);
+  background-size: 100% 100%;
 }
 
 .icon_14 {
   width: calc(var(--base) * 14);
   height: calc(var(--base) * 14);
+  background-size: 100% 100%;
 }
 
 .icon_16 {
   width: calc(var(--base) * 16);
   height: calc(var(--base) * 16);
+  background-size: 100% 100%;
 }
 
 .icon_18 {
   width: calc(var(--base) * 18);
   height: calc(var(--base) * 18);
+  background-size: 100% 100%;
 }

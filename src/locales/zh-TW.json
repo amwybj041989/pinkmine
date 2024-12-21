@@ -109,6 +109,8 @@
     "myBooster": "我的加速機",
     "logout": "退出",
     "eventDeposited": "活动存入金额",
-    "eventDiff":"额度缺口"
+    "eventDiff": "额度缺口",
+    "walletBalance": "錢包餘額",
+    "poolBalance": "礦池餘額"
   }
 }

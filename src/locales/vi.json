@@ -106,6 +106,10 @@
     "interest": "Lãi suất",
     "myEventDetail": "Chi tiết sự kiện của tôi",
     "myBooster": "Máy tăng tốc của tôi",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "eventDeposited": "Số tiền gửi chiến dịch",
+    "eventDiff": "Hạn mức lỗ hổng",
+    "walletBalance": "Số dư ví",
+    "poolBalance": "Số dư mining pool"
   }
 }

@@ -108,6 +108,10 @@
     "myEventDetail": "Event Progress",
     "myBooster": "My Booster",
     "userRevenue": "User Revenue",
-    "logout": "Log out"
+    "logout": "Log out",
+   "eventDeposited": "Deposit amount",
+   "eventDiff": "Shortage of credit limit",
+   "walletBalance": "Wallet balance",
+   "poolBalance": "Pool Balance"
   }
 }

@@ -129,7 +129,7 @@ export const useStateStore = defineStore(
         } else {
           data.coutDownTime = 0;
         }
-        console.log(data);
+        // console.log(data);
         setUserInfo(data);
       } catch (error) {
         console.log(error);
@@ -139,7 +139,7 @@ export const useStateStore = defineStore(
     let fetchWithdrawConfig = async () => {
       try {
         const { data } = await WithdrawConfig();
-        console.log('fetchWithdrawConfig', data);
+        // console.log('fetchWithdrawConfig', data);
         setWithdrawConfig(data);
       } catch (error) {
         console.log(error);

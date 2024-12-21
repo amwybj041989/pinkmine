@@ -108,6 +108,10 @@
     "interest": "利息",
     "myEventDetail": "イベント進行状況",
     "myBooster": "私のブースター",
-    "logout": "ログアウト"
+    "logout": "ログアウト",
+    "eventDeposited": "活動入金金額",
+    "eventDiff": "定格切欠き",
+    "walletBalance": "ウォレット残高",
+    "poolBalance": "マイニングプール残高"
   }
 }
