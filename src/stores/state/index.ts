@@ -9,6 +9,14 @@ let types = {
 export const useStateStore = defineStore(
   'state',
   () => {
+    console.log(process.env);
+    let isDev = ref(false);
+    if (process.env.NODE_ENV === 'development') {
+      isDev.value = true;
+      console.log(1);
+    } else {
+      isDev.value = false;
+    }
     const loading = ref(false);
     const hasAuth = ref<String>(1);
     let withdrawConfig = ref<WithdrawConfigData>({});
@@ -197,6 +205,7 @@ export const useStateStore = defineStore(
     getLoginStatus();
 
     return {
+      isDev,
       loading,
       setLoading,
       loginStatus,

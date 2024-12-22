@@ -10,6 +10,10 @@
           <Servicer></Servicer>
         </section>
       </router-view>
+      <div class="mt_15 text_center fontSize_14 gcolor mb_15">
+        <span>version:</span>
+        <span>1.0.0</span>
+      </div>
       <div class="" v-if="state.loading">
         <van-overlay show teleport="body" :z-index="99999">
           <div class="flex flex_center justify_center loader_wrap">
