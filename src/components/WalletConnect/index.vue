@@ -41,10 +41,18 @@ const { t } = useI18n();
 import useStateStore from '@/stores/state';
 import { connect as tronConnect } from '@/utils/tron';
 import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
-import { modalOopen } from '@/utils/modal';
+import { modalOopen, appKit } from '@/utils/modal';
 const state = useStateStore();
 let handleSelctNetwork = (v) => {
   state.setSelectNetwork(false);
+  if (state.loginStatus) {
+    state.setNetwork('');
+    state.setAddress('');
+    // state.setAddress('');
+    localStorage.removeItem('token');
+    state.getLoginStatus();
+    appKit.disconnect();
+  }
   localStorage.network = v;
   if (v == 'tron') {
     state.setLoading(true);

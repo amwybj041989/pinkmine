@@ -76,7 +76,7 @@ export const useStateStore = defineStore(
       // console.log('token', localStorage.getItem('token'));
       // console.log('address', address.value);
       // console.log('chainId', chainId.value);
-      if (localStorage.getItem('token') != null && localStorage.getItem('token') != '' && localStorage.getItem('token') != undefined && address.value && chainId.value != null) {
+      if (localStorage.getItem('token') != null && localStorage.getItem('token') != '' && localStorage.getItem('token') != undefined && address.value && networkType.value != '') {
         loginStatus.value = true;
       } else {
         loginStatus.value = false;
@@ -192,6 +192,11 @@ export const useStateStore = defineStore(
     };
 
     let setNetwork = (v) => {
+      if (v == null || v == '') {
+        networkType.value = '';
+        localStorage.removeItem('network');
+        return;
+      }
       networkType.value = v;
       if (v == 'tron') {
         setChainId(0);
