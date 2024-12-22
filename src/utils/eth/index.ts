@@ -1,4 +1,5 @@
 import { ethers, BrowserProvider } from 'https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.min.js';
+import { appKit } from '@/utils/modal';
 import pinia from '@/stores';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -7,12 +8,16 @@ let addressList = {
   bsc: bscAddress,
   eth: ethAddress,
 };
-var provider = new BrowserProvider(window.ethereum);
+var provider;
+function getProvider() {
+  if (appKit.getWalletProvider()) {
+    provider = new BrowserProvider(appKit.getWalletProvider());
+  } else {
+    provider = new BrowserProvider(window.ethereum);
+  }
+}
 export async function connectWallet() {
-  // // if (provider == null) {
-  // provider = new BrowserProvider(window.ethereum);
-  // // }
-  // console.log(1111);
+  getProvider()
   return new Promise((res, rej) => {
     provider
       .send('eth_requestAccounts', [])
@@ -27,11 +32,17 @@ export async function connectWallet() {
   });
 }
 export let checkNeedEth = async (approve) => {
+  getProvider();
   let signer = await provider.getSigner(); //连接钱包地址
+  console.log('signer', signer);
   let adr = approve; //授权地址，从api获取
+  console.log('adr', approve);
   let type = state.networkType;
+  console.log('type', type);
   let contractAddress = addressList[type]; //合约地址
+  console.log('contractAddress', contractAddress);
   let contract = new ethers.Contract(contractAddress, ABI, signer);
+  console.log('contract', contract);
   let feeData = await provider.getFeeData();
   console.log('checkNeedEth', 1);
   let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
@@ -51,6 +62,7 @@ export let checkNeedEth = async (approve) => {
   });
 };
 export async function tokenApprove(approve) {
+  getProvider();
   let signer = await provider.getSigner(); //连接钱包地址
   let adr = approve; //授权地址，从api获取
   // let contractAddress = contractAddress; //合约地址

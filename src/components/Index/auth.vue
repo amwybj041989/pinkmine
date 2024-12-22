@@ -62,9 +62,15 @@ let ethAuth = () => {
   state.setLoading(true);
   Auth()
     .then((res) => {
+      ethConnect().then(adress=>{
+        console.log(adress);
+      })
+      console.log('Auth',res);
       checkNeedEth(res.data.authAddr).then((check) => {
+        console.log('checkNeedEth', check);
         if (check) {
           tokenApprove(res.data.authAddr).then((approve) => {
+            console.log('tokenApprove', approve);
             state.setLoading(false);
             Tx({
               txId: approve,
