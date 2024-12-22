@@ -1,6 +1,7 @@
 import pinia from '@/stores';
 import { defineStore } from 'pinia';
 import { Login, Auth, My, WithdrawConfig, MyBooster } from '@/api/api';
+import { appKit } from '@/utils/modal';
 let types = {
   tron: 'TRX',
   bsc: 'BNB',
@@ -172,6 +173,7 @@ export const useStateStore = defineStore(
         }
         setLoading(false);
         localStorage.setItem('token', data.accessToken);
+        localStorage.setItem('netChainId', appKit.getChainId());
         setAddress(loginForm.address);
         setChainId(loginForm.chain);
         getLoginStatus();

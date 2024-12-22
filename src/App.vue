@@ -12,7 +12,7 @@
       </router-view>
       <div class="mt_15 text_center fontSize_14 gcolor mb_15">
         <span>version:</span>
-        <span>1.0.0</span>
+        <span>1.0.1</span>
       </div>
       <div class="" v-if="state.loading">
         <van-overlay show teleport="body" :z-index="99999">
@@ -69,14 +69,26 @@ function setRem() {
   document.documentElement.style.fontSize = rootFontSize + 'px';
 }
 function getConnectSataus() {
-  let isConnected = appKit.getIsConnectedState();
+  // let isConnected = appKit.getIsConnectedState();
+  let netChainId = localStorage.getItem('netChainId') * 1;
+  if (appKit.getChainId() && netChainId) {
+    if (appKit.getChainId() != netChainId) {
+      // localStorage.clear();
+      // window.location.reload();
+      // if (state.networkType == 'bsc') {
+      //   appKit.switchNetwork(bsc);
+      // } else {
+      //   appKit.switchNetwork(mainnet);
+      // }
+    }
+  }
   // if (!isConnected) {
   //   userStore.setAddress('');
   //   userStore.setChainId(0);
   // }
-  // setTimeout(() => {
-  //   getConnectSataus();
-  // }, 5000);
+  setTimeout(() => {
+    getConnectSataus();
+  }, 2000);
 }
 
 onMounted(() => {
@@ -85,9 +97,9 @@ onMounted(() => {
   nextTick(() => {
     initializeThemeSwitcher();
     generateRandomGradient();
-    getConnectSataus();
     state.setLoading(false);
   });
+  // getConnectSataus();
 });
 </script>
 

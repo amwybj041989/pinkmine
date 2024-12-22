@@ -42,6 +42,30 @@ let initApp = (type) => {
     },
   });
 };
+let bscAppKit = createAppKit({
+  adapters: [new Ethers5Adapter()],
+  metadata: metadata,
+  networks: [bsc],
+  defaultNetwork: bsc,
+  projectId,
+  features: {
+    email: false, // default to true
+    analytics: true, // Optional - defaults to your Cloud configuration
+    socials: [],
+  },
+});
+let ethAppKit = createAppKit({
+  adapters: [new Ethers5Adapter()],
+  metadata: metadata,
+  networks: [bsc],
+  defaultNetwork: bsc,
+  projectId,
+  features: {
+    email: false, // default to true
+    analytics: true, // Optional - defaults to your Cloud configuration
+    socials: [],
+  },
+});
 async function getModalAccount(v) {
   let state = useStateStore();
   let address = appKit.getAddress();
@@ -72,7 +96,12 @@ export function modalOopen(v) {
   if (localStorage.address != appKit.getAddress()) {
     state.setAddress('');
     state.setChainId(null);
-    initApp(v).open();
+    // initApp(v).open();
+    if (v == 'bsc') {
+      bscAppKit.open();
+    } else {
+      ethAppKit.open();
+    }
     getModalAccount(v);
     return;
   }
@@ -89,6 +118,11 @@ export function modalOopen(v) {
     }
     return;
   }
-  initApp(v).open();
+  // initApp(v).open();
+  if (v == 'bsc') {
+    bscAppKit.open();
+  } else {
+    ethAppKit.open();
+  }
   getModalAccount(v);
 }
