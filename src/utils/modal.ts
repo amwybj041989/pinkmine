@@ -46,7 +46,7 @@ async function getModalAccount(v) {
   let state = useStateStore();
   let address = appKit.getAddress();
   let chainId = appKit.getChainId();
-  console.log(address != undefined && chainId);
+  // console.log(address != undefined && chainId);
   if (address != undefined && chainId) {
     // if (v == 'bsc') {
     //   state.setNetwork('bsc');
@@ -83,9 +83,9 @@ export function modalOopen(v) {
     getModalAccount(v);
     return;
   }
-  if (initApp(v).getAddress() && initApp(v).getChainId()) {
-    let address = initApp(v).getAddress();
-    let chainId = initApp(v).getChainId();
+  if (appKit.getAddress() && appKit.getChainId()) {
+    let address = appKit.getAddress();
+    let chainId = appKit.getChainId();
     if (address && chainId) {
       let chain = v == 'bsc' ? 2 : 1;
       state.login({
@@ -94,6 +94,7 @@ export function modalOopen(v) {
       });
       return;
     }
+    return
   }
   initApp(v).open();
   getModalAccount(v);

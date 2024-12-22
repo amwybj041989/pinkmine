@@ -52,6 +52,7 @@ function errorHandler(error: RequestError): Promise<any> {
     if (!data.success) {
       let state = useStateStore();
       state.setLoading(false);
+
       showNotify({
         type: 'danger',
         message: data && data.message,
@@ -107,8 +108,16 @@ function responseHandler(response: { data: any }) {
   if (response.status == 200 && response.data.success) {
     return response.data;
   } else {
+    console.log('responseHandler', response);
     let state = useStateStore();
     state.setLoading(false);
+    if (response.data.message) {
+      showNotify({
+        type: 'danger',
+        message: response.data.message,
+      });
+      return;
+    }
     showNotify({
       type: 'danger',
       message: i18n.global.t('msg.networkError'),
