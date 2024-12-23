@@ -71,6 +71,7 @@ async function getModalAccount(v) {
       }
       let address = appKit.getAddress();
       let chainId = appKit.getChainId();
+
       if (!state.loginStatus && !state.chainId && chainId != 56) {
         appKit.switchNetwork(bsc);
         regetModalAccount();
@@ -93,7 +94,7 @@ async function getModalAccount(v) {
     }
   }, 1000);
 }
-getModalAccount();
+// getModalAccount();
 export function appKitOpen() {
   let state = useStateStore();
   appKit.open();

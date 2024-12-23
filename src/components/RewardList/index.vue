@@ -49,10 +49,12 @@ let onClaim = (r, i) => {
 let fetchRewardList = () => {
   RewardList({
     pageIndex: currentPage.value,
-    pageSize: 20,
+    pageSize: 50,
     status: 0,
   }).then((res) => {
-    list.value = res.data.data;
+    list.value = res.data.data.filter((item) => {
+      return item.interest > 0;
+    });
     totalPage.value = res.data.total;
   });
 };

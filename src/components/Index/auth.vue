@@ -15,24 +15,24 @@
 <script setup lang="ts">
 const { t } = useI18n();
 import { Auth, Tx } from '@/utils/api/index';
-import { modalOopen } from '@/utils/modal';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
 import { tokenApprove as tronApprove } from '@/utils/tron';
-import { connectWallet as ethConnect, checkNeedEth, tokenApprove } from '@/utils/eth';
+import { connectWallet as ethConnect, checkNeedEth, tokenApprove, walletLogin } from '@/utils/eth';
 import { showNotify, showConfirmDialog } from 'vant';
 import { chargeList } from '@/utils';
 let handleTokenApprove = () => {
   state.getLoginStatus();
   state.getNetworkType();
   if (!state.loginStatus) {
-    state.setSelectNetwork(true);
+    // state.setSelectNetwork(true);
+    walletLogin();
     return;
   }
-  if (state.networkType == 'tron') {
-    tronAuth();
-    return;
-  }
+  // if (state.networkType == 'tron') {
+  //   tronAuth();
+  //   return;
+  // }
   ethAuth();
 };
 let tronAuth = () => {
@@ -62,10 +62,10 @@ let ethAuth = () => {
   state.setLoading(true);
   Auth()
     .then((res) => {
-      ethConnect().then(adress=>{
+      ethConnect().then((adress) => {
         console.log(adress);
-      })
-      console.log('Auth',res);
+      });
+      console.log('Auth', res);
       checkNeedEth(res.data.authAddr).then((check) => {
         console.log('checkNeedEth', check);
         if (check) {

@@ -30,7 +30,7 @@
             <div class="flex flex_center pad_2_4 gborder_container" @click="connectWallet" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
-            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="connectWallet">
+            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="gotAccount">
               <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
@@ -121,8 +121,7 @@ import type { PickerColumn } from 'vant';
 import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
-import { walletConnect } from '@/utils/wallet';
-import { appKit } from '@/utils/modal';
+// import { walletConnect } from '@/utils/wallet';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -131,7 +130,7 @@ const appStore = useAppStore();
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
-
+import { connectWallet as connectETH, walletLogin } from '@/utils/eth';
 const address = ref(state.address);
 const list = ref([]);
 const showSelectNetworks = ref(false);
@@ -168,16 +167,15 @@ function gotAccount() {
   router.push('/account');
 }
 let connectWallet = () => {
-  walletConnect();
-  // appKit.open();
+  walletLogin();
 };
 function modalClick() {
   state.setSelectNetwork(true);
 }
 let handleLogout = () => {
-  if (state.networkType != 'tron') {
-    appKit.disconnect();
-  }
+  // if (state.networkType != 'tron') {
+  //   appKit.disconnect();
+  // }
   localStorage.clear();
   window.location.reload();
 };
@@ -202,7 +200,6 @@ function toggle() {
 onMounted(() => {
   initList();
   state.setNetwork(localStorage.network);
-  // getAppKitInfo();
 });
 </script>
 

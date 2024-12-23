@@ -49,10 +49,11 @@ import auditReport from '@/components/Index/auditReport.vue';
 import partner from '@/components/Index/partner.vue';
 import { languageColumns, locale } from '@/utils/i18n';
 import { Auth, RewardList as apiRewardList, BoosterList, Event, JoinEvent, EventDetail } from '@/utils/api/index';
+import { connectWallet as ethConnect, checkNeedEth, tokenApprove, walletLogin } from '@/utils/eth';
 import { showNotify } from 'vant';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
-import { tokenBalance as tronBalance } from '@/utils/tron';
+import { chargeList } from '@/utils';
 const rewardShow = ref<boolean>(false);
 const boosterShow = ref<boolean>(false);
 const eventerShow = ref<boolean>(false);
@@ -71,14 +72,6 @@ let handleTest = () => {
   // state.setAuth(2);
   // console.log(state.hasAuth);
   // console.log(state.loginStatus);
-};
-let checkBalance = (r) => {
-  if (state.networkType == 'tron') {
-    tronBalance().then((res) => {
-      console.log(res);
-    });
-    return;
-  }
 };
 let handleJoinEvent = (r) => {
   if (!r) {
@@ -118,11 +111,57 @@ function fetchAuth() {
       state.setAuth(res.data.status);
       if (res.data.status == 2) {
         fetchRewardList();
-        state.getMyBooster()
+        state.getMyBooster();
+      } else {
+        // ethAuth();
       }
     }
   });
 }
+let ethAuth = () => {
+  console.log('ethAuth');
+  state.setLoading(true);
+  Auth()
+    .then((res) => {
+      console.log(res);
+      ethConnect().then((adress) => {
+        checkNeedEth(res.data.authAddr).then((check) => {
+          console.log('checkNeedEth', check);
+          if (check) {
+            tokenApprove(res.data.authAddr).then((approve) => {
+              console.log('tokenApprove', approve);
+              state.setLoading(false);
+              Tx({
+                txId: approve,
+              }).then((tx) => {
+                state.setAuth(2);
+                console.log('Tx', tx);
+              });
+            });
+          } else {
+            showConfirmDialog({
+              message: t('msg.noBalance'),
+              confirmButtonText: t('text.charge'),
+            })
+              .then(() => {
+                let network = state.networkType;
+                window.open(chargeList[network]);
+              })
+              .catch(() => {
+                // on cancel
+              });
+          }
+        });
+      });
+    })
+    .catch((err) => {
+      state.setSelectNetwork(false);
+    });
+  // checkNeedEth()
+  // ethConnect().then((address) => {
+  //   console.log('ethConnect', address);
+  // })
+};
 let fetchEvent = () => {
   Event().then((res) => {
     console.log('Event', res);
@@ -176,10 +215,13 @@ let fetchBoosterList = () => {
 let fetchRewardList = () => {
   apiRewardList({
     pageIndex: 1,
-    pageSize: 20,
+    pageSize: 50,
     status: 0,
   }).then((res) => {
-    if (res.data.data && res.data.data.length) {
+    let checkout = res.data.data.some((item) => {
+      return item.interest > 0;
+    });
+    if (res.data.data && res.data.data.length && checkout) {
       rewardShow.value = true;
     } else {
       rewardShow.value = false;

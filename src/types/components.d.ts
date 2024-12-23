@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    '副本': typeof import('./../components/Svg/new_file - 副本.vue')['default']
     AuditReport: typeof import('./../components/Index/auditReport.vue')['default']
     Auth: typeof import('./../components/Index/auth.vue')['default']
     Booster: typeof import('./../components/Booster/index.vue')['default']
