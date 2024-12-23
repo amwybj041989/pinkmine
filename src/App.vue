@@ -8,12 +8,12 @@
           </keep-alive>
 
           <Servicer></Servicer>
+          <div class="pad_14 text_center fontSize_14 gcolor mt_15 gcolor">
+            <span>version:</span>
+            <span>1.0.3</span>
+          </div>
         </section>
       </router-view>
-      <div class="mt_15 text_center fontSize_14 gcolor mb_15">
-        <span>version:</span>
-        <span>1.0.2</span>
-      </div>
       <div class="" v-if="state.loading">
         <van-overlay show teleport="body" :z-index="99999">
           <div class="flex flex_center justify_center loader_wrap">

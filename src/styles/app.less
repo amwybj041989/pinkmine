@@ -65,21 +65,17 @@ body[data-theme='dark'] .app-wrap::before {
 }
 
 body[data-theme='light'] .app-wrap {
-  // background: url(https://img.hash.best/background/city.png) center / cover no-repeat;
   background: url('@/assets/light.jpg') center / cover no-repeat;
 }
 
-body[data-theme='light'] .app-wrap.webp:before {
-  // background-image: url(https://img.hash.best/background/city.webp);
+body[data-theme='light'] .app-wrap::before {
   background-image: url('@/assets/light.jpg');
+  content: ' ';
+  position: absolute;
+  width: 100vw;
+  height: 300vh;
+  opacity: 0.5;
 }
-// body[data-theme='dark'] .app-wrap:before {
-//   background: url(https://img.hash.best/background/bg_meteor.png) left top / cover no-repeat;
-// }
-
-// body[data-theme='dark'] .app-wrap.webp:before {
-//   background-image: url(https://img.hash.best/background/bg_meteor.webp);
-// }
 
 h1,
 h2,

@@ -54,5 +54,6 @@ declare module 'vue' {
     VanTab: typeof import('vant/es')['Tab']
     VanTabs: typeof import('vant/es')['Tabs']
     WalletConnect: typeof import('./../components/WalletConnect/index.vue')['default']
+    WalletSup: typeof import('./../components/WalletSup.vue')['default']
   }
 }

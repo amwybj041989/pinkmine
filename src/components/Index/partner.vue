@@ -4,12 +4,18 @@
     <div class="fontSize_14 sub-title-color text_center mb_15">{{ t('text.partnerSub') }}</div>
     <div class="pad_4">
       <div class="flex flex_wrap justify_sb">
-        <div class="audit_item audit_bg1"></div>
+        <div class="partner_item flex flex_center justify_center br_4" v-for="(item, i) in partner" :key="i" :class="item.name ? '' : ''" @click="handleGo(item)">
+          <div class="icon_18 partner_item_icon br_50" :style="{ backgroundImage: 'url(' + item.icon + ')' }"></div>
+          <div class="fontSize_12 capitalize title-color ml_6">
+            {{ item.name }}
+          </div>
+        </div>
+        <!--  <div class="audit_item audit_bg1"></div>
         <div class="audit_item audit_bg2"></div>
         <div class="audit_item audit_bg3"></div>
         <div class="audit_item audit_bg4"></div>
         <div class="audit_item audit_bg5"></div>
-        <div class="audit_item"></div>
+        <div class="audit_item"></div> -->
       </div>
     </div>
   </div>
@@ -17,7 +23,64 @@
 
 <script setup lang="ts">
 const { t } = useI18n();
+import { getAssetsFile } from '@/utils';
 const activeNames = ref('1');
+// let getImg = (url) => {
+//   console.log('url', import.meta.url);
+//   return new URL(`../../assets/wallets/${url}`, import.meta.url).href;
+// };
+console.log(getAssetsFile('wallets/meta.webp'));
+let partner = ref([
+  {
+    icon: getAssetsFile('wallets/meta.webp'),
+    name: 'metamask',
+    link: 'https://metamask.io/',
+  },
+  {
+    icon: getAssetsFile('wallets/binance.webp'),
+    name: 'binance wallet',
+    link: 'https://www.binance.com/en/web3wallet',
+  },
+  {
+    icon: getAssetsFile('wallets/bitge.webp'),
+    name: 'bitget',
+    link: 'https://www.bitget.com/',
+  },
+  {
+    icon: getAssetsFile('wallets/crypto.webp'),
+    name: 'crypto',
+    link: 'https://crypto.com/',
+  },
+  {
+    icon: getAssetsFile('wallets/coinbase.png'),
+    name: 'coinbase',
+    link: 'https://www.coinbase.com/',
+  },
+  {
+    icon: getAssetsFile('wallets/safe.webp'),
+    name: 'safePal',
+    link: 'https://safepal.com',
+  },
+  {
+    icon: getAssetsFile('wallets/kucoin.png'),
+    name: 'kuCoin',
+    link: 'https://www.kucoin.com/',
+  },
+  {
+    icon: getAssetsFile('wallets/kraken.webp'),
+    name: 'kraken',
+    link: 'https://www.kraken.com/',
+  },
+  {
+    icon: getAssetsFile('wallets/crypto.webp'),
+    name: 'crypto',
+    link: 'https://crypto.com/',
+  },
+]);
+let handleGo = (r) => {
+  window.open(item.link);
+};
+console.log(partner.value);
 onMounted(() => {});
 </script>
 
@@ -45,5 +108,14 @@ onMounted(() => {});
 }
 .audit_bg5 {
   background-image: url('@/assets/images/partner/partner5.png');
+}
+.partner_item {
+  width: 32%;
+  height: 36px;
+  margin-bottom: calc(var(--base) * 12);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.partner_item_icon{
+  background-size: cover;
 }
 </style>
