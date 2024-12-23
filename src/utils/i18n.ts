@@ -91,10 +91,10 @@ function getI18nLocale() {
   const langs = languageColumns.map((v) => v.value as string);
 
   // 存在当前语言的语言包 或 存在当前语言的任意地区的语言包
-  const foundLocale = langs.find((v) => v === storedLocale || v.indexOf(storedLocale) === 0);
+  // const foundLocale = langs.find((v) => v === storedLocale || v.indexOf(storedLocale) === 0);
 
   // 若未找到，则使用 默认语言包
-  const locale = foundLocale || FALLBACK_LOCALE;
+  const locale = FALLBACK_LOCALE;
 
   return locale;
 }

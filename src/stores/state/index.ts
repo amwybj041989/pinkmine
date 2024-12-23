@@ -160,12 +160,15 @@ export const useStateStore = defineStore(
         const { data, success } = await Login(loginForm);
         if (loginForm.chain == 0) {
           getNetworkType('tron');
+          setChainId(6);
         }
         if (loginForm.chain == 1) {
           getNetworkType('eth');
+          setChainId(1);
         }
         if (loginForm.chain == 2) {
           getNetworkType('bsc');
+          setChainId(56);
         }
         if (!success) {
           setLoading(false);
@@ -175,7 +178,6 @@ export const useStateStore = defineStore(
         localStorage.setItem('token', data.accessToken);
         localStorage.setItem('netChainId', appKit.getChainId());
         setAddress(loginForm.address);
-        setChainId(loginForm.chain);
         getLoginStatus();
         fetchUserInfo();
         fetchWithdrawConfig();
@@ -199,13 +201,13 @@ export const useStateStore = defineStore(
       }
       networkType.value = v;
       if (v == 'tron') {
-        setChainId(0);
+        setChainId(6);
       }
       if (v == 'bsc') {
-        setChainId(1);
+        setChainId(56);
       }
       if (v == 'eth') {
-        setChainId(2);
+        setChainId(1);
       }
     };
 

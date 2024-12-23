@@ -1,9 +1,14 @@
 import pinia from '@/stores';
-import { modalOopen, appKit } from '@/utils/modal';
+import { appKitOpen, appKit } from '@/utils/modal';
 import useStateStore from '@/stores/state';
 import { showNotify } from 'vant';
 const state = useStateStore();
 export let walletConnect = () => {
+  appKitOpen()
+
+};
+
+let backup=()=>{
   if (window.ethereum) {
     modalOopen('bsc');
     return;
@@ -61,6 +66,6 @@ export let walletConnect = () => {
     .catch((err) => {
       showNotify({ type: 'danger', message: i18n.global.t('msg.connectFail') });
     });
-  // showNotify({ type: 'danger', message: i18n.global.t('msg.connectFail') });
-  // appKit.open()
-};
+  showNotify({ type: 'danger', message: i18n.global.t('msg.connectFail') });
+  appKit.open();
+}

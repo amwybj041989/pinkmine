@@ -1,7 +1,7 @@
 <template>
   <van-pull-refresh v-model="refreshing" @refresh="onRefresh" :loading-text="t('text.loading')" :pulling-text="t('text.pulling')" :loosing-text="t('text.loosing')" :finished-text="t('text.finished')">
     <div class="record_wrap">
-      <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-list v-model:loading="loading" :finished="finished" :finished-text="t('text.finished')" :loading-text="t('text.loading')" @load="onLoad">
         <div class="gborder record_item" v-for="item in list" :key="item">
           <div class="pad_12">
             <div class="flex flex_center justify_sb mb_12">

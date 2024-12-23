@@ -30,7 +30,7 @@
             <div class="flex flex_center pad_2_4 gborder_container" @click="connectWallet" v-if="!state.address">
               <div class="color_fff ml_6">{{ t('event.connectWallet') }}</div>
             </div>
-            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="modalClick">
+            <div class="flex flex_center pad_2_4 gborder_container" v-else @click="connectWallet">
               <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
               <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
@@ -45,15 +45,6 @@
             </div>
             <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
           </div>
-          <!--  <div class="walletConnect gborder ml_8" @click="modalClick" v-if="state.address">
-            <div class="flex flex_center pad_2_4 gborder_container">
-              <div class="my-icon my-icon-jiaohuan fontSize_14 gcolor"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
-              <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div>
-            </div>
-            <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
-          </div> -->
           <div class="iconfont icon-shezhi fontSize_24 gcolor ml_12" @click="showSetting = true"></div>
         </div>
       </div>
@@ -71,7 +62,6 @@
             <div class="flex flex_center justify_sb">
               <div class="flex flex_center">
                 <div class="my-icon my-icon-earth1 fontSize_24 gcolor"></div>
-                <!-- <div class="ml_12">{{ language }}</div> -->
               </div>
               <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input" @click="showLanguagePicker = true">
                 <div class="title-color bold_600">{{ language }}</div>
@@ -79,25 +69,11 @@
               </div>
             </div>
           </div>
-          <!-- <div class="pad_0_12 text-color mb_20">
-            <div class="flex flex_center justify_sb">
-              <div class="flex flex_center">
-                <div class="my-icon my-icon-jiaohuan fontSize_24 gcolor"></div>
-              </div>
-
-              <div class="dropdown flex flex_center justify_sb pad_12 br_10 bg_input gbg" @click="showColors = true">
-                <div class="title-color bold_600"></div>
-                <div class="arrow"></div>
-              </div>
-            </div>
-          </div> -->
           <div class="pad_0_12 flex flex_center text-color justify_sb mb_20">
             <div class="flex flex_center">
               <div class="my-icon my-icon-sun1 gcolor fontSize_24"></div>
-              <!-- <div class="ml_8">Day /</div> -->
               <div class="ml_8">/</div>
               <div class="my-icon my-icon-moon1 gcolor fontSize_24 ml_8"></div>
-              <!-- <div class="ml_8">Ninght</div> -->
             </div>
             <div class="my-icon my-icon-moon1 gcolor fontSize_24" v-if="checked" @click="toggle()"></div>
             <div class="my-icon my-icon-sun1 gcolor fontSize_24" v-else @click="toggle()"></div>
@@ -105,10 +81,6 @@
           <div class="pad_0_12 text-color">
             <div class="flex flex_center justify_sb">
               <div class=""></div>
-              <!-- <div class="flex flex_center">
-              <div class="my-icon my-icon-jiaohuan fontSize_24 gcolor"></div>
-            </div> -->
-
               <div class="" @click="showColors = true">
                 <div class="color_show gbg br_50"></div>
               </div>
@@ -132,13 +104,6 @@
       <div class="pad_14 colorSelect_wrap flex flex_wrap justify_sb mt_20">
         <div class="colorSelect_item br_50" v-for="(item, i) in colors" :key="i" :style="{ backgroundImage: linear(i) }" @click="handleChangeTheme(i)"></div>
       </div>
-      <!-- <van-picker v-model="languageValues" :columns="colorsColumns" @confirm="onLanguageConfirm" @cancel="showColors = false">
-        <template #option="option">
-          <div class="gcolor" :style="{ backgroundImage:linear(option.value) }">
-            {{ option.text }}
-          </div>
-        </template>
-      </van-picker> -->
     </van-popup>
     <WalletConnect></WalletConnect>
   </div>
@@ -149,6 +114,7 @@ import { getCurrentInstance } from 'vue';
 const {
   proxy: { $forceUpdate },
 }: any = getCurrentInstance();
+
 import { Vue3Marquee } from 'vue3-marquee';
 import { appName, appDescription } from '@/constants';
 import type { PickerColumn } from 'vant';
@@ -156,7 +122,7 @@ import { languageColumns, locale } from '@/utils/i18n';
 import { useAppStore } from '@/stores/modules';
 import { useRouter, useRoute } from 'vue-router';
 import { walletConnect } from '@/utils/wallet';
-import { modalOopen, appKit } from '@/utils/modal';
+import { appKit } from '@/utils/modal';
 import { generateRandomEthAddress, generateRandomDecimalInRange, generateFakeTronAddress } from '@/utils';
 import useStateStore from '@/stores/state';
 const state = useStateStore();
@@ -203,6 +169,7 @@ function gotAccount() {
 }
 let connectWallet = () => {
   walletConnect();
+  // appKit.open();
 };
 function modalClick() {
   state.setSelectNetwork(true);
