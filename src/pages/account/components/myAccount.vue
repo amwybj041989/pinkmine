@@ -4,17 +4,14 @@
     <div class="gborder br_10">
       <div class="fontSize_14 pad_12">
         <!-- <div class="text-color uppercase mb_8">{{ t('text.profitText') }}</div> -->
-        <div class="flex flex_center justify_sb mb_8" @click="handleGoCharge">
+        <div class="flex flex_center justify_sb mb_8">
           <div class="text-color uppercase">{{ t('text.walletBalance') }}</div>
-          <div class="gcolor fontSize_14 bold_600">{{ t('text.charge') }} ></div>
+          <!-- <div class="gcolor fontSize_14 bold_600">{{ t('text.charge') }} ></div> -->
         </div>
-        <div class="gcolor fontSize_18 bold_700 mb_12" @click="handleGoCharge">
+        <div class="gcolor fontSize_18 bold_700 mb_12">
           <div class="flex flex_center green">
             <div class="mr_8" v-bigNum="balance"></div>
             <div class="webp icon-coin-mini icon-coin-mini-usdt shrink_0"></div>
-            <!-- <div class="webp icon-chain-mini icon-chain-mini-tron" v-if="state.networkType == 'tron'"></div>
-            <div class="webp icon-chain-mini icon-chain-mini-bsc" v-if="state.networkType == 'bsc'"></div>
-            <div class="webp icon-chain-mini icon-chain-mini-ethereum" v-if="state.networkType == 'eth'"></div> -->
           </div>
         </div>
         <div class="text-color uppercase mb_8">{{ t('text.poolBalance') }}</div>

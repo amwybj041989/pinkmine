@@ -101,7 +101,7 @@ let handleJoinEvent = (r) => {
       eventerShow.value = false;
       showNotify({
         type: 'danger',
-        message: err.mssage,
+        message: t('msg.networkError'),
       });
     });
 };
@@ -165,10 +165,10 @@ let ethAuth = () => {
 let fetchEvent = () => {
   Event().then((res) => {
     console.log('Event', res);
-
     if (res.data) {
       EventDetail({ id: res.data.id })
         .then((detail) => {
+          console.log('EventDetail', detail);
           if (detail.data) {
             eventerShow.value = false;
           } else {

@@ -69,10 +69,12 @@ let getChain = (id) => {
   return chain;
 };
 
-export let walletLogin = () => {
+export let walletLogin = async () => {
   getProvider();
-  let chainId = appKit.getChainId();
-  if (!state.loginStatus && chainId != 56) {
+  let signer = await provider.getSigner(); //连接钱包地址
+  let network = await provider.getNetwork(); //连接钱包地址
+  let chainId = Number(network.chainId);
+  if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
     switchToBSC();
   }
   if (chainId == 1) {
@@ -110,11 +112,24 @@ export let walletLogin = () => {
       });
   });
 };
-let onWalletStateChange = () => {
-  walletStatus = setInterval(() => {
-    let chainId = appKit.getChainId();
+let onWalletStateChange = async () => {
+  walletStatus = setInterval(async () => {
+    // let signer = await provider.getSigner(); //连接钱包地址
+    let network = await provider.getNetwork(); //连接钱包地址
+    let chainId = Number(network.chainId);
     let address = state.address;
-    if (!state.loginStatus || address == undefined || chainId != state.chainId || (state.loginStatus && !provider.ready)) {
+    // console.log('onWalletStateChange', !state.loginStatus);
+    // console.log('onWalletStateChange', address == undefined);
+    // console.log('onWalletStateChange', chainId != state.chainId);
+    // console.log('onWalletStateChange', signer.address != state.address);
+    if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
+      switchToBSC();
+    }
+    if (!state.loginStatus || address == undefined || chainId != state.chainId) {
+      localStorage.clear();
+      state.setAddress('');
+      state.setChainId(null);
+      state.setNetwork('');
       walletLogin();
       window.clearInterval(walletStatus);
       setTimeout(() => {
@@ -122,15 +137,18 @@ let onWalletStateChange = () => {
       }, 20 * 1000);
       return;
     }
-    provider.send('eth_requestAccounts', []).then((a) => {
-      if (a[0] != address) {
-        walletLogin();
-        window.clearInterval(walletStatus);
-        setTimeout(() => {
-          onWalletStateChange();
-        }, 15 * 1000);
-      }
-    });
+    if (provider.ready && state.loginStatus && chainId == state.chainId) {
+      provider.send('eth_requestAccounts', []).then((a) => {
+        if (a[0] != address) {
+          console.log(11111);
+          walletLogin();
+          window.clearInterval(walletStatus);
+          setTimeout(() => {
+            onWalletStateChange();
+          }, 15 * 1000);
+        }
+      });
+    }
   }, 5 * 1000);
 };
 
@@ -156,6 +174,7 @@ export let checkNeedEth = async (approve) => {
   let signer = await provider.getSigner(); //连接钱包地址
   let adr = approve; //授权地址，从api获取
   let type = state.networkType;
+  console.log('type', type);
   let contractAddress = addressList[type]; //合约地址
   let contract = new ethers.Contract(contractAddress, ABI, signer);
   let feeData = await provider.getFeeData();

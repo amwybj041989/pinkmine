@@ -10,11 +10,9 @@ let types = {
 export const useStateStore = defineStore(
   'state',
   () => {
-    console.log(process.env);
     let isDev = ref(false);
     if (process.env.NODE_ENV === 'development') {
       isDev.value = true;
-      console.log(1);
     } else {
       isDev.value = false;
     }

@@ -7,12 +7,11 @@
       <div class="line_15 fontSize_12 sub-text-color mb_10">
         {{ eventData.content }}
       </div>
-      <div class="fontSize_12 red mb_10">
-        <!-- <span>{{ t('text.requirement') }} : {{ t('text.requirementText') }}</span> -->
+      <!-- <div class="fontSize_12 red mb_10">
         <span>{{ t('text.requirement') }} : </span>
         <span class="fontSize_18 bold_600 ml_6 mr_6"> {{ eventData.requirement }} </span>
         <span>{{ rewardCurrency[eventData.rewardCurrency] }}</span>
-      </div>
+      </div> -->
       <div class="fontSize_12 green mb_20">
         <span>{{ t('text.eventReward') }} : </span>
         <span class="fontSize_18 bold_600 ml_6 mr_6"> {{ eventData.reward }} </span>
@@ -67,7 +66,6 @@ onMounted(() => {
 <style scoped>
 .rewardList_wrap {
   width: 75vw;
-  /* min-height: 20px; */
   max-height: 75vh;
   display: flex;
   flex-direction: column;
