@@ -175,8 +175,11 @@ let onWalletStateChange = async () => {
       }, 30 * 1000);
       return;
     }
-    if (provider.ready && state.loginStatus && chainId == state.chainId) {
+    console.log(1111);
+    if (chainId == 56) {
       provider.send('eth_requestAccounts', []).then((a) => {
+        console.log('provider', a[0]);
+        console.log('address', address);
         if (a[0] != address) {
           console.log(11111);
           walletLogin();
