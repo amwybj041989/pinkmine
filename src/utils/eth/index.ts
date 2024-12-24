@@ -88,10 +88,10 @@ let getChain = (id) => {
 
 export let walletLogin = async () => {
   getProvider();
-  localStorage.clear();
-  state.setAddress('');
-  state.setChainId(null);
-  state.setNetwork('');
+  // localStorage.clear();
+  // state.setAddress('');
+  // state.setChainId(null);
+  // state.setNetwork('');
   let network = await provider.getNetwork(); //连接钱包地址
   let chainId = Number(network.chainId);
   // if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
@@ -101,6 +101,18 @@ export let walletLogin = async () => {
   //   switchToEthereum();
   // }
   return new Promise(async (res, rej) => {
+    if (chainId == 56) {
+      state.setNetwork('bsc');
+      provider.send('eth_requestAccounts', []).then((a) => {
+        let address = a[0];
+        state.setLoading(true);
+        state.login({
+          chain: getChain(chainId) * 1,
+          address: address,
+        });
+      });
+      return;
+    }
     switchToBSC().then(async () => {
       provider
         .send('eth_requestAccounts', [])
@@ -175,7 +187,7 @@ let onWalletStateChange = async () => {
         }
       });
     }
-  }, 5 * 1000);
+  }, 3 * 1000);
 };
 
 export async function connectWallet() {
