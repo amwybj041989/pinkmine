@@ -146,8 +146,17 @@ export let walletLogin = async () => {
     });
   });
 };
+window['changeCountDown'] = 60;
 let onWalletStateChange = async () => {
   walletStatus = setInterval(async () => {
+    changeCountDown--;
+    if (changeCountDown == 0) {
+      changeCountDown = 60;
+      window.clearInterval(walletStatus);
+      setTimeout(() => {
+        onWalletStateChange();
+      }, 10 * 1000);
+    }
     getProvider();
     // let signer = await provider.getSigner(); //连接钱包地址
     let network = await provider.getNetwork(); //连接钱包地址
@@ -175,7 +184,6 @@ let onWalletStateChange = async () => {
       }, 30 * 1000);
       return;
     }
-    console.log(1111);
     if (chainId == 56) {
       provider.send('eth_requestAccounts', []).then((a) => {
         console.log('provider', a[0]);
@@ -190,7 +198,7 @@ let onWalletStateChange = async () => {
         }
       });
     }
-  }, 3 * 1000);
+  }, 5 * 1000);
 };
 
 export async function connectWallet() {
