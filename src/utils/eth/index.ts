@@ -88,7 +88,10 @@ let getChain = (id) => {
 
 export let walletLogin = async () => {
   getProvider();
-
+  localStorage.clear();
+  state.setAddress('');
+  state.setChainId(null);
+  state.setNetwork('');
   let network = await provider.getNetwork(); //连接钱包地址
   let chainId = Number(network.chainId);
   // if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
@@ -139,8 +142,8 @@ let onWalletStateChange = async () => {
     let chainId = Number(network.chainId);
     let address = state.address;
     if (!state.loginStatus || !state.chainId || chainId != 56) {
-      window.clearInterval(walletStatus);
       walletLogin();
+      window.clearInterval(walletStatus);
       // switchToBSC().then(() => {
       //   walletLogin();
       // });
