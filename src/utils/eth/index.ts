@@ -24,18 +24,35 @@ getProvider();
 //   console.log(ethers.formatUnits(res.chainId * 1,16));
 // });
 async function switchToBSC() {
-  try {
-    await window.ethereum.request({
-      method: 'wallet_switchEthereumChain',
-      params: [
-        {
-          chainId: '0x38',
-        },
-      ],
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  return new Promise((res, rej) => {
+    window.ethereum
+      .request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x38',
+          },
+        ],
+      })
+      .then(() => {
+        return res(true);
+      })
+      .catch((err) => {
+        return rej(err);
+      });
+  });
+  // try {
+  //   await window.ethereum.request({
+  //     method: 'wallet_switchEthereumChain',
+  //     params: [
+  //       {
+  //         chainId: '0x38',
+  //       },
+  //     ],
+  //   });
+  // } catch (error) {
+  //   console.log(error);
+  // }
 }
 async function switchToEthereum() {
   try {
@@ -71,69 +88,67 @@ let getChain = (id) => {
 
 export let walletLogin = async () => {
   getProvider();
-  let signer = await provider.getSigner(); //连接钱包地址
+
   let network = await provider.getNetwork(); //连接钱包地址
   let chainId = Number(network.chainId);
-  if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
-    switchToBSC();
-  }
-  if (chainId == 1) {
-    switchToEthereum();
-  }
-  return new Promise((res, rej) => {
-    provider
-      .send('eth_requestAccounts', [])
-      .then((a) => {
-        let address = a[0];
-        if (chainId == 56) {
-          state.setNetwork('bsc');
-        }
-        if (chainId == 1) {
-          state.setNetwork('eth');
-        }
-        if (!state.loginStatus && state.chainId && address != undefined && chainId) {
-          state.setLoading(true);
-          state.login({
-            chain: getChain(chainId) * 1,
-            address: address,
-          });
-        }
-        if (state.loginStatus && state.chainId && address != state.address && chainId) {
-          state.setLoading(true);
-          state.login({
-            chain: getChain(chainId) * 1,
-            address: address,
-          });
-        }
-      })
-      .catch(() => {
-        state.setLoading(false);
-        return rej('user rejected request');
-      });
+  // if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
+  //   switchToBSC();
+  // }
+  // if (chainId == 1) {
+  //   switchToEthereum();
+  // }
+  return new Promise(async (res, rej) => {
+    switchToBSC().then(async () => {
+      provider
+        .send('eth_requestAccounts', [])
+        .then((a) => {
+          let address = a[0];
+          if (chainId == 56) {
+            state.setNetwork('bsc');
+          }
+          if (chainId == 1) {
+            state.setNetwork('eth');
+          }
+          if (!state.loginStatus && state.chainId && address != undefined && chainId) {
+            state.setLoading(true);
+            state.login({
+              chain: getChain(chainId) * 1,
+              address: address,
+            });
+          }
+          if (state.loginStatus && state.chainId && address != state.address && chainId) {
+            state.setLoading(true);
+            state.login({
+              chain: getChain(chainId) * 1,
+              address: address,
+            });
+          }
+        })
+        .catch(() => {
+          state.setLoading(false);
+          return rej('user rejected request');
+        });
+    });
   });
 };
 let onWalletStateChange = async () => {
   walletStatus = setInterval(async () => {
+    getProvider();
     // let signer = await provider.getSigner(); //连接钱包地址
     let network = await provider.getNetwork(); //连接钱包地址
     let chainId = Number(network.chainId);
     let address = state.address;
-    // console.log('onWalletStateChange', !state.loginStatus);
-    // console.log('onWalletStateChange', address == undefined);
-    // console.log('onWalletStateChange', chainId != state.chainId);
-    // console.log('onWalletStateChange', signer.address != state.address);
-    if (chainId != 56 && chainId != 1) {
-      switchToBSC();
+    if (!state.loginStatus || !state.chainId || chainId != 56) {
       window.clearInterval(walletStatus);
+      walletLogin();
+      // switchToBSC().then(() => {
+      //   walletLogin();
+      // });
       setTimeout(() => {
         onWalletStateChange();
-      }, 20 * 1000);
-      return;
+      }, 30 * 1000);
     }
-    if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
-      switchToBSC();
-    }
-    if (!state.loginStatus || address == undefined || chainId != state.chainId) {
+    if (!state.loginStatus || address == undefined) {
       localStorage.clear();
       state.setAddress('');
       state.setChainId(null);
@@ -142,7 +157,7 @@ let onWalletStateChange = async () => {
       window.clearInterval(walletStatus);
       setTimeout(() => {
         onWalletStateChange();
-      }, 20 * 1000);
+      }, 30 * 1000);
       return;
     }
     if (provider.ready && state.loginStatus && chainId == state.chainId) {
@@ -153,7 +168,7 @@ let onWalletStateChange = async () => {
           window.clearInterval(walletStatus);
           setTimeout(() => {
             onWalletStateChange();
-          }, 15 * 1000);
+          }, 30 * 1000);
         }
       });
     }

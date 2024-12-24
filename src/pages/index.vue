@@ -3,7 +3,7 @@
   <div class="vuemarquee_padding"></div>
   <div class="pad_12">
     <div class="mb_15" v-if="state.hasAuth != 2">
-      <auth></auth>
+      <auth v-if="state.hasAuth != 2"></auth>
     </div>
     <div class="mb_15">
       <indexTabs></indexTabs>

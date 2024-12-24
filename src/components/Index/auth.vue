@@ -4,9 +4,6 @@
       <div class="flex flex_center justify_center">
         <div class="btn_default mining_btn" @click="handleTokenApprove">{{ t('text.mining') }}</div>
       </div>
-      <!-- <div class="">
-        <van-slider v-model="sliderValue" @change="onChange" />
-      </div> -->
     </div>
     <i class="border_line border_scroll br_10"></i>
   </div>
