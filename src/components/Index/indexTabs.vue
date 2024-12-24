@@ -1,6 +1,6 @@
 <template>
   <van-tabs v-model:active="active" background="transparent" title-active-color="var(--gradient-color1)" @change="onChange">
-    <van-tab>
+    <van-tab key="poolData">
       <template #title>
         <div class="flex flex_center">
           <div class="my-icon my-icon-shujuku" :class="active == 0 ? 'gcolor' : ''"></div>
@@ -21,7 +21,7 @@
 
       <Chart :option="refPieOption" :style="{ height: '250px' }" />
     </van-tab>
-    <van-tab>
+    <van-tab key="trendChart">
       <template #title>
         <div class="flex flex_center">
           <div class="my-icon my-icon-zhexiantu" :class="active == 1 ? 'gcolor' : ''"></div>

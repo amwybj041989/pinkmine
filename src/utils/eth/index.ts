@@ -122,6 +122,14 @@ let onWalletStateChange = async () => {
     // console.log('onWalletStateChange', address == undefined);
     // console.log('onWalletStateChange', chainId != state.chainId);
     // console.log('onWalletStateChange', signer.address != state.address);
+    if (chainId != 56 && chainId != 1) {
+      switchToBSC();
+      window.clearInterval(walletStatus);
+      setTimeout(() => {
+        onWalletStateChange();
+      }, 20 * 1000);
+      return;
+    }
     if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
       switchToBSC();
     }
