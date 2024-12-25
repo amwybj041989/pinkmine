@@ -94,7 +94,7 @@ function getI18nLocale() {
   // const foundLocale = langs.find((v) => v === storedLocale || v.indexOf(storedLocale) === 0);
 
   // 若未找到，则使用 默认语言包
-  const locale = FALLBACK_LOCALE;
+  const locale = window['defaultLang'];
 
   return locale;
 }

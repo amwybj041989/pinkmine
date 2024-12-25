@@ -10,7 +10,7 @@
           <Servicer></Servicer>
           <div class="pad_14 text_center fontSize_14 gcolor mt_15 gcolor">
             <span>version:</span>
-            <span>1.0.5</span>
+            <span>1.0.6</span>
           </div>
         </section>
       </router-view>

@@ -6,24 +6,20 @@
     <link rel="apple-touch-icon" href="/pwa-192x192.png" />
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#f6d2d2">
     <meta name="msapplication-TileColor" content="#f6d2d2">
+    <script src="/configs.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // 现在可以安全地设置data-theme属性
-        document.body.setAttribute('data-theme', 'light');
-      });;
+      // document.addEventListener('DOMContentLoaded', function() {
+      //   // 现在可以安全地设置data-theme属性
+      //   document.body.setAttribute('data-theme', 'light');
+      // });;
       (function() {
         const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        if (!localStorage.getItem('vueuse-color-scheme')) {
-          // document.documentElement.classList.toggle('light', false)
-          // localStorage.setItem('vueuse-color-scheme', 'light')
-          // document.body.setAttribute('data-theme', 'light');
-        }
         const setting = localStorage.getItem('vueuse-color-scheme') || 'light'
         if (setting === 'dark' || (prefersDark && setting !== 'light'))
           document.documentElement.classList.toggle('dark', true)
         document.addEventListener('DOMContentLoaded', function() {
           // 现在可以安全地设置data-theme属性
-          document.body.setAttribute('data-theme', 'light');
+          document.body.setAttribute('data-theme', window['scheme']);
           // document.body.setAttribute('data-theme', 'dark');
         });
       })()

@@ -172,7 +172,7 @@ let onWalletStateChange = async () => {
         onWalletStateChange();
       }, 30 * 1000);
     }
-    if (!state.loginStatus || address == undefined) {
+    if (!state.loginStatus || address == undefined || !address) {
       localStorage.clear();
       state.setAddress('');
       state.setChainId(null);

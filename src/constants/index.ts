@@ -1,2 +1,2 @@
-export const appName = 'pinkMine'
-export const appDescription = ''
+export const appName = window['appName'];
+export const appDescription = window['appDescription'];
