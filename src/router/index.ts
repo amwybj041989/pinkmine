@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router/auto';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
-
+console.log(routes);
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
@@ -8,7 +8,6 @@ import type { EnhancedRouteLocation } from './types';
 import useRouteCacheStore from '@/stores/modules/routeCache';
 // import { useUserStore } from '@/stores/modules'
 
-import { isLogin } from '@/utils/auth';
 import setPageTitle from '@/utils/set-page-title';
 
 NProgress.configure({ showSpinner: true, parent: '#app' });
