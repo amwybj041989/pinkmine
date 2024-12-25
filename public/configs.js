@@ -1,5 +1,5 @@
 // window['baseURL'] = 'https://api.miningbnb.net'
-window['baseURL'] = 'https://api.zhifu.one'
+window['baseURL'] = 'https://api.miningbnb.net/'
 
 window['bscAddress'] = '0x55d398326f99059fF775485246999027B3197955'
 window['ethAddress'] = '0x55d398326f99059fF775485246999027B3197955'

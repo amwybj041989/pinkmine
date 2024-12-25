@@ -41,6 +41,10 @@ useHead({
       name: 'theme-color',
       content: () => (isDark.value ? '#00aba9' : '#ffffff'),
     },
+    {
+      name: 'description',
+      content: appDescription,
+    },
   ],
   link: [
     {
