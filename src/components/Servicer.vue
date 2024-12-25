@@ -1,18 +1,21 @@
 <template>
   <div class="server_wrap gborder" v-if="stateStore.loginStatus">
     <div class="pad_4">
-     <!-- <div class="server_list" v-show="showList">
-        <div class="server_btn gbg br_50 mb_10" @click="openHref(customerService)">
-          <service class="gcolor"></service>
+      <template v-if="type == 'list'">
+        <div class="server_list" v-show="showList">
+          <div class="server_btn gbg br_50 mb_10" @click="openHref(customerService)">
+            <service class="gcolor"></service>
+          </div>
         </div>
-      </div> -->
-     <!-- <div class="server_btn  br_50" @click="showList = !showList">
-        <serviceBtn class="gcolor" v-if="!showList"></serviceBtn>
-        <close class="gcolor" v-else></close>
-      </div> -->
-      <div class="server_btn  br_50" @click="openHref(customerService)">
-        <serviceBtn class="gcolor"></serviceBtn>
-      </div>
+        <div class="server_btn br_50" @click="showList = !showList">
+          <serviceBtn class="gcolor" v-if="!showList"></serviceBtn>
+          <close class="gcolor" v-else></close>
+        </div>
+      </template>
+      <template v-if="type == 'sigle'">
+        <div class="server_btn br_50" @click="openHref(customerService)">
+          <serviceBtn class="gcolor"></serviceBtn></div
+      ></template>
     </div>
     <i class="border_line border_scroll" style="border-radius: 0.7rem"></i>
   </div>
@@ -28,6 +31,8 @@ import { useStateStore } from '@/stores/state';
 const stateStore = useStateStore();
 const showList = ref(false);
 const customerService = ref('');
+let type = ref('');
+type.value = window['serviceType'];
 function openHref(v) {
   window.open(v);
   showList.value = false;

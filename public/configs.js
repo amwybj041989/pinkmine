@@ -22,3 +22,4 @@ window['scheme'] = 'light' //'dark' or'light'
 // { text: 'ภาษาไทย', value: 'th' },
 // { text: 'हिंदीName', value: 'hi' },
 window['defaultLang'] = 'en'
+window['serviceType'] = 'sigle' //sigle or list
