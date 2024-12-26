@@ -45,6 +45,11 @@ let partner = ref([
     link: 'https://www.bitget.com/',
   },
   {
+    icon: getAssetsFile('wallets/tokenpocket.webp'),
+    name: 'token pocket',
+    link: '  https://www.tokenpocket.pro/',
+  },
+  {
     icon: getAssetsFile('wallets/crypto.webp'),
     name: 'crypto',
     link: 'https://crypto.com/',
