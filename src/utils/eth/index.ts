@@ -186,8 +186,8 @@ let onWalletStateChange = async () => {
     }
     if (chainId == 56) {
       provider.send('eth_requestAccounts', []).then((a) => {
-        console.log('provider', a[0]);
-        console.log('address', address);
+        // console.log('provider', a[0]);
+        // console.log('address', address);
         if (a[0] != address) {
           console.log(11111);
           walletLogin();

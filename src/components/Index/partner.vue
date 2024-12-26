@@ -4,11 +4,14 @@
     <div class="fontSize_14 sub-title-color text_center mb_15">{{ t('text.partnerSub') }}</div>
     <div class="pad_4">
       <div class="flex flex_wrap justify_sb">
-        <div class="partner_item flex flex_center justify_center br_4" v-for="(item, i) in partner" :key="i" :class="item.name ? '' : ''" @click="handleGo(item)">
+        <div class="partner_item partner_item_bg flex flex_center justify_center br_4" v-for="(item, i) in partner" :key="i" :class="item.name ? '' : ''" @click="handleGo(item)">
           <div class="icon_18 partner_item_icon br_50" :style="{ backgroundImage: 'url(' + item.icon + ')' }"></div>
           <div class="fontSize_12 capitalize title-color ml_6">
             {{ item.name }}
           </div>
+        </div>
+        <div class="partner_item">
+
         </div>
         <!--  <div class="audit_item audit_bg1"></div>
         <div class="audit_item audit_bg2"></div>
@@ -66,11 +69,6 @@ let partner = ref([
     name: 'kraken',
     link: 'https://www.kraken.com/',
   },
-  {
-    icon: getAssetsFile('wallets/crypto.webp'),
-    name: 'crypto',
-    link: 'https://crypto.com/',
-  },
 ]);
 let handleGo = (r) => {
   window.open(item.link);
@@ -107,6 +105,8 @@ onMounted(() => {});
   width: 32%;
   height: 36px;
   margin-bottom: calc(var(--base) * 12);
+}
+.partner_item_bg{
   background-color: rgba(0, 0, 0, 0.05);
 }
 .partner_item_icon {
