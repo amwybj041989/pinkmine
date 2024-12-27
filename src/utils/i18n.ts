@@ -12,7 +12,7 @@ import th from 'vant/es/locale/lang/th-TH';
 import vi from 'vant/es/locale/lang/vi-VN';
 import hi from 'vant/es/locale/lang/hi-IN';
 import { Locale, type PickerColumn } from 'vant';
-
+import { gePublicFile } from '@/utils';
 const FALLBACK_LOCALE = 'en';
 
 const vantLocales = {
@@ -81,6 +81,9 @@ async function setLang(lang: string, i18n: I18n) {
 // 加载本地语言包
 async function loadLocaleMsg(locale: string, i18n: I18n) {
   const messages = await import(`../locales/${locale}.json`);
+  // // const messages = gePublicFile(`locales/${locale}.json`);
+  // // const messages = `${window.location.host}/locales/${locale}.json`;
+  // console.log(messages);
   i18n.global.setLocaleMessage(locale, messages.default);
 }
 

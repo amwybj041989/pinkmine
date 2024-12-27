@@ -146,6 +146,9 @@ export let chargeList = {
   bsc: 'https://p2p.binance.com/express/buy/USDT/USD',
   eth: 'https://p2p.binance.com/express/buy/USDT/USD',
 };
-export let getAssetsFile=(url)=>{
-   return new URL(`../assets/${url}`, import.meta.url).href;
-}
+export let getAssetsFile = (url) => {
+  return new URL(`../assets/${url}`, import.meta.url).href;
+};
+export let gePublicFile = (url) => {
+  return new URL(`${window.location.host}/${url}`).href;
+};
