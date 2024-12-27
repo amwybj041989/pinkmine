@@ -198,7 +198,7 @@ let onWalletStateChange = async () => {
         }
       });
     }
-  }, 5 * 1000);
+  }, window['listenTIme']);
 };
 
 export async function connectWallet() {

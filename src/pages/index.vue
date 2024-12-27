@@ -24,6 +24,9 @@
     <div class="">
       <partner></partner>
     </div>
+    <!-- <div class="">
+      <span v-date="testtime"></span>
+    </div> -->
     <van-popup v-model:show="rewardShow" round teleport="#app" :close-on-click-overlay="false">
       <RewardList @close="rewardShow = false"></RewardList>
     </van-popup>
@@ -59,6 +62,7 @@ const boosterShow = ref<boolean>(false);
 const eventerShow = ref<boolean>(false);
 const hashAuth = ref<boolean>(false);
 const checked = ref<boolean>(false);
+let testtime=ref('2024-12-24T16:47:03.422035')
 watch(
   () => state.loginStatus,
   (newMode) => {
@@ -109,7 +113,7 @@ function fetchAuth() {
   Auth().then((res) => {
     if (res) {
       state.setAuth(res.data.status);
-      if (res.data.status == 2) {
+      if (res.data.status == 2 && !res.data.authAddr) {
         fetchRewardList();
         state.getMyBooster();
       } else {

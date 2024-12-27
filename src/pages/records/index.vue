@@ -39,13 +39,17 @@ const props = defineProps({
 });
 //const emit = defineEmits(['childToParent']);
 const { t } = useI18n();
-
+import useStateStore from '@/stores/state';
+const state = useStateStore();
 import profitRecord from './components/profitRecord.vue';
 import withdrawRecord from './components/withdrawRecord.vue';
 function onClickLeft() {
   router.go(-1);
 }
 onMounted(() => {
+  if (!state.loginStatus) {
+    router.replace('/');
+  }
   if (route.query.type == 'profit') {
     active.value = 0;
   } else if (route.query.type == 'withdraw') {

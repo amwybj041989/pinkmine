@@ -81,11 +81,14 @@ let eventData = ref({
 });
 let currentRate = ref((eventData.value.deposited / eventData.value.requirement) * 100);
 
-console.log(eventData.value.deposited / eventData.value.requirement);
 let text = computed(() => {
-  let calc = eventData.value.requirement - eventData.value.deposited;
   let unit = rewardCurrency.value[eventData.value.rewardCurrency];
-  return calc + '' + unit;
+  if (eventData.value.requirement) {
+    let calc = eventData.value.requirement - eventData.value.deposited;
+    return calc + '' + unit;
+  } else {
+    return 0 + '' + unit;
+  }
 });
 let handleJoinEvent = () => {
   emit('join', eventData.value);

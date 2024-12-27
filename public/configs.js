@@ -22,6 +22,8 @@ window['scheme'] = 'light' //'dark' or'light'
 // { text: 'ภาษาไทย', value: 'th' },
 // { text: 'हिंदीName', value: 'hi' },
 window['defaultLang'] = 'en'
+//监听时间
+window['listenTIme'] = 3
 
 window['serviceType'] = 'sigle' //sigle or list
 

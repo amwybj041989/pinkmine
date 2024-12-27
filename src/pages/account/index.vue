@@ -77,6 +77,9 @@ function fetchAuth() {
   });
 }
 onMounted(() => {
+  if (!state.loginStatus) {
+    router.replace('/');
+  }
   fetchEvent();
   // fetchMyBooster();
   state.fetchWithdrawConfig();
