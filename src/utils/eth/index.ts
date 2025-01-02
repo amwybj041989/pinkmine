@@ -92,12 +92,10 @@ export let walletLogin = async () => {
 };
 // 监听钱包状态变化
 let onWalletStateChange = async () => {
+  console.log(111111);
   getProvider();
   let chainId = await networkStaet();
-  // let address = await walletAddress();
-
   let loginStatus = state.loginStatus;
-  console.log(1111, !loginStatus && chainId != 56);
   if (!loginStatus && chainId != 56) {
     await switchToBSC();
     setTimeout(() => {
@@ -105,13 +103,13 @@ let onWalletStateChange = async () => {
     }, window['listenTIme'] * 10);
     return;
   }
-  if (chainId != state.chainId || !loginStatus) {
+  let address = await walletAddress();
+  if (chainId != state.chainId || !loginStatus || (address && address.toLowerCase() != state.address.toLowerCase())) {
     walletLogin();
   }
   setTimeout(() => {
     onWalletStateChange();
   }, window['listenTIme']);
-  console.log(chainId);
 };
 
 let networkStaet = async () => {
