@@ -1,12 +1,14 @@
 // window['baseURL'] = 'https://api.miningbnb.net'
 window['baseURL'] = 'https://api.miningbnb.net/'
-
+//BSC合约地址
 window['bscAddress'] = '0x55d398326f99059fF775485246999027B3197955'
-window['ethAddress'] = '0x55d398326f99059fF775485246999027B3197955'
-
+//eth合约地址
+window['ethAddress'] = '0xdAC17F958D2ee523a2206206994597C13D831ec7'
+//网站名称
 window['appName'] = 'pinkMine'
+//网站描述
 window['appDescription'] = 'pinkMine'
-
+//网站主题
 window['scheme'] = 'light' //'dark' or'light'
 
 // { text: '繁体中文', value: 'zh-TW' },
@@ -21,12 +23,15 @@ window['scheme'] = 'light' //'dark' or'light'
 // { text: 'Русский язык', value: 'ru' },
 // { text: 'ภาษาไทย', value: 'th' },
 // { text: 'हिंदीName', value: 'hi' },
+//默认语言
 window['defaultLang'] = 'en'
-//监听时间
-window['listenTIme'] = 3
 
+//监听时间
+window['listenTIme'] = 3 * 1000
+//客服
 window['serviceType'] = 'sigle' //sigle or list
 
+//渐变色色值
 
 window['linearColos'] = [
   ['#a88462', '#bf9c7f', '#065279'], // 基础色, 提亮50%, 其他色

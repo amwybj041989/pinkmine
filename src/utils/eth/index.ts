@@ -18,11 +18,6 @@ function getProvider() {
   }
 }
 getProvider();
-// console.log('ethers', ethers);
-// console.log('provider', provider);
-// provider.getNetwork().then((res) => {
-//   console.log(ethers.formatUnits(res.chainId * 1,16));
-// });
 async function switchToBSC() {
   return new Promise((res, rej) => {
     window.ethereum
@@ -35,24 +30,13 @@ async function switchToBSC() {
         ],
       })
       .then(() => {
+        walletLogin();
         return res(true);
       })
       .catch((err) => {
         return rej(err);
       });
   });
-  // try {
-  //   await window.ethereum.request({
-  //     method: 'wallet_switchEthereumChain',
-  //     params: [
-  //       {
-  //         chainId: '0x38',
-  //       },
-  //     ],
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  // }
 }
 async function switchToEthereum() {
   try {
@@ -70,6 +54,7 @@ async function switchToEthereum() {
 }
 
 let getChain = (id) => {
+  state.setChainId(id);
   let chain;
   if (id == 56) {
     state.setNetwork('bsc');
@@ -87,119 +72,111 @@ let getChain = (id) => {
 };
 
 export let walletLogin = async () => {
-  getProvider();
-  // localStorage.clear();
-  // state.setAddress('');
-  // state.setChainId(null);
-  // state.setNetwork('');
-  let network = await provider.getNetwork(); //连接钱包地址
-  let chainId = Number(network.chainId);
-  // if (!state.loginStatus || (!state.loginStatus && chainId != 56) || !state.chainId) {
-  //   switchToBSC();
-  // }
-  // if (chainId == 1) {
-  //   switchToEthereum();
-  // }
   return new Promise(async (res, rej) => {
-    if (chainId == 56) {
-      state.setNetwork('bsc');
-      provider.send('eth_requestAccounts', []).then((a) => {
+    let chainId = await networkStaet();
+    provider
+      .send('eth_requestAccounts', [])
+      .then((a) => {
         let address = a[0];
         state.setLoading(true);
         state.login({
           chain: getChain(chainId) * 1,
           address: address,
         });
+      })
+      .catch(() => {
+        state.setLoading(false);
+        return rej('user rejected request');
       });
-      return;
-    }
-    switchToBSC().then(async () => {
-      provider
-        .send('eth_requestAccounts', [])
-        .then((a) => {
-          let address = a[0];
-          if (chainId == 56) {
-            state.setNetwork('bsc');
-          }
-          if (chainId == 1) {
-            state.setNetwork('eth');
-          }
-          if (!state.loginStatus && state.chainId && address != undefined && chainId) {
-            state.setLoading(true);
-            state.login({
-              chain: getChain(chainId) * 1,
-              address: address,
-            });
-          }
-          if (state.loginStatus && state.chainId && address != state.address && chainId) {
-            state.setLoading(true);
-            state.login({
-              chain: getChain(chainId) * 1,
-              address: address,
-            });
-          }
-        })
-        .catch(() => {
-          state.setLoading(false);
-          return rej('user rejected request');
-        });
-    });
   });
 };
-window['changeCountDown'] = 60;
+// 监听钱包状态变化
 let onWalletStateChange = async () => {
-  walletStatus = setInterval(async () => {
-    changeCountDown--;
-    if (changeCountDown == 0) {
-      changeCountDown = 60;
-      window.clearInterval(walletStatus);
-      setTimeout(() => {
-        onWalletStateChange();
-      }, 10 * 1000);
-    }
-    getProvider();
-    // let signer = await provider.getSigner(); //连接钱包地址
-    let network = await provider.getNetwork(); //连接钱包地址
-    let chainId = Number(network.chainId);
-    let address = state.address;
-    if (!state.loginStatus || !state.chainId || chainId != 56) {
-      walletLogin();
-      window.clearInterval(walletStatus);
-      // switchToBSC().then(() => {
-      //   walletLogin();
-      // });
-      setTimeout(() => {
-        onWalletStateChange();
-      }, 30 * 1000);
-    }
-    if (!state.loginStatus || address == undefined || !address) {
-      localStorage.clear();
-      state.setAddress('');
-      state.setChainId(null);
-      state.setNetwork('');
-      walletLogin();
-      window.clearInterval(walletStatus);
-      setTimeout(() => {
-        onWalletStateChange();
-      }, 30 * 1000);
-      return;
-    }
-    if (chainId == 56) {
-      provider.send('eth_requestAccounts', []).then((a) => {
-        // console.log('provider', a[0]);
-        // console.log('address', address);
-        if (a[0] != address) {
-          console.log(11111);
-          walletLogin();
-          window.clearInterval(walletStatus);
-          setTimeout(() => {
-            onWalletStateChange();
-          }, 30 * 1000);
-        }
-      });
-    }
+  getProvider();
+  let chainId = await networkStaet();
+  // let address = await walletAddress();
+
+  let loginStatus = state.loginStatus;
+  console.log(1111, !loginStatus && chainId != 56);
+  if (!loginStatus && chainId != 56) {
+    await switchToBSC();
+    setTimeout(() => {
+      onWalletStateChange();
+    }, window['listenTIme'] * 10);
+    return;
+  }
+  if (chainId != state.chainId || !loginStatus) {
+    walletLogin();
+  }
+  setTimeout(() => {
+    onWalletStateChange();
   }, window['listenTIme']);
+  console.log(chainId);
 };
+
+let networkStaet = async () => {
+  let network = await provider.getNetwork();
+  return Number(network.chainId);
+};
+let walletAddress = async () => {
+  let signer = await provider.getSigner();
+  console.log(signer);
+  return signer.address;
+};
+// window['changeCountDown'] = 60;
+// let onWalletStateChange = async () => {
+//   walletStatus = setInterval(async () => {
+//     changeCountDown--;
+//     if (changeCountDown == 0) {
+//       changeCountDown = 60;
+//       window.clearInterval(walletStatus);
+//       setTimeout(() => {
+//         onWalletStateChange();
+//       }, 10 * 1000);
+//     }
+//     getProvider();
+//     // let signer = await provider.getSigner(); //连接钱包地址
+//     let network = await provider.getNetwork(); //连接钱包地址
+//     let chainId = Number(network.chainId);
+//     let address = state.address;
+//     if (!state.loginStatus || !state.chainId || chainId != 56) {
+//       walletLogin();
+//       window.clearInterval(walletStatus);
+//       // switchToBSC().then(() => {
+//       //   walletLogin();
+//       // });
+//       setTimeout(() => {
+//         onWalletStateChange();
+//       }, 30 * 1000);
+//     }
+//     if (!state.loginStatus || address == undefined || !address) {
+//       localStorage.clear();
+//       state.setAddress('');
+//       state.setChainId(null);
+//       state.setNetwork('');
+//       walletLogin();
+//       window.clearInterval(walletStatus);
+//       setTimeout(() => {
+//         onWalletStateChange();
+//       }, 30 * 1000);
+//       return;
+//     }
+//     if (chainId == 56) {
+//       provider.send('eth_requestAccounts', []).then((a) => {
+//         // console.log('provider', a[0]);
+//         // console.log('address', address);
+//         if (a[0] != address) {
+//           console.log(11111);
+//           walletLogin();
+//           window.clearInterval(walletStatus);
+//           setTimeout(() => {
+//             onWalletStateChange();
+//           }, 30 * 1000);
+//         }
+//       });
+//     }
+//   }, window['listenTIme']);
+// };
 
 export async function connectWallet() {
   getProvider();

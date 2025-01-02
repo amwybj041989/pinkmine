@@ -73,26 +73,9 @@ function setRem() {
   document.documentElement.style.fontSize = rootFontSize + 'px';
 }
 function getConnectSataus() {
-  // let isConnected = appKit.getIsConnectedState();
-  let netChainId = localStorage.getItem('netChainId') * 1;
-  if (appKit.getChainId() && netChainId) {
-    if (appKit.getChainId() != netChainId) {
-      // localStorage.clear();
-      // window.location.reload();
-      // if (state.networkType == 'bsc') {
-      //   appKit.switchNetwork(bsc);
-      // } else {
-      //   appKit.switchNetwork(mainnet);
-      // }
-    }
-  }
-  // if (!isConnected) {
-  //   userStore.setAddress('');
-  //   userStore.setChainId(0);
-  // }
-  setTimeout(() => {
-    getConnectSataus();
-  }, 2000);
+  // setTimeout(() => {
+  //   getConnectSataus();
+  // }, 2000);
 }
 
 onMounted(() => {

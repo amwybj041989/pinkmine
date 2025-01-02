@@ -158,15 +158,12 @@ export const useStateStore = defineStore(
         const { data, success } = await Login(loginForm);
         if (loginForm.chain == 0) {
           getNetworkType('tron');
-          setChainId(6);
         }
         if (loginForm.chain == 1) {
           getNetworkType('eth');
-          setChainId(1);
         }
         if (loginForm.chain == 2) {
           getNetworkType('bsc');
-          setChainId(56);
         }
         if (!success) {
           setLoading(false);
@@ -174,7 +171,6 @@ export const useStateStore = defineStore(
         }
         setLoading(false);
         localStorage.setItem('token', data.accessToken);
-        localStorage.setItem('netChainId', appKit.getChainId());
         setAddress(loginForm.address);
         getLoginStatus();
         fetchUserInfo();
