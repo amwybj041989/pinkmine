@@ -43,7 +43,6 @@ function fetchList() {
 watch(
   () => state.loginStatus,
   (newMode) => {
-    console.log(11111111111111);
     if (newMode) {
       fetchList();
     }

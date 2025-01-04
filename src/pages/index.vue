@@ -62,12 +62,12 @@ const boosterShow = ref<boolean>(false);
 const eventerShow = ref<boolean>(false);
 const hashAuth = ref<boolean>(false);
 const checked = ref<boolean>(false);
-let testtime=ref('2024-12-24T16:47:03.422035')
+let testtime = ref('2024-12-24T16:47:03.422035');
 watch(
   () => state.loginStatus,
   (newMode) => {
     if (newMode) {
-      fetchAuth();
+      fetchRewardList()
     }
   }
 );
@@ -235,10 +235,10 @@ let fetchRewardList = () => {
   });
 };
 onMounted(() => {
-  console.log('loginStatus', state.loginStatus);
-  state.getLoginStatus();
-  if (state.loginStatus) {
-    fetchAuth();
+  // console.log('loginStatus', state.loginStatus);
+  // state.getLoginStatus();
+  if (state.loginStatus && state.hasAuth == 2) {
+    fetchRewardList();
   }
   // fetchAuth()
 });

@@ -95,7 +95,6 @@ export const useUserStore = defineStore(
     //     address: localStorage.address,
     //   });
     // }
-    getLoginStatus();
 
     return {
       loginStatus,

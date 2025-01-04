@@ -17,7 +17,7 @@ export const useStateStore = defineStore(
       isDev.value = false;
     }
     const loading = ref(false);
-    const hasAuth = ref<String>(1);
+    const hasAuth = ref(1);
     let withdrawConfig = ref<WithdrawConfigData>({});
     let walletToken = ref('');
     const address = ref<String>('');
@@ -71,15 +71,11 @@ export const useStateStore = defineStore(
     };
 
     const getLoginStatus = () => {
-      // console.log('token', localStorage.getItem('token'));
-      // console.log('address', address.value);
-      // console.log('chainId', chainId.value);
       if (localStorage.getItem('token') != null && localStorage.getItem('token') != '' && localStorage.getItem('token') != undefined && address.value && networkType.value != '') {
         loginStatus.value = true;
       } else {
         loginStatus.value = false;
       }
-      // return loginStatus;
     };
     const setAddress = (value) => {
       localStorage.address = value;
@@ -154,6 +150,7 @@ export const useStateStore = defineStore(
     };
 
     const login = async (loginForm) => {
+      // init()
       try {
         const { data, success } = await Login(loginForm);
         if (loginForm.chain == 0) {
@@ -175,9 +172,7 @@ export const useStateStore = defineStore(
         getLoginStatus();
         fetchUserInfo();
         fetchWithdrawConfig();
-        Auth().then((res) => {
-          hasAuth.value = res.status;
-        });
+        fetchAuth();
       } catch (error) {
         setLoading(false);
         setAddress('');
@@ -204,9 +199,20 @@ export const useStateStore = defineStore(
         setChainId(1);
       }
     };
+    let init = () => {
+      loading.value = false;
+      hasAuth.value = 1;
+      withdrawConfig.value = {};
+      walletToken.value = '';
+      address.value = '';
+      myBooster.value = null;
 
+      chainId.value = null;
+      loginStatus.value = false;
+      userInfo.value = {};
+      networkType.value = '';
+    };
     getLoginStatus();
-
     return {
       isDev,
       loading,
@@ -233,6 +239,7 @@ export const useStateStore = defineStore(
       myBooster,
       getMyBooster,
       fetchAuth,
+      init
     };
   },
   {

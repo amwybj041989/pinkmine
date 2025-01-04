@@ -51,9 +51,9 @@ watch(
   }
 );
 onMounted(() => {
-  if (stateStore.loginStatus) {
-    fetchCustomerService();
-  }
+  // if (stateStore.loginStatus) {
+  //   fetchCustomerService();
+  // }
 });
 </script>
 

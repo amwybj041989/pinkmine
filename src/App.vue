@@ -7,7 +7,7 @@
             <component :is="Component" :key="route.name" />
           </keep-alive>
 
-          <Servicer></Servicer>
+          <Servicer v-if="state.loginStatus"></Servicer>
           <div class="pad_14 text_center fontSize_14 gcolor mt_15 gcolor">
             <span>version:</span>
             <span>1.0.1</span>
@@ -34,6 +34,7 @@ import { generateRandomGradient } from '@/utils';
 import { appName, appDescription } from '@/constants';
 import { appKit } from '@/utils/modal';
 const { t } = useI18n();
+import { walletLogin } from '@/utils/eth';
 useHead({
   title: appName,
   meta: [
@@ -72,21 +73,17 @@ function setRem() {
   }
   document.documentElement.style.fontSize = rootFontSize + 'px';
 }
-function getConnectSataus() {
-  // setTimeout(() => {
-  //   getConnectSataus();
-  // }, 2000);
-}
 
 onMounted(() => {
+  // localStorage.clear();
   setRem();
   window.addEventListener('resize', setRem);
   nextTick(() => {
     initializeThemeSwitcher();
     generateRandomGradient();
-    state.setLoading(false);
+    // state.init();
+    // walletLogin();
   });
-  // getConnectSataus();
 });
 </script>
 

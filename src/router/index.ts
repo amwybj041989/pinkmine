@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router/auto';
 import { handleHotUpdate, routes } from 'vue-router/auto-routes';
-console.log(routes);
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
