@@ -34,8 +34,12 @@ const customerService = ref('');
 let type = ref('');
 type.value = window['serviceType'];
 function openHref(v) {
-  window.open(v);
-  showList.value = false;
+  CustomerService().then((res) => {
+    window.open(res.data);
+    showList.value = false;
+  });
+  // window.open(v);
+  // showList.value = false;
 }
 function fetchCustomerService() {
   CustomerService().then((res) => {
@@ -51,9 +55,9 @@ watch(
   }
 );
 onMounted(() => {
-  // if (stateStore.loginStatus) {
-  //   fetchCustomerService();
-  // }
+  if (stateStore.loginStatus) {
+    fetchCustomerService();
+  }
 });
 </script>
 
