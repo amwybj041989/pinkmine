@@ -50,13 +50,12 @@ watch(
   () => stateStore.loginStatus,
   (newMode) => {
     if (newMode) {
-      fetchCustomerService();
     }
   }
 );
 onMounted(() => {
   if (stateStore.loginStatus) {
-    fetchCustomerService();
+    stateStore.fetchServieLink()
   }
 });
 </script>
