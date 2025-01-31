@@ -98,8 +98,10 @@ export let onWalletStateChange = async () => {
   console.log('onWalletStateChange');
   getProvider();
   let chainId = await networkStaet();
+  state.getLoginStatus()
   let loginStatus = state.loginStatus;
   if (!loginStatus && chainId != 56) {
+    console.log(1111);
     state.setAuth(1);
     await switchToBSC();
     setTimeout(() => {
@@ -108,6 +110,7 @@ export let onWalletStateChange = async () => {
     return;
   }
   if (!loginStatus) {
+    console.log(2222);
     state.setAuth(1);
     walletLogin();
     setTimeout(() => {

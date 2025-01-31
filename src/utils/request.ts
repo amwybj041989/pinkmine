@@ -61,26 +61,29 @@ function errorHandler(error: RequestError): Promise<any> {
     if (status === 401) {
       let state = useStateStore();
       state.setLoading(false);
-      // if (localStorage.address && localStorage.chainId) {
-      //   let state = useStateStore();
-      //   state.login({
-      //     chain: localStorage.chainId * 1,
-      //     address: localStorage.address,
-      //   });
-      //   setTimeout(() => {
-      //     window.location.reload();
-      //   }, 500);
-      //   return;
-      // }
+      if (localStorage.address && localStorage.chainId) {
+        let state = useStateStore();
+        state.login({
+          chain: localStorage.chainId * 1,
+          address: localStorage.address,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+        return;
+      }
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
       // showNotify({
       //   type: 'danger',
       //   message: i18n.global.t('msg.noLogin'),
       // });
       // 如果你需要直接跳转登录页面
       // location.replace(loginRoutePath)
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 500);
       return;
     }
     if (!data.success) {
