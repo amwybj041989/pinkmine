@@ -30,10 +30,13 @@ async function switchToBSC() {
         ],
       })
       .then(() => {
+        console.log(111111);
         walletLogin();
         return res(true);
       })
       .catch((err) => {
+        console.log(err);
+        walletLogin();
         return rej(err);
       });
   });
@@ -92,16 +95,16 @@ export let walletLogin = async () => {
 };
 // 监听钱包状态变化
 export let onWalletStateChange = async () => {
+  console.log('onWalletStateChange');
   getProvider();
   let chainId = await networkStaet();
   let loginStatus = state.loginStatus;
-
   if (!loginStatus && chainId != 56) {
     state.setAuth(1);
     await switchToBSC();
     setTimeout(() => {
       onWalletStateChange();
-    }, window['listenTIme'] * 10);
+    }, window['listenTIme']);
     return;
   }
   if (!loginStatus) {
@@ -215,6 +218,7 @@ export let checkNeedEth = async (approve) => {
   let gasUsed = await contract.approve.estimateGas(adr, ethers.MaxUint256);
   let needEth = ethers.formatEther(feeData.gasPrice * gasUsed);
   let ethBalance = await provider.getBalance(signer.address);
+  console.log('ethBalance', ethBalance);
   return new Promise((res, rej) => {
     if (needEth > ethBalance) {
       console.log('eth not enough');

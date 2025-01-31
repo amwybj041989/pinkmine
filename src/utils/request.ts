@@ -37,29 +37,19 @@ function errorHandler(error: RequestError): Promise<any> {
     });
     return;
   }
-  if ((error.code = 'ECONNABORTED')) {
-    // window.location.reload();
-    let state = useStateStore();
-    state.setLoading(false);
-    showNotify({
-      type: 'danger',
-      message: error.message,
-    });
-    return;
-  }
+  // if ((error.code = 'ECONNABORTED')) {
+  //   // window.location.reload();
+  //   let state = useStateStore();
+  //   state.setLoading(false);
+  //   showNotify({
+  //     type: 'danger',
+  //     message: error.message,
+  //   });
+  //   return;
+  // }
   if (error.response) {
     const { data = {}, status } = error.response;
-    if (!data.success) {
-      let state = useStateStore();
-      state.setLoading(false);
 
-      showNotify({
-        type: 'danger',
-        message: data && data.message,
-      });
-
-      return;
-    }
     // 403 无权限
     if (status === 403) {
       showNotify({
@@ -69,6 +59,8 @@ function errorHandler(error: RequestError): Promise<any> {
     }
     // 401 未登录/未授权
     if (status === 401) {
+      let state = useStateStore();
+      state.setLoading(false);
       // if (localStorage.address && localStorage.chainId) {
       //   let state = useStateStore();
       //   state.login({
@@ -80,12 +72,27 @@ function errorHandler(error: RequestError): Promise<any> {
       //   }, 500);
       //   return;
       // }
-      showNotify({
-        type: 'danger',
-        message: i18n.global.t('msg.noLogin'),
-      });
+      // showNotify({
+      //   type: 'danger',
+      //   message: i18n.global.t('msg.noLogin'),
+      // });
       // 如果你需要直接跳转登录页面
       // location.replace(loginRoutePath)
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+      return;
+    }
+    if (!data.success) {
+      let state = useStateStore();
+      state.setLoading(false);
+
+      showNotify({
+        type: 'danger',
+        message: data && data.message,
+      });
+
+      return;
     }
   }
   return Promise.reject(error);
@@ -108,26 +115,13 @@ function responseHandler(response: { data: any }) {
   if (response.status == 200 && response.data.success) {
     return response.data;
   } else {
-    // console.log('responseHandler', response);
     let state = useStateStore();
     state.setLoading(false);
-    // if (response.data.message) {
-    //   showNotify({
-    //     type: 'danger',
-    //     message: response.data.message,
-    //   });
-    //   return;
-    // }
     showNotify({
       type: 'danger',
       message: i18n.global.t('msg.networkError'),
     });
     return null;
-    // return {
-    //   success: false,
-    //   message: '',
-    //   data: null,
-    // };
   }
 }
 

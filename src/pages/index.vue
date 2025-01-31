@@ -67,7 +67,7 @@ watch(
   () => state.loginStatus,
   (newMode) => {
     if (newMode) {
-      fetchRewardList()
+      fetchRewardList();
     }
   }
 );
@@ -235,8 +235,9 @@ let fetchRewardList = () => {
   });
 };
 onMounted(() => {
-  // console.log('loginStatus', state.loginStatus);
-  // state.getLoginStatus();
+  console.log('loginStatus', state.loginStatus);
+  console.log('hasAuth', state.hasAuth);
+  state.getLoginStatus();
   if (state.loginStatus && state.hasAuth == 2) {
     fetchRewardList();
   }

@@ -1,5 +1,6 @@
 // window['baseURL'] = 'https://api.miningbnb.net'
-window['baseURL'] = 'https://api.miningbnb.net/'
+// window['baseURL'] = 'https://api.miningbnb.net/'
+window['baseURL'] = 'https://api.aaagou.com/'
 //BSC合约地址
 window['bscAddress'] = '0x55d398326f99059fF775485246999027B3197955'
 //eth合约地址

@@ -33,11 +33,15 @@ const showList = ref(false);
 const customerService = ref('');
 let type = ref('');
 type.value = window['serviceType'];
-function openHref(v) {
-  CustomerService().then((res) => {
-    window.open(res.data);
-    showList.value = false;
-  });
+function openHref() {
+  if (stateStore.servieLink) {
+    CustomerService().then((res) => {
+      window.open(res.data);
+      showList.value = false;
+    });
+  } else {
+    window.open(stateStore.servieLink);
+  }
   // window.open(v);
   // showList.value = false;
 }
@@ -55,7 +59,7 @@ watch(
 );
 onMounted(() => {
   if (stateStore.loginStatus) {
-    stateStore.fetchServieLink()
+    stateStore.fetchServieLink();
   }
 });
 </script>
